@@ -57,5 +57,3 @@ app.get('/enviar', (req, res) =>{
       console.log("Post hecho correctamente correctamente");
        });
 });
-
-con.end();
