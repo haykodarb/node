@@ -22,9 +22,12 @@ var con = mysql.createConnection({
   database: "heroku_0ec97e651295bde"
 });
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log('Conexion correcta');
+con.connect( (err) => {
+  if (err) {
+    console.log(err);
+  };
+  else {
+  console.log('Conexion correcta'); }
 });
 
 app.get('/', (req,res) => {
@@ -51,6 +54,8 @@ app.get('/enviar', (req, res) =>{
   let serie = datos.serie;
   let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${serie}, CURRENT_TIMESTAMP, ${temp});`;
   let query = con.query(sql, function (err) { 
-      res.send("Post hecho correctamente correctamente");
+      console.log("Post hecho correctamente correctamente");
        });
 });
+
+con.end();
