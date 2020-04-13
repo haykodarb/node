@@ -23,7 +23,7 @@ var con = mysql.createConnection({
 });
 
 con.connect( (err) => {
-  if (err) {
+  if (!!err) {
     console.log(err);
   }
   else {
@@ -54,7 +54,7 @@ app.get('/enviar', (req, res) =>{
   let serie = datos.serie;
   let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${serie}, CURRENT_TIMESTAMP, ${temp});`;
   let query = con.query(sql, function (err) { 
-      throw err; });
-  console.log("Post hecho correctamente correctamente");
-      
+      if(!!err) {throw err;}
+      else {console.log("Post hecho correctamente correctamente");}
+    });
 });
