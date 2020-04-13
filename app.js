@@ -40,7 +40,7 @@ res.send("Página principal de Hayk")
 app.get('/recibir', (req, res) => { 
     let datos = req.query;
     let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
-    let query = con.query(sql, (err, result) => {
+    con.query(sql, (err, result) => {
         console.log("Select hecho correctamente correctamente");
         estados = result[0];
         estados = JSON.stringify(estados);
@@ -55,7 +55,7 @@ app.get('/enviar', (req, res) =>{
   let temp = datos.temp; 
   let serie = datos.serie;
   let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${serie}, CURRENT_TIMESTAMP, ${temp});`;
-  let query = con.query(sql, function (err) { 
+  con.query(sql, function (err) { 
     if (err) {
       try {
         throw err;
