@@ -23,12 +23,14 @@ var con = mysql.createConnection({
 });
 
 con.connect( (err) => {
-  if (!!err) {
-    console.log(err);
-  }
-  else {
-  console.log('Conexion correcta'); }
-});
+  if (err) {
+    try {
+      throw err;
+    } catch (e) {
+      console.log('Sucedio un error con la conexion: ', e);
+    } } else {
+    console.log('Conexion correcta'); }
+  });
 
 app.get('/', (req,res) => {
 res.send("Página principal de Hayk")
@@ -54,7 +56,15 @@ app.get('/enviar', (req, res) =>{
   let serie = datos.serie;
   let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${serie}, CURRENT_TIMESTAMP, ${temp});`;
   let query = con.query(sql, function (err) { 
-      if(!!err) {throw err;}
-      else {res.send("POST HECHO CORRECTAMENTE");}
+    if (err) {
+      try {
+        throw err;
+      } catch (e) {
+        console.log('Sucedio un error al enviar: ', e);
+      }
+    } else {
+      res.send("");
+      console.log("Post hecho correctamente");
+    }
     });
 });
