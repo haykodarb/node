@@ -32,11 +32,6 @@ con.connect( (err) => {
     console.log('Conexion correcta'); }
   });
 
-app.get('/', (req,res) => {
-res.send("Página principal de Hayk")
-});
-
-
 app.get('/recibir', (req, res) => { 
     let datos = req.query;
     let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
