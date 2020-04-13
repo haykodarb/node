@@ -48,7 +48,7 @@ app.get('/select', (req, res) => {
         res.send(estados);
         res.end();
       }  
-    }) 
+    });
 });
     
 app.get('/insert', (req, res) =>{
@@ -64,6 +64,7 @@ app.get('/insert', (req, res) =>{
         console.log('Sucedio un error al recibir: ', e);
       }
     } else { 
+      res.send("");
       res.end();
     } 
     });
