@@ -32,17 +32,23 @@ con.connect( (err) => {
     console.log('Conexion correcta'); }
   });
 
-app.get('/recibir', (req, res) => { 
-    let datos = req.query;
+app.get('/recibir', (req, res) => {
     let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
     con.query(sql, (err, result) => {
+      if (err) {
+        try {
+          throw err;
+        } catch (e) {
+          console.log('Sucedio un error al recibir: ', e);
+        }
+      } else {
         console.log("Select hecho correctamente correctamente");
         estados = result[0];
         estados = JSON.stringify(estados);
         res.send(estados);
         res.end;
-      });
-  
+      }  
+    }) 
 });
     
 app.get('/enviar', (req, res) =>{
