@@ -55,6 +55,6 @@ app.get('/enviar', (req, res) =>{
   let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${serie}, CURRENT_TIMESTAMP, ${temp});`;
   let query = con.query(sql, function (err) { 
       if(!!err) {throw err;}
-      else {console.log("Post hecho correctamente correctamente");}
+      else {res.send("POST HECHO CORRECTAMENTE");}
     });
 });
