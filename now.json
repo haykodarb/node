@@ -6,7 +6,7 @@
       { "src": "app.js", "use": "@now/node" }
     ],
     "routes": [
-      { "src": "/recibir", "dest": "app.js" },
-      { "src": "/enviar", "dest": "app.js" }
+      { "src": "/select", "dest": "app.js" },
+      { "src": "/insert", "dest": "app.js" }
     ]
   }

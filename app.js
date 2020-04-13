@@ -32,7 +32,7 @@ con.connect( (err) => {
     console.log('Conexion correcta'); }
   });
 
-app.get('/recibir', (req, res) => {
+app.get('/select', (req, res) => {
     let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
     con.query(sql, (err, result) => {
       if (err) {
@@ -46,26 +46,25 @@ app.get('/recibir', (req, res) => {
         estados = result[0];
         estados = JSON.stringify(estados);
         res.send(estados);
-        res.end;
+        res.end();
       }  
     }) 
 });
     
-app.get('/enviar', (req, res) =>{
+app.get('/insert', (req, res) =>{
   let datos = req.query;
   let temp = datos.temp; 
   let serie = datos.serie;
   let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${serie}, CURRENT_TIMESTAMP, ${temp});`;
-  con.query(sql, function (err) { 
+  con.query(sql, function (err) {
     if (err) {
       try {
         throw err;
       } catch (e) {
-        console.log('Sucedio un error al enviar: ', e);
+        console.log('Sucedio un error al recibir: ', e);
       }
-    } else {
-      res.send("");
-      console.log("Post hecho correctamente");
-    }
+    } else { 
+      res.end();
+    } 
     });
 });
