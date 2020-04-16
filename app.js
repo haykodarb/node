@@ -52,8 +52,8 @@ app.get('/select', (req, res) => {
 app.post('/insert', (req, res) =>{
   let data = {
     temp: req.body.temp,
-    serie: req.body.serie,
-  }
+    serie: req.body.serie
+  };
   if (!data.temp) {
     res.end("Parametros vacios o incorrectamente enviados");
     return;
