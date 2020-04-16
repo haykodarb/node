@@ -1,14 +1,16 @@
 const express = require('express');
 const mysql = require('mysql');
-var http = require('http');
-var url = require('url');
+const http = require('http');
+const url = require('url');
 const app = express();
+const bodyParser = requier('body-parser'); 
 
 var port = process.env.PORT || '3306';
 
 app.listen(port, () => { console.log(`Server started on port ${port}`)
 } );
 
+app.use(bodyParser());
 
 var con = mysql.createConnection(
   {
@@ -49,13 +51,13 @@ app.get('/select', (req, res) => {
 });
     
 app.post('/insert', (req, res) =>{
-  let datos = req.body;
-  if (!datos.temp) {
+  let data = req.body;
+  if (!data.temp) {
     res.end("Parametros vacios o incorrectamente enviados");
     return;
     } 
-  let temp = datos.temp; 
-  let serie = datos.serie;
+  let temp = data.temp; 
+  let serie = data.serie;
   let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${serie}, CURRENT_TIMESTAMP, ${temp});`;
   con.query(sql, function (err) {
     if (err) {
@@ -65,7 +67,7 @@ app.post('/insert', (req, res) =>{
         console.log('Sucedio un error al recibir: ', e);}
         res.end('Sucedio un error al recibir: ', e);
     } else { 
-      res.end(`Recibido correctamente: ${datos}`);} 
+      res.end(`Recibido correctamente: ` + JSON.stringify(data));} 
     });
 });
 
