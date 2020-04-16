@@ -44,8 +44,7 @@ app.get('/select', (req, res) => {
         console.log("Select hecho correctamente correctamente");
         var estados = result[0];
         estados = JSON.stringify(estados);
-        res.send(estados); // No hace falta .send, .end también envía.
-        res.end();
+        res.end(estados); // No hace falta .send, .end también envía.
       }  
     });
 });
@@ -67,7 +66,7 @@ app.post('/insert', (req, res) =>{
         console.log('Sucedio un error al recibir: ', e);}
         res.end('Sucedio un error al recibir: ', e);
     } else { 
-      res.end(`Recibido correctamente: ` + JSON.stringify(data));} 
+      res.end('Recibido correctamente');} 
     });
 });
 
