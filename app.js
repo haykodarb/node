@@ -58,7 +58,7 @@ app.post('/insert', (req, res) =>{
     res.end("Parametros vacios o incorrectamente enviados");
     return;
     } 
-  let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${serie}, CURRENT_TIMESTAMP, ${temp});`;
+  let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${data.serie}, CURRENT_TIMESTAMP, ${data.temp});`;
   con.query(sql, function (err) {
     if (err) {
       try {
