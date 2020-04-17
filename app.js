@@ -30,6 +30,11 @@ con.connect((err) => {
   }
 });
   
+app.get('/', (req, res) => {
+res.sendFile(__dirname +  '/index.html');
+
+});
+
 app.get('/select', (req, res) => {
     let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
     con.query(sql, (err, result) => {
