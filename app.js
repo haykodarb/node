@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 app.listen(app.get('port'), () => console.log(`Server started on port ${app.get('port')}`));
 
 app.use(express.json());
+app.set('view engine', 'ejs');
 
 var con = mysql.createConnection(
   {
@@ -29,9 +30,46 @@ con.connect((err) => {
     res.status(200);
   }
 });
-  
+
+let data = {
+  temp,
+  estadoActual,
+  estadoApp,
+  setPoint
+}
+
 app.get('/', (req, res) => {
-res.sendFile(__dirname +  '/index.html');
+  let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
+  con.query(sql, (err, result) => {
+    if (err) {
+        try {
+        throw err;}
+        catch (e) {
+          res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}` });
+          }
+        } 
+    else {
+        data.setPoint = result[0].setPoint;
+        data.estadoActual = result[0].estadoActual;
+        data.estadoApp = result[0].estadoApp;
+        } 
+      });
+
+      let sql = `SELECT temp FROM datos ORDER BY ID DESC LIMIT 1`; 
+      con.query(sql, (err, result) => {
+        if (err) {
+            try {
+            throw err;}
+            catch (e) {
+              res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}` });
+              }
+            } 
+        else {
+            data.temp = result[0].temp;
+            } 
+          });    
+
+  res.render('home', data);
 
 });
 
