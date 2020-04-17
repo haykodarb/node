@@ -17,7 +17,7 @@ var con = mysql.createConnection(
   database: "heroku_0ec97e651295bde"
 });
 
-con.connect((err) => {
+con.connect( (err) => {
   if (err) {
     try {
       throw err;
@@ -30,7 +30,7 @@ con.connect((err) => {
 });
 
 app.get('/select', (req, res) => {
-    let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
+    const sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
     con.query(sql, (err, result) => {
               if (err) {
           try {
@@ -40,19 +40,18 @@ app.get('/select', (req, res) => {
           }
         } else {
           estados = result[0];
-          // Mas info aca http://expressjs.com/es/api.html#res.json
           res.status(200).json(estados);
         }      
     });
 });
     
 app.post('/insert', (req, res) =>{
-  var data = {
+  let data = {
     temp: req.body.temp,
     serie: req.body.serie
   };
-  let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${data.serie}, CURRENT_TIMESTAMP, ${data.temp});`;
-  con.query(sql, (err) => {
+  const sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${data.serie}, CURRENT_TIMESTAMP, ${data.temp});` ;
+  con.query((sql), (err) => {
     if (err) {
       try {
         throw err;}
@@ -61,8 +60,7 @@ app.post('/insert', (req, res) =>{
             }
      }
       else {
-        var jason = JSON.stringify(data);
-        res.status(200);} 
+        res.status(200).send(`Post hecho correctamente ocn los datos: ${JSON.stringify(data)}`);} 
     });
 });
 
