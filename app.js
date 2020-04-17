@@ -1,7 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
 const http = require('http');
-const url = require('url');
 const app = express();
 const bodyParser = require('body-parser'); 
 
@@ -44,7 +43,8 @@ app.get('/select', (req, res) => {
         console.log("Select hecho correctamente correctamente");
         var estados = result[0];
         estados = JSON.stringify(estados);
-        res.end(estados); // No hace falta .send, .end también envía.
+        res.send(estados); 
+        res.end();
       }  
     });
 });
@@ -55,21 +55,20 @@ app.post('/insert', (req, res) =>{
     serie: req.body.serie
   };
   let sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${data.serie}, CURRENT_TIMESTAMP, ${data.temp});`;
-  con.query(sql, function (err) {
+  con.query(sql, (err) => {
     if (err) {
       try {
         throw err;}
       catch (err) {
-        console.log('Sucedio un error al recibir: ', err);}
-        res.end('Sucedio un error al recibir: ', err);
-    } else { 
-      res.end('Recibido correctamente');} 
+        var jason = JSON.stringify(data);
+        res.end(`Hubo un error: ${err}, Los valores recibidos fueron: ${jason}`);
+        console.log(err);}
+            } 
+      else {
+        var jason = JSON.stringify(data);
+        res.end(`POST hecho correctamente con los valores ${jason}`);} 
     });
 });
-
-app.get('/sumar', (req,res) => {
-  res.end("HOLA!!!!")
-})
 
 process.on('uncaughtException', function (err) {
   console.log(err);
