@@ -32,10 +32,10 @@ con.connect((err) => {
 });
 
 let data = {
-  temp,
-  estadoActual,
-  estadoApp,
-  setPoint
+  temp: 0,
+  estadoActual: 0,
+  estadoApp: 0,
+  setPoint: 0
 }
 
 app.use('/', (req, res) => {
@@ -52,28 +52,26 @@ app.use('/', (req, res) => {
         data.setPoint = result[0].setPoint;
         data.estadoActual = result[0].estadoActual;
         data.estadoApp = result[0].estadoApp;
-        } 
-      });
+      } 
+    });
 
-      let sql = `SELECT temp FROM datos ORDER BY ID DESC LIMIT 1`; 
-      con.query(sql, (err, result) => {
-        if (err) {
-            try {
-            throw err;}
-            catch (e) {
-              res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}` });
-              }
-            } 
-        else {
-            data.temp = result[0].temp;
-            } 
-          });    
+  sql = `SELECT temp FROM datos ORDER BY ID DESC LIMIT 1`; 
+  con.query(sql, (err, result) => {
+    if (err) {
+      try {
+        throw err;}
+      catch (e) {
+        res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}` });
+        }
+    } 
+    else {
+      data.temp = result[0].temp;
+      } 
+  });    
 });
 
 app.get('/', (req, res) => {
-  
   res.render('home', data);
-
 });
 
 app.get('/select', (req, res) => {
