@@ -4,12 +4,10 @@ const http = require('http');
 const app = express();
 const bodyParser = require('body-parser'); 
 
-var port = process.env.PORT || '3306';
 
-app.listen(port, () => { console.log(`Server started on port ${port}`)
-} );
+app.listen(app.get('port'), () => console.log(`Server started on port ${app.get('port')}`));
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 var con = mysql.createConnection(
   {
@@ -19,33 +17,33 @@ var con = mysql.createConnection(
   database: "heroku_0ec97e651295bde"
 });
 
-con.connect( (err) => {
+con.connect((err) => {
   if (err) {
     try {
       throw err;
     } catch (e) {
-      console.log('Sucedio un error con la conexion: ', e);
-    } } else {
-    console.log('Conexion correcta'); }
-  });
+      res.status(400).json({ errorMessage: `Fallo al conectarse a la base de datos: ${e}` });
+    }
+  } else {
+    console.log('Conexion correcta');
+    res.status(200);
+  }
+});
   
 app.get('/select', (req, res) => {
     let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
     con.query(sql, (err, result) => {
-      if (err) {
-        try {
-          throw err;
-        } catch (e) {
-          console.log('Sucedio un error al recibir: ', e);
-          res.end();
-        }
-      } else {
-        console.log("Select hecho correctamente correctamente");
-        var estados = result[0];
-        estados = JSON.stringify(estados);
-        res.send(estados); 
-        res.end();
-      }  
+              if (err) {
+          try {
+            throw err;
+          } catch (e) {
+            res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}` });
+          }
+        } else {
+          estados = result[0];
+          // Mas info aca http://expressjs.com/es/api.html#res.json
+          res.status(200).json(estados);
+        }      
     });
 });
     
@@ -60,16 +58,13 @@ app.post('/insert', (req, res) =>{
       try {
         throw err;}
       catch (err) {
-        var jason = JSON.stringify(data);
-        res.end(`Hubo un error: ${err}, Los valores recibidos fueron: ${jason}`);
-        console.log(err);}
-            } 
+        res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
+            }
+     }
       else {
         var jason = JSON.stringify(data);
-        res.end(`POST hecho correctamente con los valores ${jason}`);} 
+        res.status(200);} 
     });
 });
 
-process.on('uncaughtException', function (err) {
-  console.log(err);
-})
+module.exports = app;
