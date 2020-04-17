@@ -32,10 +32,10 @@ con.connect((err) => {
 });
 
 let data = {
-  temp: 0,
-  estadoActual: 0,
-  estadoApp: 0,
-  setPoint: 0
+  temp: null,
+  estadoActual: null,
+  estadoApp: null,
+  setPoint: null  
 }
 
 app.use('/', (req, res) => {
