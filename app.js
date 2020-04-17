@@ -38,7 +38,7 @@ let data = {
   setPoint
 }
 
-app.get('/', (req, res) => {
+app.use('/', (req, res) => {
   let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
   con.query(sql, (err, result) => {
     if (err) {
@@ -68,7 +68,10 @@ app.get('/', (req, res) => {
             data.temp = result[0].temp;
             } 
           });    
+});
 
+app.get('/', (req, res) => {
+  
   res.render('home', data);
 
 });
