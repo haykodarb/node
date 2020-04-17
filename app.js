@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 app.listen(app.get('port'), () => console.log(`Server started on port ${app.get('port')}`));
 
 app.use(express.json());
-app.set('view engine', 'ejs');
 
 var con = mysql.createConnection(
   {
@@ -23,55 +22,11 @@ con.connect((err) => {
     try {
       throw err;
     } catch (e) {
-      res.status(400).json({ errorMessage: `Fallo al conectarse a la base de datos: ${e}` });
+      console.log(`Fallo al conectarse a la base de datos: ${e}`);
     }
   } else {
     console.log('Conexion correcta');
-    res.status(200);
   }
-});
-
-let data = {
-  temp: null,
-  estadoActual: null,
-  estadoApp: null,
-  setPoint: null  
-}
-
-app.use('/', (req, res) => {
-  let sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
-  con.query(sql, (err, result) => {
-    if (err) {
-        try {
-        throw err;}
-        catch (e) {
-          res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}` });
-          }
-        } 
-    else {
-        data.setPoint = result[0].setPoint;
-        data.estadoActual = result[0].estadoActual;
-        data.estadoApp = result[0].estadoApp;
-      } 
-    });
-
-  sql = `SELECT temp FROM datos ORDER BY ID DESC LIMIT 1`; 
-  con.query(sql, (err, result) => {
-    if (err) {
-      try {
-        throw err;}
-      catch (e) {
-        res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}` });
-        }
-    } 
-    else {
-      data.temp = result[0].temp;
-      } 
-  });    
-});
-
-app.get('/', (req, res) => {
-  res.render('home', data);
 });
 
 app.get('/select', (req, res) => {
@@ -101,7 +56,7 @@ app.post('/insert', (req, res) =>{
     if (err) {
       try {
         throw err;}
-      catch (err) {
+      catch (e) {
         res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
             }
      }
