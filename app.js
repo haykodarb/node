@@ -39,11 +39,13 @@ app.get('/select', (req, res) => {
         try {
           throw err;
         } catch (e) {
+          con.end();
           res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}` });
         }
       } else {
         // Mas info aca http://expressjs.com/es/api.html#res.json
         res.status(200).json(result[0]);
+        con.end();
       }      
     });
 });
@@ -54,16 +56,17 @@ app.post('/insert', (req, res) =>{
     serie: req.body.serie
   };
   const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${data.serie}, ${data.temp}, CURRENT_TIMESTAMP)`;
-
   con.query(sql, (err) => {
     if (err) {
       try {
         throw err;
       } catch (e) {
+        con.end();
         res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
       }
     } else {
       res.status(200).send("Post hecho correctamente");
+      con.end();
     }
   });
 });
