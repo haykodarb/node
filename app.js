@@ -63,7 +63,7 @@ app.post('/insert', (req, res) =>{
         res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
       }
     } else {
-      res.status(200);
+      res.status(200).send("Post hecho correctamente");
     }
   });
 });
