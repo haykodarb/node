@@ -25,6 +25,7 @@ con.connect((err) => {
     } catch (e) {
       res.status(400).json({ errorMessage: `Fallo al conectarse a la base de datos: ${e}` });
     }
+    
   } else {
     console.log('Conexion correcta');
     res.status(200);
