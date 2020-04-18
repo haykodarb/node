@@ -11,10 +11,10 @@ app.use(express.json());
 
 var con = mysql.createConnection(
   {
-  host: "us-cdbr-iron-east-01.cleardb.net",
-  user: "b93244dc053f45",
-  password: "937a4217",
-  database: "heroku_0ec97e651295bde"
+  host: "us-cdbr-gcp-east-01.cleardb.net",
+  user: "bd70014928536a",
+  password: "a867a9ff",
+  database: " gcp_3a44f6029eefbaf3050d"
 });
 
 con.connect( (err) => {
@@ -30,7 +30,7 @@ con.connect( (err) => {
 });
 
 app.get('/select', (req, res) => {
-    const sql = `SELECT setPoint, estadoActual, estadoApp FROM estados ORDER BY ID DESC LIMIT 1`; 
+    const sql = `SELECT estadoApp, estadoActual, setPoint FROM estados ORDER BY ID DESC LIMIT 1`; 
     con.query(sql, (err, result) => {
               if (err) {
           try {
@@ -50,7 +50,7 @@ app.post('/insert', (req, res) =>{
     temp: req.body.temp,
     serie: req.body.serie
   };
-  const sql = `INSERT INTO datos (id, serie, fecha, temp) VALUES (NULL, ${data.serie}, CURRENT_TIMESTAMP, ${data.temp});` ;
+  const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${data.serie}, ${data.temp}), CURRENT_TIMESTAMP;` ;
   con.query((sql), (err) => {
     if (err) {
       try {
@@ -60,7 +60,7 @@ app.post('/insert', (req, res) =>{
             }
      }
       else {
-        res.status(200).send(`Post hecho correctamente ocn los datos: ${JSON.stringify(data)}`);} 
+        res.status(200).send(`Post hecho correctamente con los datos: ${JSON.stringify(data)}`);} 
     });
 });
 
