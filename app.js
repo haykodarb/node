@@ -11,7 +11,8 @@ http.listen(3000, () => {
   console.log(chalk.green('Listening on port: 3000'));
 });
 
-let con = mysql.createConnection({
+let con = mysql.createPool({
+  connectionLimit: 4,
   host: "us-cdbr-gcp-east-01.cleardb.net",
   user: "bd70014928536a",
   password: "a867a9ff",
@@ -32,18 +33,17 @@ con.connect((err) => {
 });
 
 app.get('/select', (req, res) => {
-    const sql = `SELECT estadoApp, estadoActual, setPoint FROM estados ORDER BY ID DESC LIMIT 1`; 
+  const sql = `SELECT estadoApp, estadoActual, setPoint FROM estados ORDER BY ID DESC LIMIT 1`; 
 
-    con.query(sql, (err, result) => {
-      if (err) {
-        try {
-          throw err;
-        } catch (e) {
+  con.query(sql, (err, result) => {
+    if (err) {
+      try {
+        throw err;
+      } catch (e) {
           res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}` });
         }
-      } else {
-        // Mas info aca http://expressjs.com/es/api.html#res.json
-        res.status(200).json(result[0]);
+    } else {
+      res.status(200).json(result[0]);
       }      
     });
 });
