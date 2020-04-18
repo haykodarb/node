@@ -19,18 +19,6 @@ let con = mysql.createPool({
   database: "gcp_3a44f6029eefbaf3050d"
 });
 
-//con.connect((err) => {
-//if (err) {
-//    try {
- //     throw err;
-//    } catch (e) {
-//      console.log(`Fallo al conectarse a la base de datos: ${e}`);
- //     return;
-//    }
-//  } else {
-//    console.log('Conexion correcta');
- // } });
-
 app.get('/select', (req, res) => {
   const sql = `SELECT estadoApp, estadoActual, setPoint FROM estados ORDER BY ID DESC LIMIT 1`; 
 
