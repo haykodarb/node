@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const app = express();
 const http = require('http').createServer(app);
 const bodyParser = require('body-parser'); 
-const fs = require('fs');
 
 app.use(express.json());
 
@@ -21,9 +20,19 @@ let con = mysql.createPool({
 });
 
 app.get('/select', (req, res) => {
-  let rawdata = fs.readFileSync('estados.json');
-  let estados = JSON.parse(rawdata);
-  res.status(200).json(estados);
+  const sql = `SELECT estadoApp, estadoActual, setPoint FROM estados ORDER BY ID DESC LIMIT 1`; 
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      try {
+        throw err;
+      } catch (e) {
+          res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}` });
+        }
+    } else {
+      res.status(200).json(result[0]);
+      }      
+    });
 });
     
 app.post('/insert', (req, res) =>{
@@ -40,8 +49,8 @@ app.post('/insert', (req, res) =>{
         res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
       }
     } else {
-      res.status(200).send("Post recibido correctamente");
-      }
+      res.status(200).send("Post hecho correctamente");
+    }
   });
 });
 
