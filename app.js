@@ -35,7 +35,10 @@ app.get('/select', (req, res) => {
 });
     
 app.post('/insert', (req, res) =>{
-  let datos = JSON.parse(req.body);
+  let datos = {
+    temp: req.body.temp,
+    serie: req.body.serie
+  };
   res.status(200).send('Post recibido correctamente');
   const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${datos.serie}, ${datos.temp}, CURRENT_TIMESTAMP)`;
   con.query(sql, (err) => {
