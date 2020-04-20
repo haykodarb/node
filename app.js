@@ -6,8 +6,6 @@ const http = require('http').createServer(app);
 const bodyParser = require('body-parser'); 
 const fs = require('fs');
 
-
-
 app.use(express.json());
 
 http.listen(3000, () => {
@@ -22,35 +20,29 @@ let con = mysql.createPool({
   database: "gcp_3a44f6029eefbaf3050d"
 });
 
-
 app.get('/select', (req, res) => {
-  fs.readFile('./estados.json', (err, data) => {
-  if(err) {
-    try  {throw err;} 
-    catch(e) {console.log(`Sucedió un error al obtener la información ${e}`);}
-  }
-  let estados = JSON.parse(data);
+  let rawdata = fs.readFileSync('estados.json');
+  let estados = JSON.parse(rawdata);
   res.status(200).json(estados);
-  });
 });
     
 app.post('/insert', (req, res) =>{
-  let datos = {
+  const data = {
     temp: req.body.temp,
     serie: req.body.serie
   };
-  res.status(200).send('Post recibido correctamente');
-  const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${datos.serie}, ${datos.temp}, CURRENT_TIMESTAMP)`;
+  res.status(200).send("Post recibido correctamente");
+  const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${data.serie}, ${data.temp}, CURRENT_TIMESTAMP)`;
   con.query(sql, (err) => {
     if (err) {
       try {
         throw err;
       } catch (e) {
-        console.log(`errorMessage: Sucedio un error al recibir: ${e}`);
+        res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
       }
     } else {
       console.log('Insert realizado correctamente');
-    }
+      }
   });
 });
 
