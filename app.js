@@ -6,6 +6,8 @@ const http = require('http').createServer(app);
 const bodyParser = require('body-parser'); 
 const fs = require('fs');
 
+
+
 app.use(express.json());
 
 http.listen(3000, () => {
@@ -21,7 +23,7 @@ let con = mysql.createPool({
 });
 
 app.get('/select', (req, res) => {
-  fs.readFile('estados.json', (err, data) => {
+  fs.readFile('./estados.json', (err, data) => {
   if(err) {
     try  {throw err;} 
     catch(e) {console.log(`Sucedió un error al obtener la información ${e}`);}
@@ -33,7 +35,7 @@ app.get('/select', (req, res) => {
     
 app.post('/insert', (req, res) =>{
   let datos = req.body;
-  fs.writeFile('datos.json', datos, (err) => {
+  fs.writeFile('./datos.json', datos, (err) => {
     if(err) {
       try  {throw err;} 
       catch(e) {console.log(`Sucedió un error al escribir la información ${e}`);}
