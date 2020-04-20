@@ -21,14 +21,24 @@ let con = mysql.createPool({
 });
 
 app.get('/select', (req, res) => {
-  let rawdata = fs.readFileSync('estados.json');
-  let estados = JSON.parse(rawdata);
+  fs.readFile('estados.json', (err, data) => {
+  if(err) {
+    try  {throw err;} 
+    catch(e) {console.log(`Sucedió un error al obtener la información ${e}`);}
+  }
+  let estados = JSON.parse(data);
   res.status(200).json(estados);
+  });
 });
     
 app.post('/insert', (req, res) =>{
   let datos = req.body;
-  fs.writeFileSync('datos.json', datos);
+  fs.writeFile('datos.json', datos, (err) => {
+    if(err) {
+      try  {throw err;} 
+      catch(e) {console.log(`Sucedió un error al escribir la información ${e}`);}
+    }
+    });
   res.status(200).send('Post realizado correcctamente');
   insertSQL(datos);
 });
