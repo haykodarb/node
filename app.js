@@ -31,7 +31,6 @@ app.post('/insert', (req, res) =>{
     temp: req.body.temp,
     serie: req.body.serie
   };
-  res.status(200).send("Post recibido correctamente");
   const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${data.serie}, ${data.temp}, CURRENT_TIMESTAMP)`;
   con.query(sql, (err) => {
     if (err) {
@@ -41,7 +40,7 @@ app.post('/insert', (req, res) =>{
         res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
       }
     } else {
-      console.log('Insert realizado correctamente');
+      res.status(200).send("Post recibido correctamente");
       }
   });
 });
