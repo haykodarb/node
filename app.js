@@ -22,6 +22,7 @@ let con = mysql.createPool({
   database: "gcp_3a44f6029eefbaf3050d"
 });
 
+
 app.get('/select', (req, res) => {
   fs.readFile('./estados.json', (err, data) => {
   if(err) {
@@ -34,19 +35,9 @@ app.get('/select', (req, res) => {
 });
     
 app.post('/insert', (req, res) =>{
-  let datos = req.body;
-  fs.writeFile('./datos.json', datos, (err) => {
-    if(err) {
-      try  {throw err;} 
-      catch(e) {console.log(`Sucedió un error al escribir la información ${e}`);}
-    }
-    });
-  res.status(200).send('Post realizado correcctamente');
-  insertSQL(datos);
-});
-
-function insertSQL(data) {
-  const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${data.serie}, ${data.temp}, CURRENT_TIMESTAMP)`;
+  let datos = JSON.parse(req.body);
+  res.status(200).send('Post recibido correctamente');
+  const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${datos.serie}, ${datos.temp}, CURRENT_TIMESTAMP)`;
   con.query(sql, (err) => {
     if (err) {
       try {
@@ -58,6 +49,6 @@ function insertSQL(data) {
       console.log('Insert realizado correctamente');
     }
   });
-}
+});
 
 module.exports = app;
