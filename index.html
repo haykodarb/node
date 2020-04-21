@@ -83,6 +83,7 @@
 	
 <script>
 
+function fetchData() { 
 fetch('https://hayk-project.now.sh/datos')
 .then(res => {
 	return res.json();	
@@ -111,6 +112,17 @@ fetch('https://hayk-project.now.sh/estados')
 	document.getElementById('setPoint').setAttribute('value', `${setPoint}`);
 	document.getElementById('estadoApp').setAttribute('value', `${estadoApp}`);
 	document.getElementById('estadoActual').setAttribute('value', `${estadoActual}`);
+})
+}
+
+function liveUpdate() { 
+	setInterval( () => {
+		fetchData();
+	}, 5000)
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	liveUpdate();
 })
 
 </script>
