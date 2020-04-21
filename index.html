@@ -80,54 +80,54 @@
 		</div>	
 		<input type="submit" value="Enviar	">
 	</form>
-	
+</body>
+
 <script>
 
-function fetchData() { 
-fetch('https://hayk-project.now.sh/datos')
-.then(res => {
-	return res.json();	
-})
-.then(json => {
-	let temp = json.temp;
-	temp = `${temp}°C`;
-	document.getElementById('temp').setAttribute('value', `${temp}`);
-})
-
-fetch('https://hayk-project.now.sh/estados')
-.then(res => {
-	return res.json();	
-})
-.then(json => {
-	let setPoint = json.setPoint;
-	setPoint = `${setPoint}°C`;
-	let estadoApp = json.estadoApp;
-	if(estadoApp == 1) {
-		estadoApp = `Encendido`;
-	} else {estadoApp = `Apagado`;}
-	let estadoActual = json.estadoActual;
-	if(estadoActual == 1) {
-		estadoActual = `ON`;
-	} else {estadoApp = `OFF`;}
-	document.getElementById('setPoint').setAttribute('value', `${setPoint}`);
-	document.getElementById('estadoApp').setAttribute('value', `${estadoApp}`);
-	document.getElementById('estadoActual').setAttribute('value', `${estadoActual}`);
-})
-}
-
-fetchData();
-
-function liveUpdate() { 
-	setInterval( () => {
-		fetchData();
-	}, 5000)
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-	liveUpdate();
-})
-
+	function fetchData() { 
+	fetch('https://hayk-project.now.sh/datos')
+	.then(res => {
+		return res.json();	
+	})
+	.then(json => {
+		let temp = json.temp;
+		temp = `${temp}°C`;
+		document.getElementById('temp').setAttribute('value', `${temp}`);
+	})
+	
+	fetch('https://hayk-project.now.sh/estados')
+	.then(res => {
+		return res.json();	
+	})
+	.then(json => {
+		let setPoint = json.setPoint;
+		setPoint = `${setPoint}°C`;
+		let estadoApp = json.estadoApp;
+		if(estadoApp == 1) {
+			estadoApp = `Encendido`;
+		} else {estadoApp = `Apagado`;}
+		let estadoActual = json.estadoActual;
+		if(estadoActual == 1) {
+			estadoActual = `ON`;
+		} else {estadoApp = `OFF`;}
+		document.getElementById('setPoint').setAttribute('value', `${setPoint}`);
+		document.getElementById('estadoApp').setAttribute('value', `${estadoApp}`);
+		document.getElementById('estadoActual').setAttribute('value', `${estadoActual}`);
+	})
+	}
+	
+	fetchData();
+	
+	function liveUpdate() { 
+		setInterval( () => {
+			fetchData();
+		}, 5000)
+	}
+	
+	document.addEventListener('DOMContentLoaded', () => {
+		liveUpdate();
+	})
+	
 </script>
 
-</body>
 </html>
