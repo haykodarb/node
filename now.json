@@ -6,7 +6,8 @@
       { "src": "app.js", "use": "@now/node" }
     ],
     "routes": [
-      { "src": "/select", "dest": "app.js" },
-      { "src": "/insert", "dest": "app.js" }
+      { "src": "/datos", "dest": "app.js" },
+      { "src": "/insert", "dest": "app.js" },
+      { "src": "/estados", "dest": "app.js" }
     ]
   }
