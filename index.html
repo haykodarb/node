@@ -95,11 +95,11 @@ const options = {
 }
 
 fetch('https://hayk-project.now.sh/datos')
-.then(res => json = res.json())
+.then(res => json = JSON.parse(res))
 .then(res => {
 	temp = json.temp;
-    document.getElementById('temp').setAttribute('value', '11');
-        });
+    document.getElementById('temp').setAttribute('value', `${temp}`);
+        });	
 
 </script>
 
