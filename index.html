@@ -89,7 +89,7 @@
 
 fetch('https://hayk-project.now.sh/datos')
 .then(res => {
-	console.log(res.body);
+	console.log(res);
 	let temp = res.body.temp;
     document.getElementById('temp').setAttribute('value', `${temp}`);
         });	
