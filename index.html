@@ -95,8 +95,8 @@ const options = {
 }
 
 fetch('https://hayk-project.now.sh/datos')
-.then(res => temp = res)
 .then(res => {
+	temp = res.temp;
     document.getElementById('temp').setAttribute('value', `${temp}`);
         });	
 
