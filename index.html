@@ -64,11 +64,11 @@
 	<form action="/action_page.php">
 		<div>
 	  		<label for="sistema">Sistema</label>
-	  		<input type="text" id="sistema" name="sistema" value="ON">
+	  		<input type="text" id="estadoApp" name="sistema" value="ON">
   		</div>
   		<div>
 			<label for="resistencia">Resistencia</label>
-			<input type="text" id="resistencia" name="resistencia" value="Apagada">
+			<input type="text" id="estadoActual" name="resistencia" value="Apagada">
 		</div>
 		<div>
 			<label for="temperatura">Temperatura</label>
@@ -92,10 +92,29 @@ fetch('https://hayk-project.now.sh/datos')
 	return res.json();	
 })
 .then(json => {
-	console.log(json);
 	let temp = json.temp;
 	let string = `${temp}°C`;
 	document.getElementById('temp').setAttribute('value', `${temp}`);
+})
+
+fetch('https://hayk-project.now.sh/estados')
+.then(res => {
+	return res.json();	
+})
+.then(json => {
+	let setPoint = json.setPoint;
+	setPoint = `${setPoint}°C`;
+	let estadoApp = json.estadoApp;
+	if(estadoApp == 1) {
+		estadoApp = `Encendido`;
+	} else {estadoApp = `Apagado`;}
+	let estadoActual = json.estadoActual;
+	if(estadoActual == 1) {
+		estadoActual = `ON`;
+	} else {estadoApp = `OFF`;}
+	document.getElementById('setPoint').setAttribute('value', `${setPoint}`);
+	document.getElementById('estadoApp').setAttribute('value', `${estadoApp}`);
+	document.getElementById('estadoActual').setAttribute('value', `${estadoActual}`);
 })
 
 </script>
