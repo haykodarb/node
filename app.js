@@ -44,7 +44,7 @@ app.get('/datos', (req, res) => {
           res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}` });
         }
     } else {
-      res.status(200).send(JSON.stringify(result[0]));
+      res.status(200).send(result[0].temp);
       }      
     });
 });
