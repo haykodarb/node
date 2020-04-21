@@ -60,7 +60,7 @@
 		}
 	</style>
 </head>
-<body>
+<body>	
 	<form action="/action_page.php">
 		<div>
 	  		<label for="sistema">Sistema</label>
@@ -72,7 +72,7 @@
 		</div>
 		<div>
 			<label for="temperatura">Temperatura</label>
-			<input type="text" id="temperatura" name="temperatura" value="50.25 °C">
+			<input type="text" id="temp" name="temperatura" value="0">
 		</div>	
 		<div>
 			<label for="setPoint">Set point</label>
@@ -83,6 +83,18 @@
 			<input type="text" disabled id="hora" name="hora" value="16:02">
 		</div>	
 		<input type="submit" value="Enviar	">
-	</form> 
+	</form>
+	
+<script>
+	
+fetch('https://hayk-project.now.sh/datos')
+.then(res => res.json())
+.then(res => {
+	temp = res.temp;
+    document.getElementById('temp').setAttribute('value', `${temp}`);
+        });
+
+</script>
+
 </body>
 </html>
