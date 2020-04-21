@@ -86,7 +86,15 @@
 	</form>
 	
 <script>
-	
+const options = {
+    method: 'POST',
+    body: JSON.stringify(user),
+    headers: {
+		'Content-Type': 'application/json',
+		'Access-Control-Allow-Origin': '*',	
+	}
+}
+
 fetch('https://hayk-project.now.sh/datos')
 .then(res => res.json())
 .then(res => {
