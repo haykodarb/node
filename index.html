@@ -72,7 +72,7 @@
 		</div>
 		<div>
 			<label for="temperatura">Temperatura</label>
-			<input type="text" id="temp" name="temperatura" value="0">
+			<input type="text" id="temp" name="temperatura" value="">
 		</div>	
 		<div>
 			<label for="setPoint">Set point</label>
@@ -86,16 +86,10 @@
 	</form>
 	
 <script>
-const options = {
-    method: 'GET',
-    headers: {
-		'Content-Type': 'application/json',
-		'Access-Control-Allow-Origin': '*',	
-	}
-}
 
 fetch('https://hayk-project.now.sh/datos')
 .then(res => {
+	console.log(res);
 	let temp = res;
     document.getElementById('temp').setAttribute('value', `${temp}`);
         });	
