@@ -93,7 +93,7 @@ fetch('https://hayk-project.now.sh/datos')
 })
 .then(json => {
 	let temp = json.temp;
-	let string = `${temp}°C`;
+	temp = `${temp}°C`;
 	document.getElementById('temp').setAttribute('value', `${temp}`);
 })
 
