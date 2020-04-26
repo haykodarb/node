@@ -20,7 +20,7 @@ let con = mysql.createPool({
 });
 
 app.get('/datos', (req, res) => {
-  const sql = `SELECT temp, hum FROM datos ORDER BY ID DESC LIMIT 1`; 
+  const sql = `SELECT temp, hum, lum FROM datos ORDER BY ID DESC LIMIT 1`; 
   con.query(sql, (err, result) => {
     if (err) {
       try {
