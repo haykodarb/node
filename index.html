@@ -107,6 +107,7 @@
 	})
 	.then(json => {
 		let temp = json.temp;
+		let hum = json.hum;
 		temp = `${temp}°C`;
 		hum = `${hum}%`;
 		document.getElementById('temp').setAttribute('value', `${temp}`);
