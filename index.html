@@ -1,41 +1,51 @@
-	q<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Invernadero</title>
-
-	<h1> Invernadero</h1>
-
 	<style>
+		html {
+			height: 100%;
+		}
+
 		body {
 			background-color: #d7fff1;
-		}
-		h1 {
-			background-color: #285943;
-			width: 600px;	
-			height: 60px;
-			text-align: center;
 			font-family: Arial, Helvetica, serif;
+			min-height: 100vh;
+			/* mobile viewport bug fix */
+			min-height: -webkit-fill-available;
+			position: relative;
+		}
+
+		h1 {
+			background-color: #285943;	
+			padding: 8px 0;
+			text-align: center;
 			font-size: 40px;
 			font-weight: 500;
 			color: white;
 		}
 
-		form {
+		.container {
 			display: flex;
-		    flex-direction: column;
-		    max-width: 600px;
-		    width: 100%;
-		    margin: 0 auto;
-		    text-align: left;
+			flex-direction: column;
+			max-width: 600px;
+			width: 100%;
+			margin: 0 auto;
+			text-align: left;
 		}
 
+		.addOpacity {
+			opacity: 0.5;
+		}
 
 		form > div {
 			display: flex;
-		    align-items: center;
-		    justify-content: space-between;
-		    padding: 5px 0;
-		    height: 60px;
+			align-items: center;
+			justify-content: space-between;
+			padding: 5px 0;
+			height: 60px;
 		}
 
 		form > div > label {
@@ -47,10 +57,10 @@
 			width: 100%;
 			height: 100%;
 			display: flex;
-    		align-items: center;
-    		padding-left: 40px;
-    		border-top-left-radius: 5px;
-    		border-bottom-left-radius: 5px;
+			align-items: center;
+			padding-left: 40px;
+			border-top-left-radius: 5px;
+			border-bottom-left-radius: 5px;
 		}
 
 		form > div > input {
@@ -63,7 +73,7 @@
 			font-weight: 600;
 			border: none;
 			border-top-right-radius: 5px;
-    		border-bottom-right-radius: 5px;
+			border-bottom-right-radius: 5px;
 		}
 
 		form input[type="submit"] {
@@ -75,48 +85,143 @@
 			background: #afafaf;
 			cursor: not-allowed;
 		}
+		
+		#loader {
+			margin: auto;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			font-size: 25px;
+			width: 1.2em;
+			height: 1.2em;
+			border-radius: 50%;
+			position: relative;
+			text-indent: -9999em;
+			-webkit-animation: load5 1.1s infinite ease;
+			animation: load5 1.1s infinite ease;
+			-webkit-transform: translateZ(0);
+			-ms-transform: translateZ(0);
+			transform: translateZ(0);
+			display: none;
+		}
+
+		@-webkit-keyframes load5 {
+			0%,
+			100% {
+				box-shadow: 0em -2.6em 0em 0em green, 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.5), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7);
+			}
+			12.5% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.7), 1.8em -1.8em 0 0em green, 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5);
+			}
+			25% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.5), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7), 2.5em 0em 0 0em green, 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			37.5% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5), 2.5em 0em 0 0em rgba(255, 255, 255, 0.7), 1.75em 1.75em 0 0em green, 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			50% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.5), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7), 0em 2.5em 0 0em green, -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			62.5% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.5), 0em 2.5em 0 0em rgba(255, 255, 255, 0.7), -1.8em 1.8em 0 0em green, -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			75% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.5), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7), -2.6em 0em 0 0em green, -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			87.5% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5), -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em green;
+			}
+		}
+		@keyframes load5 {
+			0%,
+			100% {
+				box-shadow: 0em -2.6em 0em 0em green, 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.5), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7);
+			}
+			12.5% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.7), 1.8em -1.8em 0 0em green, 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5);
+			}
+			25% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.5), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7), 2.5em 0em 0 0em green, 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			37.5% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5), 2.5em 0em 0 0em rgba(255, 255, 255, 0.7), 1.75em 1.75em 0 0em green, 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			50% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.5), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7), 0em 2.5em 0 0em green, -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			62.5% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.5), 0em 2.5em 0 0em rgba(255, 255, 255, 0.7), -1.8em 1.8em 0 0em green, -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			75% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.5), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7), -2.6em 0em 0 0em green, -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
+			}
+			87.5% {
+				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5), -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em green;
+			}
+		}
 	</style>
 </head>
 <body>	
-	<form>
-		<div>
-			<label for="temperatura">Temperatura</label>
-			<input type="text" id="temp" name="temp" value="">
-		</div>	
-		<div>
-			<label for="humedad">Humedad</label>
-			<input type="text" id="hum" name="hum" value="">
-		</div>
-		<div>
-			<label for="luminosidad">Luminosidad</label>
-			<input type="text" id="lum" name="lum" value="">
-		</div>
-		<div>
-			<label for="hora">Hora</label>
-			<input type="text" id="hora" name="hora" value="">
-		</div>	
-	</form>
+	<div class="container">
+		<h1>Invernadero</h1>
+		<form>
+			<div>
+				<label for="temperatura">Temperatura</label>
+				<input type="text" id="temp" name="temp" value="">
+			</div>	
+			<div>
+				<label for="humedad">Humedad</label>
+				<input type="text" id="hum" name="hum" value="">
+			</div>
+			<div>
+				<label for="luminosidad">Luminosidad</label>
+				<input type="text" id="lum" name="lum" value="">
+			</div>
+			<div>
+				<label for="hora">Hora</label>
+				<input type="text" id="hora" name="hora" value="">
+			</div>	
+		</form>
+	</div>
+	<div id="loader">Loading...</div>
 </body>
 
 <script>
 
+	function showLoader() {
+		document.getElementById('loader').style.display = 'block';
+		document.getElementsByClassName('container')[0].classList.add('addOpacity');
+	}
+
+	function hideLoader() {
+		document.getElementById('loader').style.display = 'none';
+		document.getElementsByClassName('container')[0].classList.remove('addOpacity');
+	}
+
 	function fetchData() { 
-	fetch('https://hayk-project.now.sh/datos')
-	.then(res => {
-		return res.json();	
-	})
-	.then(json => {
-		let temp = json.temp;
-		let hum = json.hum;
-		let lum = json.lum;
-		temp = `${temp}°C`;
-		hum = `${hum}%`;
-		lum = `${lum}%`;
-		document.getElementById('temp').setAttribute('value', `${temp}`);
-		document.getElementById('hum').setAttribute('value', `${hum}`);
-		document.getElementById('lum').setAttribute('value', `${lum}`);
-	})
-}
+		showLoader();
+
+		fetch('https://hayk-project.now.sh/datos')
+			.then(res => {
+				return res.json();	
+			})
+			.then(json => {
+				let temp = json.temp;
+				let hum = json.hum;
+				let lum = json.lum;
+				temp = `${temp}°C`;
+				hum = `${hum}%`;
+				lum = `${lum}%`;
+				document.getElementById('temp').setAttribute('value', `${temp}`);
+				document.getElementById('hum').setAttribute('value', `${hum}`);
+				document.getElementById('lum').setAttribute('value', `${lum}`);
+			})
+			.finally(() => {
+				hideLoader();
+			});
+	}
 	
 	fetchData();
 	
@@ -129,6 +234,9 @@
 		}, 10000)
 	}
 	
+	document.addEventListener('DOMContentLoaded', () => {
+		liveUpdate();
+	})
 </script>
 
 </html>
