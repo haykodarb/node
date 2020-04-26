@@ -197,8 +197,7 @@
 		if(min < 10) {
 		min = `0${min}`;
 		}
-		let time = hora + ":" + min;
-		document.getElementById('hora').setAttribute('value', `${time}`);
+		document.getElementById('hora').setAttribute('value', `${hora}:${min}`);
 	}
 
 	function showLoader() {
@@ -213,7 +212,6 @@
 
 	function fetchData() { 
 		showLoader();
-
 		fetch('https://hayk-project.now.sh/datos')
 			.then(res => {
 				return res.json();	
