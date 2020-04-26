@@ -49,6 +49,7 @@ app.post('/insert', (req, res) =>{
         throw err;
       } catch (e) {
         res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
+        console.log(`Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`);
       }
     } else {
       res.status(200).send("Post hecho correctamente");
