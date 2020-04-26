@@ -189,6 +189,17 @@
 </body>
 
 <script>
+	
+	function fijarHora() {
+		let today = new Date();
+		let min = today.getMinutes;
+		let hora = today.getHours;
+		if(min < 10) {
+		min = `0${min}`;
+		}
+		let time = hora + ":" + min;
+		document.getElementById('hora').setAttribute('value', `${time}`);
+	}
 
 	function showLoader() {
 		document.getElementById('loader').style.display = 'block';
@@ -201,6 +212,8 @@
 	}
 
 	function fetchData() { 
+		showLoader();
+
 		fetch('https://hayk-project.now.sh/datos')
 			.then(res => {
 				return res.json();	
@@ -216,17 +229,18 @@
 				document.getElementById('hum').setAttribute('value', `${hum}`);
 				document.getElementById('lum').setAttribute('value', `${lum}`);
 			})
+			.finally(() => {
+				hideLoader();
 			});
 	}
 	
+	fijarHora();
 	fetchData();
 	
 	function liveUpdate() { 
 		setInterval( () => {
 			fetchData();
-			let today = new Date();
-			let time = today.getHours() + ":" + today.getMinutes();
-			document.getElementById('hora').setAttribute('value', `${time}`);
+			fijarHora();
 		}, 10000)
 	}
 	
