@@ -19,23 +19,8 @@ let con = mysql.createPool({
   database: "gcp_3a44f6029eefbaf3050d"
 });
 
-app.get('/estados', (req, res) => {
-  const sql = `SELECT estadoApp, estadoActual, setPoint FROM estados ORDER BY ID DESC LIMIT 1`; 
-  con.query(sql, (err, result) => {
-    if (err) {
-      try {
-        throw err;
-      } catch (e) {
-          res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}` });
-        }
-    } else {
-      res.status(200).json(result[0]);
-      }      
-    });
-});
-
 app.get('/datos', (req, res) => {
-  const sql = `SELECT temp FROM datos ORDER BY ID DESC LIMIT 1`; 
+  const sql = `SELECT temp, hum FROM datos ORDER BY ID DESC LIMIT 1`; 
   con.query(sql, (err, result) => {
     if (err) {
       try {
@@ -53,9 +38,10 @@ app.get('/datos', (req, res) => {
 app.post('/insert', (req, res) =>{
   const data = {
     temp: req.body.temp,
-    serie: req.body.serie
+    serie: req.body.serie,
+    hum: req.body.hum
   };
-  const sql = `INSERT INTO datos (id, serie, temp, hora) VALUES (NULL, ${data.serie}, ${data.temp}, CURRENT_TIMESTAMP)`;
+  const sql = `INSERT INTO datos (id, serie, temp, hum, hora) VALUES (NULL, ${data.serie}, ${data.temp}, ${data.hum}, CURRENT_TIMESTAMP)`;
   con.query(sql, (err) => {
     if (err) {
       try {
