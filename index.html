@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Termotanque
-	</title>
+	<title>Invernadero</title>
+
+	<h1> Invernadero</h1>
 
 	<style>
 		body {
-			background-color: #7b7b7b;
+			background-color: #d7fff1;
 		}
-
+		h1 {
+			background-color: #285943;
+			width: 600px;	
+			height: 60px;
+			text-align: center;
+			font-family: Arial, Helvetica, serif;
+			font-size: 40px;
+			font-weight: 500;
+			color: white;
+		}
 		form {
 			display: flex;
 		    flex-direction: column;
@@ -24,26 +34,32 @@
 		    align-items: center;
 		    justify-content: space-between;
 		    padding: 5px 0;
-		    height: 30px;
+		    height: 60px;
 		}
 
 		form > div > label {
-			background: black;
-			color: white;
+			font-size: 20px;
+			font-family: Arial, Helvetica, serif;
+			background: #8cd790;
+			color: black;
+			font-weight: 500;
 			width: 100%;
 			height: 100%;
 			display: flex;
     		align-items: center;
-    		padding-left: 5px;
+    		padding-left: 40px;
     		border-top-left-radius: 5px;
     		border-bottom-left-radius: 5px;
 		}
 
 		form > div > input {
+			font-size: 16px;
+			background: #aafcb8;
+			color: black;
 			height: 100%;
 			padding: 0;
 			text-align: center;
-			font-weight: bold;
+			font-weight: 600;
 			border: none;
 			border-top-right-radius: 5px;
     		border-bottom-right-radius: 5px;
@@ -61,24 +77,23 @@
 	</style>
 </head>
 <body>	
-	<form action="/action_page.php">
-		<div>
-	  		<label for="sistema">Sistema</label>
-	  		<input type="text" id="estadoApp" name="sistema" value="">
-  		</div>
-  		<div>
-			<label for="resistencia">Resistencia</label>
-			<input type="text" id="estadoActual" name="resistencia" value="">
-		</div>
+	<form>
 		<div>
 			<label for="temperatura">Temperatura</label>
-			<input type="text" id="temp" name="temperatura" value="">
+			<input type="text" id="temp" name="temp" value="">
 		</div>	
 		<div>
-			<label for="setPoint">Set point</label>
-			<input type="text" id="setPoint" name="setPoint" value="">
+			<label for="humedad">Humedad</label>
+			<input type="text" id="hum" name="hum" value="">
+		</div>
+		<div>
+			<label for="luminosidad">Luminosidad</label>
+			<input type="text" id="lumin" name="lumin" value="">
+		</div>
+		<div>
+			<label for="hora">Hora</label>
+			<input type="text" id="hora" name="hora" value="">
 		</div>	
-		<input type="submit" value="Enviar	">
 	</form>
 </body>
 
@@ -92,29 +107,9 @@
 	.then(json => {
 		let temp = json.temp;
 		temp = `${temp}°C`;
+		hum = `${hum}%`;
 		document.getElementById('temp').setAttribute('value', `${temp}`);
 	})
-	
-	fetch('https://hayk-project.now.sh/estados')
-	.then(res => {
-		return res.json();	
-	})
-	.then(json => {
-		let setPoint = json.setPoint;
-		setPoint = `${setPoint}°C`;
-		let estadoApp = json.estadoApp;
-		if(estadoApp == 1) {
-			estadoApp = `Encendido`;
-		} else {estadoApp = `Apagado`;}
-		let estadoActual = json.estadoActual;
-		if(estadoActual == 1) {
-			estadoActual = `ON`;
-		} else {estadoApp = `OFF`;}
-		document.getElementById('setPoint').setAttribute('value', `${setPoint}`);
-		document.getElementById('estadoApp').setAttribute('value', `${estadoApp}`);
-		document.getElementById('estadoActual').setAttribute('value', `${estadoActual}`);
-	})
-	}
 	
 	fetchData();
 	
@@ -127,7 +122,7 @@
 	document.addEventListener('DOMContentLoaded', () => {
 		liveUpdate();
 	})
-	
+	}
 </script>
 
 </html>
