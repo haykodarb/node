@@ -201,8 +201,6 @@
 	}
 
 	function fetchData() { 
-		showLoader();
-
 		fetch('https://hayk-project.now.sh/datos')
 			.then(res => {
 				return res.json();	
@@ -218,8 +216,6 @@
 				document.getElementById('hum').setAttribute('value', `${hum}`);
 				document.getElementById('lum').setAttribute('value', `${lum}`);
 			})
-			.finally(() => {
-				hideLoader();
 			});
 	}
 	
