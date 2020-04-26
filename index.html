@@ -123,6 +123,9 @@
 	function liveUpdate() { 
 		setInterval( () => {
 			fetchData();
+			let today = new Date();
+			let time = today.getHours() + ":" + today.getMinutes();
+			document.getElementById('hora').setAttribute('value', `${time}`);
 		}, 10000)
 	}
 	
