@@ -89,7 +89,7 @@
 		</div>
 		<div>
 			<label for="luminosidad">Luminosidad</label>
-			<input type="text" id="lumin" name="lumin" value="">
+			<input type="text" id="lum" name="lum" value="">
 		</div>
 		<div>
 			<label for="hora">Hora</label>
@@ -108,10 +108,13 @@
 	.then(json => {
 		let temp = json.temp;
 		let hum = json.hum;
+		let lum = json.lum;
 		temp = `${temp}°C`;
 		hum = `${hum}%`;
+		lum = `${lum}%`;
 		document.getElementById('temp').setAttribute('value', `${temp}`);
 		document.getElementById('hum').setAttribute('value', `${hum}`);
+		document.getElementById('lum').setAttribute('value', `${lum}`);
 	})
 }
 	
