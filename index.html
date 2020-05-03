@@ -263,10 +263,10 @@ fetch('https://hayk-project.now.sh/graficos')
 	})
 	.then(json => {
 		dataArray = json;
-		console.log(dataArray);
 		return dataArray;	
 	})
 
+console.log(dataArray);
 
 let tempArray = dataArray.tempArray;
 let humArray = dataArray.humArray;
