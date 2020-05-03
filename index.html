@@ -266,10 +266,14 @@ fetch('https://hayk-project.now.sh/graficos')
 		dataArray = json;
 	})
 
-let horaArray = dataArray.horaArray;
 let tempArray = dataArray.tempArray;
 let humArray = dataArray.humArray;
 let lumArray = dataArray.lumArray;
+
+let indexArray = [];
+for( let j = 0; j < 49; j++ ) {
+	indexArray[i] = i;
+}
 
 console.log(horaArray);
 
@@ -280,7 +284,7 @@ type: 'line',
 
 // The data for our dataset
 data: {
-	labels: horaArray,
+	labels: indexArray,
 	datasets: [{
 		label: 'Temperatura',
 		borderColor: 'rgb(255, 50, 50)',
