@@ -260,7 +260,7 @@ let dataArray = {
 
 fetch('https://hayk-project.now.sh/graficos')
     .then(res => {
-		dataArray = res;	
+		dataArray = res.json();	
 	});
 
 let horaArray = dataArray.horaArray;
