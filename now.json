@@ -2,7 +2,7 @@
     "version": 2,
     "name": "hayk-project",
     "builds": [
-      { "src": "index.html", "use": "@now/static" },
+      { "src": "public/index.html", "use": "@now/static" },
       { "src": "app.js", "use": "@now/node" }
     ],
     "routes": [
