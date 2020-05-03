@@ -262,15 +262,16 @@ fetch('https://hayk-project.now.sh/graficos')
 		return res.json();	
 	})
 	.then(json => {
-		console.log(json);
 		dataArray = json;
 	})
+
+console.log(dataArray);
 
 let tempArray = dataArray.tempArray;
 let humArray = dataArray.humArray;
 let lumArray = dataArray.lumArray;
-
 let indexArray = [];
+
 for( let j = 0; j < 49; j++ ) {
 	indexArray[i] = i;
 }
