@@ -46,14 +46,14 @@ app.get('/graficos', (req, res) =>  {
     } else {
       let data = result;
       let dataArray = {
-        tempArray: [],
-        humArray: [],
-        lumArray: []
+        tempArray,
+        humArray,
+        lumArray
       };
       for(let i = 0; i < data.length; i++){
-        data[i].temp = tempArray[i];
-        data[i].hum = humArray[i];
-        data[i].lum = lumArray[i];
+        data[i].temp = dataArray.tempArray[i];
+        data[i].hum = dataArray.humArray[i];
+        data[i].lum = dataArray.lumArray[i];
       }
       res.status(200).json(dataArray);
       }
