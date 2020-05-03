@@ -252,6 +252,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <canvas id="myChart" width="800" height="400"></canvas>
 <script>
+function fetchData() { 
+    showLoader();
+    fetch('https://hayk-project.now.sh/graficos')
+        .then(res => {
+            return res.json();	
+        })
+        .then(json => {
+            let tempArray = json.tempArray;
+            let humArray = json.humArray;
+            let lumArray = json.lumArray;
+        })
+
+
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
 // The type of chart we want to create
@@ -263,18 +276,21 @@ data: {
 	datasets: [{
 		label: 'Temperatura',
 		borderColor: 'rgb(255, 50, 50)',
-		data: [0, 10, 5, 2, 20, 30, 45]
+		data: tempArray
 	},
 	{
 		label: 'Humedad',
 		borderColor: 'rgb(0, 99, 132)',
-		data: [10, 0, 7, 9, 10, 15, 5]
+		data: humArray
 	},
 	{
 		label: 'Iluminación',
 		borderColor: 'rgb(245, 233, 30)',
-		data: [10, 0, 7, 9, 10, 45, 55]
+		data: lumArray
 	}]
+
+	
+
 },
 
 // Configuration options go here
