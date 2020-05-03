@@ -252,6 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <canvas id="myChart" width="800" height="400"></canvas>
 <script>
+
+let dataArray;
+
 function fetchData() { 
     showLoader();
     fetch('https://hayk-project.now.sh/graficos')
@@ -259,11 +262,9 @@ function fetchData() {
             return res.json();	
         })
         .then(json => {
-            let tempArray = json.tempArray;
-            let humArray = json.humArray;
-            let lumArray = json.lumArray;
-        })
-
+			dataArray = json;
+		})
+	}
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
@@ -276,17 +277,17 @@ data: {
 	datasets: [{
 		label: 'Temperatura',
 		borderColor: 'rgb(255, 50, 50)',
-		data: tempArray
+		data: dataArray.tempArray
 	},
 	{
 		label: 'Humedad',
 		borderColor: 'rgb(0, 99, 132)',
-		data: humArray
+		data: dataArray.humArray
 	},
 	{
 		label: 'Iluminación',
 		borderColor: 'rgb(245, 233, 30)',
-		data: lumArray
+		data: dataArray.lumArray
 	}]
 
 	
@@ -298,7 +299,7 @@ options: {
 	
 responsive: false
 }
-});
+});}
 </script>
 
 </html>
