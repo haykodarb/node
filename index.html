@@ -253,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <canvas id="myChart" width="800" height="400"></canvas>
 <script>
 
-let dataArray = {};
+let dataArray;
 
 function fetchData() {
     fetch('https://hayk-project.now.sh/graficos')
@@ -271,6 +271,8 @@ let horaArray = dataArray.horaArray;
 let tempArray = dataArray.tempArray;
 let humArray = dataArray.humArray;
 let lumArray = dataArray.lumArray;
+
+console.log(horaArray);
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
