@@ -219,7 +219,6 @@ function fetchData() {
 			return res.json();	
         })
         .then(json => {
-			console.log(json);
 			let temp = json.temp;
             let hum = json.hum;
             let lum = json.lum;
@@ -260,8 +259,12 @@ let dataArray = {
 
 fetch('https://hayk-project.now.sh/graficos')
     .then(res => {
-		dataArray = res.json();	
-	});
+		return res.json();	
+	})
+	.then(json => {
+		console.log(json);
+		dataArray = json;
+	})
 
 let horaArray = dataArray.horaArray;
 let tempArray = dataArray.tempArray;
