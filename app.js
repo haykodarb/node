@@ -34,8 +34,25 @@ app.get('/datos', (req, res) => {
     });
 });
 
+app.get('/graficos', (req, res) =>  {
+  const sql = `SELECT temp, hum, lum, hora FROM datos ORDER BY ID DESC LIMIT 50`;
+  con.query(sql, (err, result) => {
+    if (err) {
+      try {
+        throw err;
+      } catch (e) {
+          res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}` });
+        }
+    } else {
+      res.status(200).json(result);
+      }      
+    });
+});
+
 
 app.post('/insert', (req, res) =>{
+  
+  //Probar cambiar esto por const data = req.body, deberia quedar igual.
   const data = {
     temp: req.body.temp,
     serie: req.body.serie,

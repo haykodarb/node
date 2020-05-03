@@ -8,6 +8,6 @@
     "routes": [
       { "src": "/datos", "dest": "app.js" },
       { "src": "/insert", "dest": "app.js" },
-      { "src": "/estados", "dest": "app.js" }
+      { "src": "/graficos", "dest": "app.js" }
     ]
   }
