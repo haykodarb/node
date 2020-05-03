@@ -46,9 +46,9 @@ app.get('/graficos', (req, res) =>  {
     } else {
       let data = result;
       let dataArray = {
-        tempArray,
-        humArray,
-        lumArray
+        tempArray: [null],
+        humArray: [null],
+        lumArray: [null]
       };
       for(let i = 0; i < data.length; i++){
         data[i].temp = dataArray.tempArray[i];
