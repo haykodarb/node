@@ -268,8 +268,6 @@ fetch('https://hayk-project.now.sh/graficos')
 		var chart = new Chart(ctx, {
 		// The type of chart we want to create
 		type: 'line',
-		backgroundColor: 'rgb(119, 175, 156)',
-		borderColor: 'rgb(40, 89, 67)',
 		// The data for our dataset
 		data: {
 			labels: indexArray,
@@ -291,8 +289,10 @@ fetch('https://hayk-project.now.sh/graficos')
 		},
 		// Configuration options go here
 		options: {
-			responsive: false
-			}
+			responsive: false,
+			backgroundColor: 'rgb(119, 175, 156)',
+			borderColor: 'rgb(40, 89, 67)'	
+		}
 		});
 	})
 </script>
