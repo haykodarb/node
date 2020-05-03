@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+	<script src= "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"> </script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Invernadero</title>
@@ -247,6 +248,41 @@ document.addEventListener('DOMContentLoaded', () => {
     liveUpdate();
 })
 
+</script>
+
+<canvas id="myChart" width="800" height="400"></canvas>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+// The type of chart we want to create
+type: 'line',
+
+// The data for our dataset
+data: {
+	labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+	datasets: [{
+		label: 'Temperatura',
+		borderColor: 'rgb(255, 50, 50)',
+		data: [0, 10, 5, 2, 20, 30, 45]
+	},
+	{
+		label: 'Humedad',
+		borderColor: 'rgb(0, 99, 132)',
+		data: [10, 0, 7, 9, 10, 15, 5]
+	},
+	{
+		label: 'Iluminación',
+		borderColor: 'rgb(245, 233, 30)',
+		data: [10, 0, 7, 9, 10, 45, 55]
+	}]
+},
+
+// Configuration options go here
+options: {
+	
+responsive: false
+}
+});
 </script>
 
 </html>
