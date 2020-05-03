@@ -255,8 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let dataArray = {};
 
-function fetchData() { 
-    showLoader();
+function fetchData() {
     fetch('https://hayk-project.now.sh/graficos')
         .then(res => {
             return res.json();	
@@ -265,6 +264,8 @@ function fetchData() {
 			dataArray = json;
 		})
 	}
+
+fetchData();
 
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
