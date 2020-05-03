@@ -267,6 +267,11 @@ function fetchData() {
 
 fetchData();
 
+let horaArray = dataArray.horaArray;
+let tempArray = dataArray.tempArray;
+let humArray = dataArray.humArray;
+let lumArray = dataArray.lumArray;
+
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
 // The type of chart we want to create
@@ -274,21 +279,21 @@ type: 'line',
 
 // The data for our dataset
 data: {
-	labels: dataArray.horaArray,
+	labels: horaArray,
 	datasets: [{
 		label: 'Temperatura',
 		borderColor: 'rgb(255, 50, 50)',
-		data: dataArray.tempArray
+		data: tempArray
 	},
 	{
 		label: 'Humedad',
 		borderColor: 'rgb(0, 99, 132)',
-		data: dataArray.humArray
+		data: humArray
 	},
 	{
 		label: 'Iluminación',
 		borderColor: 'rgb(245, 233, 30)',
-		data: dataArray.lumArray
+		data: lumArray
 	}]
 
 	
