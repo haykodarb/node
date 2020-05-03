@@ -50,11 +50,11 @@ app.get('/graficos', (req, res) =>  {
         lumArray: [null]
       };
       for(let i = 0; i < result.length; i++){
-        data[i].temp = dataArray.tempArray[i];
-        data[i].hum = dataArray.humArray[i];
-        data[i].lum = dataArray.lumArray[i];
+        result[i].temp = dataArray.tempArray[i];
+        result[i].hum = dataArray.humArray[i];
+        result[i].lum = dataArray.lumArray[i];
       }
-      res.status(200).json(result);
+      res.status(200).send(result);
       }
       });    
     });
