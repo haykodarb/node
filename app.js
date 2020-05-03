@@ -54,7 +54,7 @@ app.get('/graficos', (req, res) =>  {
         dataArray.humArray[i] = result[i].hum; 
         dataArray.lumArray[i] = result[i].lum;
       }
-      res.status(200).send(dataArray);
+      res.status(200).json(dataArray);
       }
       });    
     });
