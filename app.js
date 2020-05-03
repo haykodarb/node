@@ -44,18 +44,17 @@ app.get('/graficos', (req, res) =>  {
           res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}` });
         }
     } else {
-      let data = result;
       let dataArray = {
         tempArray: [null],
         humArray: [null],
         lumArray: [null]
       };
-      for(let i = 0; i < data.length; i++){
+      for(let i = 0; i < result.length; i++){
         data[i].temp = dataArray.tempArray[i];
         data[i].hum = dataArray.humArray[i];
         data[i].lum = dataArray.lumArray[i];
       }
-      res.status(200).json(data);
+      res.status(200).json(result);
       }
       });    
     });
