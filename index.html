@@ -250,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
-<canvas id="myChart" width="800" height="400"></canvas>
+<canvas id="myChart" width="1400" height="600"></canvas>
 <script>
 
 fetch('https://hayk-project.now.sh/graficos')
@@ -275,17 +275,17 @@ fetch('https://hayk-project.now.sh/graficos')
 			datasets: [{
 				label: 'Temperatura',
 				borderColor: 'rgb(255, 50, 50)',
-				data: tempArray
+				data: dataArray.tempArray
 				},
 			{
 				label: 'Humedad',
 				borderColor: 'rgb(0, 99, 132)',
-				data: humArray
+				data: dataArray.humArray
 				},
 			{
 				label: 'Iluminación',
 				borderColor: 'rgb(245, 233, 30)',
-				data: lumArray
+				data: dataArray.lumArray
 			}]
 		},
 		// Configuration options go here
