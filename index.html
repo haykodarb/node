@@ -254,13 +254,13 @@ document.addEventListener('DOMContentLoaded', () => {
 <script>
 
 let dataArray = {
-	horaArray: [1, 2, 4]
+	horaArray: [1, 2, 1]
 };
 
 function fetchData() {
     fetch('https://hayk-project.now.sh/graficos')
         .then(res => {
-            dataArray = res;	
+            dataArray = res.json();	
         })
 	}
 
