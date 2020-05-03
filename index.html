@@ -260,11 +260,8 @@ let dataArray = {
 function fetchData() {
     fetch('https://hayk-project.now.sh/graficos')
         .then(res => {
-            return res.json();	
+            dataArray = res;	
         })
-        .finally(json => {
-			dataArray = json;
-		})
 	}
 
 fetchData();
