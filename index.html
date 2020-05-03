@@ -260,7 +260,7 @@ function fetchData() {
         .then(res => {
             return res.json();	
         })
-        .then(json => {
+        .finally(json => {
 			dataArray = json;
 		})
 	}
