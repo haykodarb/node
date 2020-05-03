@@ -44,7 +44,7 @@ app.get('/graficos', (req, res) =>  {
           res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}` });
         }
     } else {
-      res.status(200).json(result);
+      res.status(200).json(result.temp);
       }      
     });
 });
