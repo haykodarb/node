@@ -180,19 +180,19 @@
 		<form>
 			<div>
 				<label for="temperatura">Temperatura</label>
-				<input type="text" id="temp" name="temp" value="">
+				<input type="text" id="temp" name="temp" value="" readonly>
 			</div>	
 			<div>
 				<label for="humedad">Humedad</label>
-				<input type="text" id="hum" name="hum" value="">
+				<input type="text" id="hum" name="hum" value="" readonly>
 			</div>
 			<div>
 				<label for="luminosidad">Luminosidad</label>
-				<input type="text" id="lum" name="lum" value="">
+				<input type="text" id="lum" name="lum" value="" readonly>
 			</div>
 			<div>
 				<label for="hora">Hora</label>
-				<input type="text" id="hora" name="hora" value="">
+				<input type="text" id="hora" name="hora" value="" readonly>
 			</div>	
 		</form>
 	</div>
@@ -275,6 +275,7 @@ fetch('https://hayk-project.now.sh/graficos')
 			
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var chart = new Chart(ctx, {
+		title: 'Ultimas 24 horas',
 		// The type of chart we want to create
 		type: 'line',
 		// The data for our dataset
