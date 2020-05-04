@@ -67,20 +67,14 @@ app.get('/graficos', (req, res) =>  {
 app.post('/insert', (req, res) =>{
   
   //Probar cambiar esto por const data = req.body, deberia quedar igual.
-  const data = {
-    temp: req.body.temp,
-    serie: req.body.serie,
-    hum: req.body.hum,
-    lum: req.body.lum
-  };
-  const sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) VALUES (NULL, CURDATE, CURTIME, ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
+  const data = req.body;
+  const sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) VALUES (NULL, CURDATE(), CURTIME(), ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
       try {
         throw err;
       } catch (e) {
         res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
-        console.log(`Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`);
       }
     } else {
       res.status(200).send("Post hecho correctamente");
