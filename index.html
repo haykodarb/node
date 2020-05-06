@@ -295,7 +295,7 @@ fetch('https://hayk-project.now.sh/graficos')
 			title: {
             display: true,
 			text: 'Datos de las ultimas 24 horas',
-			fontSize: 16 
+			fontSize: 20 
 			},
 			layout: {
             	padding: {
@@ -313,8 +313,11 @@ fetch('https://hayk-project.now.sh/graficos')
 							}},
 					distribution: 'linear',
 					ticks: {
-						source: 'auto'
-					},
+						source: 'auto',
+						autoSkip: 'true',
+						maxRotation: '0',
+						padding: 2,
+						},
 
             		}]
 				}
