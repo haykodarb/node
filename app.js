@@ -13,7 +13,7 @@ http.listen(3000, () => {
 
 function obtenerHora() {
   let today = new Date();
-  let hours = today.getHours();
+  let hours = today.getHours()-3;
   if (hours < 10) {
   hours = `0${hours}`;}
   let min = today.getMinutes();
@@ -32,7 +32,7 @@ function obtenerDia() {
   let month = today.getMonth() + 1;
   if(month < 10) {
   month = `0${month}`;}
-  let day = today.getDate();
+  let day = today.getUTCDate(-3);
   if(day < 10) {
   day = `0${day}`;}
   let diaActual = `${year}-${month}-${day}`;
@@ -98,7 +98,7 @@ app.post('/insert', (req, res) =>{
   console.log(horaActual);
   const data = req.body;
   let sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) `;
-  sql += `VALUES (NULL, CURDATE(), "${horaActual}", ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
+  sql += `VALUES (NULL, CURDATE(), CURTIME(), ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
       try {
