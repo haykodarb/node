@@ -63,7 +63,7 @@ app.get('/datos', (req, res) => {
 });
 
 app.get('/graficos', (req, res) =>  {
-  obtenerDia();
+  let diaActual = obtenerDia();
   const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${diaActual}' ORDER BY ID DESC`;
   con.query(sql, (err, result) => {
     if (err) {
@@ -94,8 +94,7 @@ app.get('/graficos', (req, res) =>  {
 
 
 app.post('/insert', (req, res) =>{
-  obtenerHora();
-  console.log(horaActual);
+  let horaActual = obtenerHora();
   const data = req.body;
   let sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) `;
   sql += `VALUES (NULL, CURDATE(), ${horaActual}, ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
