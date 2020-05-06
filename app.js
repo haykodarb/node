@@ -98,7 +98,7 @@ app.post('/insert', (req, res) =>{
   console.log(horaActual);
   const data = req.body;
   let sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) `;
-  sql += `VALUES (NULL, CURDATE(), '${horaActual}', ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
+  sql += `VALUES (NULL, CURDATE(), "${horaActual}", ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
       try {
