@@ -28,8 +28,8 @@ function obtenerHora() {
 
 function obtenerDia() {
   let today = new Date();
-  let year = today.getYear();
-  let month = today.getMonth();
+  let year = today.getFullYear();
+  let month = today.getMonth() + 1;
   if(month < 10) {
   month = `0${month}`;}
   let day = today.getDate();
@@ -64,7 +64,6 @@ app.get('/datos', (req, res) => {
 
 app.get('/graficos', (req, res) =>  {
   let diaActual = obtenerDia();
-  console.log(diaActual);
   const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${diaActual}' ORDER BY ID DESC`;
   con.query(sql, (err, result) => {
     if (err) {
