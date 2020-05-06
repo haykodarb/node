@@ -296,7 +296,7 @@ fetch('https://hayk-project.now.sh/graficos')
             display: true,
 			text: 'Datos de las ultimas 24 horas',
 			fontSize: 16 
-		},
+			},
 			layout: {
             	padding: {
                 	left: 50,
@@ -308,7 +308,9 @@ fetch('https://hayk-project.now.sh/graficos')
             	xAxes: [{
                 	type: 'time',
                 	time: {
-                    minUnit: 'minute'},
+                    		displayFormats: {
+								minute: 'hh:mm'
+							}},
 					distribution: 'linear',
 					ticks: {
 						source: 'auto'
