@@ -22,7 +22,7 @@ function obtenerHora() {
   let sec = today.getSeconds();
   if(sec < 10) {
   sec = `0${sec}`;}
-  let horaActual = `${today.getHours()}:${min}:${sec}`;
+  let horaActual = `${hours}:${min}:${sec}`;
   return horaActual;
 }
 
