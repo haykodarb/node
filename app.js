@@ -11,6 +11,21 @@ http.listen(3000, () => {
   console.log(chalk.green('Listening on port: 3000'));
 });
 
+function obtenerHora() {
+  let today = new Date();
+  let hours = today.getHours();
+  if (hours < 10) {
+  hours = `0${hours}`;}
+  let min = today.getMinutes();
+  if(min < 10) {
+  min = `0${min}`;}
+  let sec = today.getSeconds();
+  if(sec < 10) {
+  sec = `0${sec}`;}
+  let horaActual = `${today.getHours()}:${min}:${sec}`;
+  return horaActual;
+}
+
 let con = mysql.createPool({
   connectionLimit: 4,
   host: "us-cdbr-gcp-east-01.cleardb.net",
@@ -35,7 +50,10 @@ app.get('/datos', (req, res) => {
 });
 
 app.get('/graficos', (req, res) =>  {
-  const sql = `SELECT temp, hum, lum, hora FROM datos ORDER BY ID DESC LIMIT 50`;
+  let today = new Date();
+  let hoy = `${today.getYear()}:${today.getMonth()}:${today.getDate}`;
+  console.log(hoy);
+  const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${hoy}' ORDER BY ID DESC`;
   con.query(sql, (err, result) => {
     if (err) {
       try {
@@ -65,10 +83,11 @@ app.get('/graficos', (req, res) =>  {
 
 
 app.post('/insert', (req, res) =>{
-  
-  //Probar cambiar esto por const data = req.body, deberia quedar igual.
+  obtenerHora();
+  console.log(horaActual);
   const data = req.body;
-  const sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) VALUES (NULL, CURDATE(), CURTIME(), ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
+  let sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) `;
+  sql += `VALUES (NULL, CURDATE(), ${horaActual}, ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
       try {
