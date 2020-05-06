@@ -64,7 +64,7 @@ app.get('/datos', (req, res) => {
 
 app.get('/graficos', (req, res) =>  {
   let diaActual = obtenerDia();
-  const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${diaActual}' ORDER BY id ASC`;
+  const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${diaActual}'`;
   con.query(sql, (err, result) => {
     if (err) {
       try {
