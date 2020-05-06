@@ -267,20 +267,12 @@ fetch('https://hayk-project.now.sh/graficos')
 		return res.json();	
 	})
 	.then(json => {
-		let dataArray = json;
-		let indexArray = [];
-		for(let j = 0; j < 49; j++) {
-			indexArray[j] = j;
-			}
-			
+		let dataArray = json;	
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var chart = new Chart(ctx, {
-		title: 'Ultimas 24 horas',
-		// The type of chart we want to create
 		type: 'line',
-		// The data for our dataset
 		data: {
-			labels: indexArray,
+			labels: dataArray.horaArray,
 			datasets: [{
 				label: 'Temperatura',
 				borderColor: 'rgb(255, 50, 50)',
