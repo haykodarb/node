@@ -26,6 +26,19 @@ function obtenerHora() {
   return horaActual;
 }
 
+function obtenerDia() {
+  let today = new Date();
+  let year = today.getYear();
+  let month = today.getMonth();
+  if(month < 10) {
+  month = `0${month}`;}
+  let day = today.getDate();
+  if(day < 10) {
+  day = `0${day}`;}
+  let diaActual = `${year}:${month}:${day}`;
+  return diaActual;
+}
+
 let con = mysql.createPool({
   connectionLimit: 4,
   host: "us-cdbr-gcp-east-01.cleardb.net",
@@ -50,10 +63,8 @@ app.get('/datos', (req, res) => {
 });
 
 app.get('/graficos', (req, res) =>  {
-  let today = new Date();
-  let hoy = `${today.getYear()}:${today.getMonth()}:${today.getDate}`;
-  console.log(hoy);
-  const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${hoy}' ORDER BY ID DESC`;
+  obtenerDia();
+  const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${diaActual}' ORDER BY ID DESC`;
   con.query(sql, (err, result) => {
     if (err) {
       try {
