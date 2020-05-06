@@ -303,7 +303,20 @@ fetch('https://hayk-project.now.sh/graficos')
                 	right: 50,
                 	top: 50,
                 	bottom: 100
-            }
+            },
+			scales: {
+            	xAxes: [{
+                	type: 'time',
+                	time: {
+                    minUnit: 'minute'},
+					distribution: 'linear',
+					ticks: {
+						source: 'auto'
+					},
+
+            		}]
+				}
+			}
 		}
 		});
 	})
