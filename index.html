@@ -166,7 +166,7 @@
 		}
 
 		canvas {
-			max-width: 900px;
+			max-width: 1000px;
 			width: 100%;
 			display: block;
 			margin: 35px auto 0;
@@ -292,6 +292,18 @@ fetch('https://hayk-project.now.sh/graficos')
 		// Configuration options go here
 		options: {
 			responsive: false,
+			title: {
+            display: true,
+			text: 'Datos de las ultimas 24 horas',
+			fontSize: 16 
+		},
+			layout: {
+            	padding: {
+                	left: 50,
+                	right: 50,
+                	top: 50,
+                	bottom: 100
+            }
 		}
 		});
 	})
