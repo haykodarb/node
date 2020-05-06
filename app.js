@@ -35,7 +35,7 @@ function obtenerDia() {
   let day = today.getDate();
   if(day < 10) {
   day = `0${day}`;}
-  let diaActual = `${year}:${month}:${day}`;
+  let diaActual = `${year}-${month}-${day}`;
   return diaActual;
 }
 
@@ -64,6 +64,7 @@ app.get('/datos', (req, res) => {
 
 app.get('/graficos', (req, res) =>  {
   let diaActual = obtenerDia();
+  console.log(diaActual);
   const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${diaActual}' ORDER BY ID DESC`;
   con.query(sql, (err, result) => {
     if (err) {
@@ -95,6 +96,7 @@ app.get('/graficos', (req, res) =>  {
 
 app.post('/insert', (req, res) =>{
   let horaActual = obtenerHora();
+  console.log(horaActual);
   const data = req.body;
   let sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) `;
   sql += `VALUES (NULL, CURDATE(), ${horaActual}, ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
