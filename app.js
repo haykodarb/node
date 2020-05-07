@@ -11,17 +11,17 @@ http.listen(3000, () => {
   console.log(chalk.green('Listening on port: 3000'));
 });
 
+
+function agregarCero(num) {
+  if (num < 10) {
+    num = `0${num}`;} 
+  return num;}
+
 function obtenerHora() {
   let today = new Date();
-  let hours = today.getHours()-3;
-  if (hours < 10) {
-  hours = `0${hours}`;}
-  let min = today.getMinutes();
-  if(min < 10) {
-  min = `0${min}`;}
-  let sec = today.getSeconds();
-  if(sec < 10) {
-  sec = `0${sec}`;}
+  let hours = agregarCero(today.getHours()-3);
+  let min = agregarCero(today.getMinutes());
+  let sec = agregarCero(today.getSeconds());
   let horaActual = `${hours}:${min}:${sec}`;
   return horaActual;
 }
@@ -29,12 +29,8 @@ function obtenerHora() {
 function obtenerDia() {
   let today = new Date();
   let year = today.getFullYear();
-  let month = today.getMonth() + 1;
-  if(month < 10) {
-  month = `0${month}`;}
-  let day = today.getUTCDate(-3);
-  if(day < 10) {
-  day = `0${day}`;}
+  let month = agregarCero(today.getMonth());
+  let day = agregarCero(today.getDate());
   let diaActual = `${year}-${month}-${day}`;
   return diaActual;
 }
