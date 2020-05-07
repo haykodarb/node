@@ -32,6 +32,7 @@ function obtenerDia() {
   let month = agregarCero(today.getMonth());
   let day = agregarCero(today.getDate());
   let diaActual = `${year}-${month}-${day}`;
+  console.log(diaActual);
   return diaActual;
 }
 
