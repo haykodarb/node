@@ -29,10 +29,9 @@ function obtenerHora() {
 function obtenerDia() {
   let today = new Date();
   let year = today.getFullYear();
-  let month = agregarCero(today.getMonth());
-  let day = agregarCero(today.getDate());
+  let month = agregarCero(today.getMonth()+1);
+  let day = agregarCero(today.getUTCDate());
   let diaActual = `${year}-${month}-${day}`;
-  console.log(diaActual);
   return diaActual;
 }
 
@@ -61,6 +60,7 @@ app.get('/datos', (req, res) => {
 
 app.get('/graficos', (req, res) =>  {
   let diaActual = obtenerDia();
+  console.log(`diaActual`);
   const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${diaActual}'`;
   con.query(sql, (err, result) => {
     if (err) {
