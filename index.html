@@ -297,8 +297,8 @@ var chart = new Chart(ctx, {
 			responsive: false,
 			title: {
             display: true,
-			text: 'Datos del día de hoy',
-			fontSize: 20 
+			text: 'Datos de hoy',
+			fontSize: 18 
 			},
 			layout: {
             	padding: {
@@ -306,24 +306,24 @@ var chart = new Chart(ctx, {
                 	right: 20,
                 	top: 20,
                 	bottom: 20
-            },
-			scales: {
-            	xAxes: [{
-                	type: 'time',
-                	time: {
-                    		displayFormats: {
-								minute: 'h:mm'
-							}},
-					distribution: 'linear',
-					ticks: {
-						source: 'auto',
-						autoSkip: 'true',
-						maxRotation: '0',
-						padding: 2,
-						},
-
-            		}]
 				}
+			},
+			scales: {
+				xAxes: [{
+						type: 'time',
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Date'
+						},
+						ticks: {
+							major: {
+								fontStyle: 'bold',
+								fontColor: '#FF0000'
+								},
+							maxRotation: 0
+							}						
+					}],
 			}
 		}
 	});
