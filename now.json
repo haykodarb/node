@@ -5,7 +5,8 @@
       { "src": "*.png", "use": "@now/static" },
       { "src": "*.jpg", "use": "@now/static" },
       { "src": "*.ico", "use": "@now/static" },
-      { "src": "app.js", "use": "@now/node" }
+      { "src": "app.js", "use": "@now/node" },
+      { "src": "fetch.js", "use": "@now/node" }
     ],
     "routes": [
       { "src": "/datos", "dest": "app.js" },
