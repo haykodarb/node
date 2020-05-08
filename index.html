@@ -223,12 +223,11 @@ function hideLoader() {
 }
 
 function fetchData() { 
-    showLoader();
     fetch('https://kassen.now.sh/datos')
         .then(res => {
 			return res.json();	
         })
-        .then(json => {
+        .finally(json => {
 			let temp = json.temp;
             let hum = json.hum;
             let lum = json.lum;
@@ -239,9 +238,7 @@ function fetchData() {
             document.getElementById('hum').setAttribute('value', `${hum}`);
             document.getElementById('lum').setAttribute('value', `${lum}`);
         })
-        .finally(() => {
-            hideLoader();
-        });
+        ;
 }
 
 fijarHora();
@@ -251,7 +248,7 @@ function liveUpdate() {
     setInterval( () => {
         fetchData();
         fijarHora();
-    }, 30000)
+    }, 60000)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -261,32 +258,25 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-
-fetch('https://kassen.now.sh/graficos')
-    .then(res => {
-		return res.json();	
-	})
-	.then(json => {
-		let dataArray = json;	
-		var ctx = document.getElementById('myChart').getContext('2d');
-		var chart = new Chart(ctx, {
-		type: 'line',
-		data: {
-			labels: dataArray.horaArray,
-			datasets: [{
-				label: 'Temperatura',
-				borderColor: 'rgb(255, 50, 50)',
-				data: dataArray.tempArray
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+	type: 'line',
+	data: {
+		labels: [],
+		datasets: [{
+			label: 'Temperatura',
+			borderColor: 'rgb(255, 50, 50)',
+			data: []
 				},
 			{
-				label: 'Humedad',
-				borderColor: 'rgb(0, 99, 132)',
-				data: dataArray.humArray
+			label: 'Humedad',
+			borderColor: 'rgb(0, 99, 132)',
+			data: []
 				},
 			{
-				label: 'Iluminación',
-				borderColor: 'rgb(245, 233, 30)',
-				data: dataArray.lumArray
+			label: 'Iluminación',
+			borderColor: 'rgb(245, 233, 30)',
+			data: []
 			}]
 		},
 		// Configuration options go here
@@ -323,8 +313,35 @@ fetch('https://kassen.now.sh/graficos')
 				}
 			}
 		}
-		});
+	});
+
+function dataGrafico() {
+	fetch('https://kassen.now.sh/graficos')
+    .then(res => {
+		return res.json();	
 	})
+	.then(json => {
+		let dataArray = json;
+		chart.data.labels = dataArray.horaArray;
+		chart.datasets[0].data = dataArray.tempArray;
+		chart.datasets[1].data = dataArray.humArray;
+		chart.datasets[2].data = dataArray.lumArray;
+		
+	})
+}
+
+dataGrafico();
+
+function liveUpdate() { 
+    setInterval( () => {
+        dataGrafico();
+    }, 60000)
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    liveUpdate();
+})
+
 </script>
 
 </html>
