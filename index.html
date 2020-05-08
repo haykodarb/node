@@ -313,7 +313,7 @@ function dataGraph() {
 	})
 }
 
-dataGrafico();
+dataGraph();
 fijarHora();
 fetchData();
 
@@ -321,7 +321,7 @@ function liveUpdate() {
     setInterval( () => {
         fetchData();
         fijarHora();
-		dataGrafico();
+		dataGraph();
 	}, 60000)
 }
 
