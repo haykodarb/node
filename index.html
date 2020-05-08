@@ -299,11 +299,10 @@ function dataGraph() {
 		return res.json();	
 	})
 	.then(json => {
-		let dataArray = json;
-		chart.data.labels = dataArray.horaArray;
-		chart.data.datasets[0].data = dataArray.tempArray;
-		chart.data.datasets[1].data = dataArray.humArray;
-		chart.data.datasets[2].data = dataArray.lumArray;
+		chart.data.labels = json.horaArray;
+		chart.data.datasets[0].data = json.tempArray;
+		chart.data.datasets[1].data = json.humArray;
+		chart.data.datasets[2].data = json.lumArray;
 		chart.update();
 	});
 }
