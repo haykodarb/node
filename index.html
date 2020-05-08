@@ -241,23 +241,6 @@ function fetchData() {
         ;
 }
 
-fijarHora();
-fetchData();
-
-function liveUpdate() { 
-    setInterval( () => {
-        fetchData();
-        fijarHora();
-    }, 60000)
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    liveUpdate();
-})
-
-</script>
-
-<script>
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
 	type: 'line',
@@ -315,7 +298,7 @@ var chart = new Chart(ctx, {
 		}
 	});
 
-function dataGrafico() {
+function dataGraph() {
 	fetch('https://kassen.now.sh/graficos')
     .then(res => {
 		return res.json();	
@@ -331,16 +314,21 @@ function dataGrafico() {
 }
 
 dataGrafico();
+fijarHora();
+fetchData();
 
 function liveUpdate() { 
     setInterval( () => {
-        dataGrafico();
-    }, 60000)
+        fetchData();
+        fijarHora();
+		dataGrafico();
+	}, 60000)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     liveUpdate();
 })
+
 
 </script>
 
