@@ -5,14 +5,12 @@
       { "src": "*.png", "use": "@now/static" },
       { "src": "*.jpg", "use": "@now/static" },
       { "src": "*.ico", "use": "@now/static" },
-      { "src": "app.js", "use": "@now/node" },
-      { "src": "fetch.js", "use": "@now/javascript" }
+      { "src": "app.js", "use": "@now/node" }
     ],
     "routes": [
       { "src": "/datos", "dest": "app.js" },
       { "src": "/insert", "dest": "app.js" },
       { "src": "/graficos", "dest": "app.js" },
-      { "src": "/favicon.ico", "dest": "favicon.ico"},
-      { "src": "/fetch.js", "dest": "fetch.js"}
+      { "src": "/favicon.ico", "dest": "favicon.ico"}
     ]
   }
