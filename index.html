@@ -207,8 +207,7 @@ function fijarHora() {
     let min = today.getMinutes();
     let hora = today.getHours();
     if(min < 10) {
-    min = `0${min}`;
-    }
+    min = `0${min}`;}
     document.getElementById('hora').setAttribute('value', `${hora}:${min}`);
 }
 
@@ -225,8 +224,10 @@ function hideLoader() {
 function fetchData() { 
     fetch('https://kassen.now.sh/datos')
         .then(res => {
-			json = res;	
-        	let temp = json.temp;
+			return res.json();	
+        })
+        .finally(json => {
+			let temp = json.temp;
             let hum = json.hum;
             let lum = json.lum;
             temp = `${temp}°C`;
@@ -235,8 +236,7 @@ function fetchData() {
             document.getElementById('temp').setAttribute('value', `${temp}`);
             document.getElementById('hum').setAttribute('value', `${hum}`);
             document.getElementById('lum').setAttribute('value', `${lum}`);
-        })
-        ;
+		});
 }
 
 var ctx = document.getElementById('myChart').getContext('2d');
@@ -299,12 +299,16 @@ var chart = new Chart(ctx, {
 function dataGraph() {
 	fetch('https://kassen.now.sh/graficos')
     .then(res => {
-		let dataArray = res.json();
+		return res.json();	
+	})
+	.then(json => {
+		let dataArray = json;
 		chart.data.labels = dataArray.horaArray;
 		chart.data.datasets[0].data = dataArray.tempArray;
 		chart.data.datasets[1].data = dataArray.humArray;
 		chart.data.datasets[2].data = dataArray.lumArray;
-	})
+		
+	});
 }
 
 dataGraph();
