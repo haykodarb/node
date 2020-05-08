@@ -11,6 +11,7 @@
       { "src": "/datos", "dest": "app.js" },
       { "src": "/insert", "dest": "app.js" },
       { "src": "/graficos", "dest": "app.js" },
-      { "src": "/favicon.ico", "dest": "favicon.ico"}
+      { "src": "/favicon.ico", "dest": "favicon.ico"},
+      { "src": "/fetch.js", "dest": "fetch.js"}
     ]
   }
