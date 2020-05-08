@@ -226,13 +226,10 @@ function fetchData() {
         .then(res => {
 			return res.json();	
         })
-        .finally(json => {
-			let temp = json.temp;
-            let hum = json.hum;
-            let lum = json.lum;
-            temp = `${temp}°C`;
-            hum = `${hum}%`;
-            lum = `${lum}%`;
+        .then(json => {
+			let temp = `${json.temp}°C`;
+            let hum = `${json.hum}%`;
+            let lum = `${json.lum}%`;
             document.getElementById('temp').setAttribute('value', `${temp}`);
             document.getElementById('hum').setAttribute('value', `${hum}`);
             document.getElementById('lum').setAttribute('value', `${lum}`);
