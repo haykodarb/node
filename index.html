@@ -225,7 +225,7 @@ function hideLoader() {
 function fetchData() { 
     fetch('https://kassen.now.sh/datos')
         .then(res => {
-			json = res.json();	
+			json = res;	
         	let temp = json.temp;
             let hum = json.hum;
             let lum = json.lum;
