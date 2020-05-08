@@ -303,12 +303,12 @@ function dataGraph() {
     .then(res => {
 		return res.json();	
 	})
-	.then(json => {
+	.finally(json => {
 		let dataArray = json;
 		chart.data.labels = dataArray.horaArray;
-		chart.datasets[0].data = dataArray.tempArray;
-		chart.datasets[1].data = dataArray.humArray;
-		chart.datasets[2].data = dataArray.lumArray;
+		chart.data.datasets[0].data = dataArray.tempArray;
+		chart.data.datasets[1].data = dataArray.humArray;
+		chart.data.datasets[2].data = dataArray.lumArray;
 		
 	})
 }
