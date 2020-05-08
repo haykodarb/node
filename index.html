@@ -21,12 +21,13 @@
 		}
 
 		h1 {
-			background-color: #285943;	
+			background-color: #466d60;	
 			padding: 8px 0;
 			text-align: center;
 			font-size: 40px;
 			font-weight: 500;
 			color: white;
+			border-radius: 10px;
 		}
 
 		.container {
@@ -37,7 +38,16 @@
 			margin: 0 auto;
 			text-align: left;
 		}
-
+		
+		.botones {
+			display: block;
+			flex-direction: row;
+			max-width: 1200px;
+			height: 50px;
+			width: 100%;
+			margin: 0 auto;
+			text-align: center;
+		}
 		.addOpacity {
 			opacity: 0.5;
 		}
@@ -164,12 +174,33 @@
 				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5), -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em green;
 			}
 		}
-
+		button {
+			background-color: white;
+			color:	#43695c;
+			font-size: 18px;
+			font-weight: 500;
+			width: 20%;
+			height: 100%;
+			margin: 35px auto 0;
+			border-radius: 15px;
+			cursor: pointer;
+			box-shadow: none;
+		}
+		button:hover{
+			background-color: #43695c;
+			color:	white;
+		}
+		button:focus {
+  			outline: none;
+		}
+		button::-moz-focus-inner {
+ 			border: 0;
+		}
 		canvas {
 			max-width: 1000px;
 			width: 100%;
 			display: block;
-			margin: 35px auto 0;
+			margin: 45px auto 0;
 			background-color: white;
 		}
 	</style>
@@ -193,11 +224,15 @@
 			<div>
 				<label for="hora">Hora</label>
 				<input type="text" id="hora" name="hora" value="" readonly>
+			
 			</div>	
 		</form>
 	</div>
-	<div id="loader">Loading...</div>
-
+	<div class= "botones">
+	<button type="button">Hoy</button>
+	<button type="button">Últimos 7 días</button>
+	<button type="button">Últimos 30</button>
+	</div>
 	<canvas id="myChart"></canvas>
 </body>
 
