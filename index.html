@@ -301,15 +301,11 @@ var chart = new Chart(ctx, {
 function dataGraph() {
 	fetch('https://kassen.now.sh/graficos')
     .then(res => {
-		return res.json();	
-	})
-	.finally(json => {
-		let dataArray = json;
+		let dataArray = res.json();
 		chart.data.labels = dataArray.horaArray;
 		chart.data.datasets[0].data = dataArray.tempArray;
 		chart.data.datasets[1].data = dataArray.humArray;
 		chart.data.datasets[2].data = dataArray.lumArray;
-		
 	})
 }
 
