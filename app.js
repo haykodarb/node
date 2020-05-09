@@ -89,9 +89,10 @@ app.get('/graficos/:id', (req, res) =>  {
 
 app.post('/insert', (req, res) =>{
   let fechaActual = obtenerFecha();
+  let diaActual = obtenerDia(0);
   const data = req.body;
-  let sql = `INSERT INTO datos (id, time, serie, temp, hum, lum) `;
-  sql += `VALUES (NULL, ${fechaActual}, ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
+  let sql = `INSERT INTO datos (id, time, dia, serie, temp, hum, lum) `;
+  sql += `VALUES (NULL, ${fechaActual}, ${diaActual}, ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
       try {
