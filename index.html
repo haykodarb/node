@@ -229,9 +229,9 @@
 		</form>
 	</div>
 	<div class= "botones">
-	<button id="botonHoy" >Hoy</button>
-	<button id="botonSemana" >Últimos 7 días</button>
-	<button id="botonMes" >Últimos 30</button>
+	<button id="botonHoy" onclick= "cambiarPeriodo('hoy')">Hoy</button>
+	<button id="botonSemana" onclick= "cambiarPeriodo('semana')">Últimos 7 días</button>
+	<button id="botonMes" onclick= "cambiarPeriodo('mes')">Últimos 30</button>
 	</div>
 	<canvas id="myChart"></canvas>
 </body>
@@ -243,9 +243,6 @@ function cambiarPeriodo(per) {
 periodo = per;
 dataGraph(per);
 }
-
-let botonHoy = document.getElementById('botonHoy');
-botonHoy.onclick = cambiarPeriodo('hoy');
 
 //document.getElementById('botonSemana').addEventListener("click", cambiarPeriodo('semana'));
 //document.getElementById('botonMes').addEventListener("click", cambiarPeriodo('mes'));
