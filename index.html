@@ -354,20 +354,17 @@ var chart = new Chart(ctx, {
 			scales: {
             	xAxes: [{
 					type: 'time',
-					time: {
-							displayFormats: {
-								hour: 'DD/MM HH:mm',
-							},
-							unit: 'hour',
-							parser: true
-						},
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: 'Date'
+					},
 					ticks: {
-						source: 'auto',
-						autoSkip: 'true',
-						maxRotation: '5',
-						padding: 2,
-						},
-
+						major: {
+							fontStyle: 'bold',
+							fontColor: '#FF0000'
+							}
+						}
             		}]
 				}
 			}
