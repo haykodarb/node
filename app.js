@@ -92,7 +92,7 @@ app.get('/graficos/:id', (req, res) =>  {
         dataArray.humArray[i] = result[i].hum; 
         dataArray.lumArray[i] = result[i].lum;
         dataArray.horaArray[i] = result[i].hora;
-        dataArray.diaArray[i] = result[i].hora;
+        dataArray.diaArray[i] = result[i].dia;
       }
       res.status(200).json(dataArray);
       }
