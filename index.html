@@ -356,7 +356,11 @@ var chart = new Chart(ctx, {
                 	type: 'time',
 					distribution: 'linear',
 					time: {
-							parser: 'DD/MM HH:mm'
+							displayFormats: {
+								"hour" : 'HH:mm',
+							},
+							unit: 'hour',
+							parser: true
 						},
 					ticks: {
 						source: 'auto',
