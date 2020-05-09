@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const app = express();
 const http = require('http').createServer(app);
 const bodyParser = require('body-parser'); 
-let moment = require('moment');
+let moment = require('moment-timezone');
 
 app.use(express.json());
 
@@ -13,27 +13,14 @@ http.listen(3000, () => {
 });
 
 
-function agregarCero(num) {
-  if (num < 10) {
-    num = `0${num}`;} 
-  return num;}
-
-function obtenerHora() {
-  let today = new Date();
-  let hours = agregarCero(today.getHours()-3);
-  let min = agregarCero(today.getMinutes());
-  let sec = agregarCero(today.getSeconds());
-  let horaActual = `${hours}:${min}:${sec}`;
-  return horaActual;
+function obtenerFecha() {
+  let now = moment().tz('America/Argentina/Buenos_Aires').format();
+  return now;
 }
 
 function obtenerDia(num) {
-  let today = new Date();
-  let year = today.getFullYear();
-  let month = agregarCero(today.getMonth()+1);
-  let day = agregarCero(today.getUTCDate()-num);
-  let dia = `${year}-${month}-${day}`;
-  return dia;
+  let now = moment().subtract(num, 'days').tz('America/Argentina/Buenos_Aires').format('YYYY-MM-DD');
+  return now;
 }
 
 let con = mysql.createPool({
@@ -63,16 +50,15 @@ app.get('/graficos/:id', (req, res) =>  {
   let diaHoy = obtenerDia(0);  //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarable
   let diaSemana = obtenerDia(7);
   let diaMes = obtenerDia(30);
+  let fechaHoy = obtenerFecha();
   let sql = '';
   if(req.params.id === 'hoy') {
-  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia = '${diaHoy}'`;
-  }
+  sql = `SELECT time, temp, hum, lum FROM datos WHERE dia = '${diaHoy}'`;  }
   else if (req.params.id === 'semana'){
-  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia BETWEEN '${diaSemana}' AND '${diaHoy}'`
-  }
+  sql = `SELECT time, temp, hum, lum FROM datos WHERE dia BETWEEN '${diaSemana}' AND '${fechaHoy}'`;  }
   else if (req.params.id === 'mes') {
-  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia BETWEEN '${diaMes}' AND '${diaHoy}'`  
-  }
+  sql = `SELECT time, temp, hum, lum FROM datos WHERE dia BETWEEN '${diaMes}' AND '${diaHoy}'`;  }
+
   con.query(sql, (err, result) => {
     if (err) {
       try {
@@ -85,15 +71,13 @@ app.get('/graficos/:id', (req, res) =>  {
         tempArray: [],
         humArray: [],
         lumArray: [],
-        horaArray: [],
-        diaArray: [],
+        timeArray: []
       };
       for(let i = 0; i < result.length; i++){
         dataArray.tempArray[i] = result[i].temp;
         dataArray.humArray[i] = result[i].hum; 
         dataArray.lumArray[i] = result[i].lum;
-        dataArray.horaArray[i] = result[i].hora;
-        dataArray.diaArray[i] = result[i].dia;
+        dataArray.timeArray[i] = result[i].time;
       }
       res.status(200).json(dataArray);
       }
@@ -104,11 +88,11 @@ app.get('/graficos/:id', (req, res) =>  {
 
 
 app.post('/insert', (req, res) =>{
-  let horaActual = obtenerHora();
+  let fechaActual = obtenerFecha();
   console.log(horaActual);
   const data = req.body;
-  let sql = `INSERT INTO datos (id, dia, hora, serie, temp, hum, lum) `;
-  sql += `VALUES (NULL, CURDATE(), CURTIME(), ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
+  let sql = `INSERT INTO datos (id, time, serie, temp, hum, lum) `;
+  sql += `VALUES (NULL, ${fechaActual}, ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
       try {
