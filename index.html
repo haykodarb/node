@@ -390,18 +390,10 @@ function dataGraph(periodo) {
 				x: json.timeArray[i],
 				y: json.tempArray[i]
 			};
-			humData[i] = {
-				x: json.timeArray[i],
-				y: json.humArray[i]
-			};
-			lumData[i] = {
-				x: json.timeArray[i],
-				y: json.lumArray[i]
-			};			
  		}
 		chart.data.datasets[0].data = tempData
-		chart.data.datasets[1].data = humData;
-		chart.data.datasets[2].data = lumData;
+		chart.data.datasets[1].data = json.humArray;
+		chart.data.datasets[2].data = json.lumArray;
 		chart.update();
 		if(periodo === 'hoy'){
 			chart.options.title.text = 'Datos del día de hoy'; }
