@@ -399,17 +399,16 @@ function dataGraph(periodo) {
 				y: json.lumArray[i]
 			};			
  		}
-		chart.data.datasets[0].data = tempData
+		chart.data.datasets[0].data = tempData;
 		chart.data.datasets[1].data = humData;
 		chart.data.datasets[2].data = lumData;
-		chart.update();
 		if(periodo === 'hoy'){
 			chart.options.title.text = 'Datos del día de hoy'; }
 		else if(periodo === 'semana') {
 			chart.options.title.text = 'Datos de la última semana'; }
 		else if(periodo === 'mes') {
 			chart.options.title.text = 'Datos del último mes'; }
-	
+		chart.update();
 	});
 }
 
