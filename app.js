@@ -59,7 +59,7 @@ app.get('/datos', (req, res) => {
 });
 
 app.get('/graficos/:id', (req, res) =>  {
-  let hoy = obtenerDia(0);  //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarable
+  let hoy = obtenerDia(0); 
   let semana = obtenerDia(7);
   let mes = obtenerDia(30);
   let sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia BETWEEN '${req.params.id}' AND '${hoy}'`
