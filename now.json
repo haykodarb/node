@@ -1,11 +1,11 @@
 {
     "version": 2,
     "builds": [
-      { "src": "index.html", "use": "@now/static" },
+      { "src": "*.html", "use": "@now/static" },
       { "src": "*.png", "use": "@now/static" },
       { "src": "*.jpg", "use": "@now/static" },
       { "src": "*.ico", "use": "@now/static" },
-      { "src": "app.js", "use": "@now/node" }
+      { "src": "*.js", "use": "@now/node" }
     ],
     "routes": [
       { "src": "/datos", "dest": "app.js" },
