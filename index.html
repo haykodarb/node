@@ -319,8 +319,11 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
 	type: 'line',
 	data: {
-		labels: [],
-		datasets: [{
+		datasets: [
+			{
+				x: []
+			},
+		{
 			label: 'Temperatura',
 			borderColor: 'rgb(255, 50, 50)',
 			data: []
@@ -382,10 +385,10 @@ function dataGraph(periodo) {
 		return res.json();	
 	})
 	.then(json => {
-		chart.data.labels = json.timeArray
-		chart.data.datasets[0].data = json.tempArray;
-		chart.data.datasets[1].data = json.humArray;
-		chart.data.datasets[2].data = json.lumArray;
+		chart.data.datasets[0].x = json.timeArray
+		chart.data.datasets[1].data = json.tempArray;
+		chart.data.datasets[2].data = json.humArray;
+		chart.data.datasets[3].data = json.lumArray;
 		chart.update();
 		if(periodo === 'hoy'){
 			chart.options.title.text = 'Datos del día de hoy'; }
