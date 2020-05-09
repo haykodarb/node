@@ -244,9 +244,6 @@ periodo = per;
 dataGraph(per);
 }
 
-//document.getElementById('botonSemana').addEventListener("click", cambiarPeriodo('semana'));
-//document.getElementById('botonMes').addEventListener("click", cambiarPeriodo('mes'));
-
 function fijarHora() {
     let today = new Date();
     let min = today.getMinutes();
@@ -322,7 +319,7 @@ var chart = new Chart(ctx, {
                 	type: 'time',
                 	time: {
                     		displayFormats: {
-								minute: 'h:mm'
+								minute: 'MM-DD HH:mm'
 							}},
 					distribution: 'linear',
 					ticks: {
@@ -348,14 +345,11 @@ function dataGraph(periodo) {
 	})
 	.then(json => {
 		if(periodo === 'hoy'){
-			chart.options.title.text = 'Datos del día de hoy';
-			chart.data.labels = json.horaArray;}
+			chart.options.title.text = 'Datos del día de hoy'; }
 		else if(periodo === 'semana') {
-			chart.options.title.text = 'Datos de la última semana';
-			chart.data.labels = json.diaArray;}
+			chart.options.title.text = 'Datos de la última semana'; }
 		else if(periodo === 'mes') {
-			chart.options.title.text = 'Datos del último mes';
-			chart.data.labels = json.diaArray;}
+			chart.options.title.text = 'Datos del último mes'; }
 		chart.data.datasets[0].data = json.tempArray;
 		chart.data.datasets[1].data = json.humArray;
 		chart.data.datasets[2].data = json.lumArray;
