@@ -332,7 +332,7 @@ var chart = new Chart(ctx, {
 				},
 			{
 			label: 'Iluminación',
-			borderColor: 'rgb(252, 171, 16)',
+			borderColor: 'rgb(253, 184, 32)',
 			data: []
 			}]
 		},
@@ -383,8 +383,12 @@ function dataGraph(periodo) {
 	})
 	.then(json => {
 		let tempData = [];
+		tempData.length = json.length;
 		let humData = [];
+		humData.length = json.length;
 		let lumData = [];	
+		lumData.length = json.length;
+		
 		for(let i = 0; i < json.length; i++){
 			tempData[i] = {
 				x: json.timeArray[i],
