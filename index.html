@@ -382,18 +382,26 @@ function dataGraph(periodo) {
 		return res.json();	
 	})
 	.then(json => {
+		let tempData = [];
+		let humData = [];
+		let lumData = [];	
 		for(let i = 0; i < json.length; i++){
-			let tempData = [];
-			let humData = [];
-			let lumData = [];
 			tempData[i] = {
 				x: json.timeArray[i],
 				y: json.tempArray[i]
 			};
+			humData[i] = {
+				x: json.timeArray[i],
+				y: json.humArray[i]
+			};
+			lumData[i] = {
+				x: json.timeArray[i],
+				y: json.lumArray[i]
+			};			
  		}
 		chart.data.datasets[0].data = tempData
-		chart.data.datasets[1].data = json.humArray;
-		chart.data.datasets[2].data = json.lumArray;
+		chart.data.datasets[1].data = humData;
+		chart.data.datasets[2].data = lumData;
 		chart.update();
 		if(periodo === 'hoy'){
 			chart.options.title.text = 'Datos del día de hoy'; }
