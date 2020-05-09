@@ -13,13 +13,13 @@ http.listen(3000, () => {
 });
 
 
-function obtenerFecha() {
+function obtenerTiempo() {
   let now = moment().tz('America/Argentina/Buenos_Aires').format('YYYY-MM-DD HH:mm:ss');
   return now;
 }
 
 function obtenerDia(num) {
-  let now = moment().subtract(num, 'days').tz('America/Argentina/Buenos_Aires').format('YYYY-MM-DD');
+  let now = moment().tz('America/Argentina/Buenos_Aires').subtract(0, 'days').hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss');
   return now;
 }
 
@@ -47,17 +47,17 @@ app.get('/datos', (req, res) => {
 });
 
 app.get('/graficos/:id', (req, res) =>  {
-  let diaHoy = obtenerDia(0);  //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarable
+  let diaHoy = obtenerDia(0);  //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarabltime let instanteActual = obtenerTiempo();
   let diaSemana = obtenerDia(7);
   let diaMes = obtenerDia(30);
-  let fechaHoy = obtenerFecha();
+  let tiempoActual = obtenerTiempo();
   let sql = '';
   if(req.params.id === 'hoy') {
-  sql = `SELECT time, temp, hum, lum FROM datos WHERE dia = '${diaHoy}'`;  }
+  sql = `SELECT time, temp, hum, lum FROM datos WHERE time BETWEEN '${diaHoy}' AND '${tiempoActual}'`;  }
   else if (req.params.id === 'semana'){
-  sql = `SELECT time, temp, hum, lum FROM datos WHERE dia BETWEEN '${diaSemana}' AND '${fechaHoy}'`;  }
+  sql = `SELECT time, temp, hum, lum FROM datos WHERE time BETWEEN '${diaSemana}' AND '${tiempoActual}'`;  }
   else if (req.params.id === 'mes') {
-  sql = `SELECT time, temp, hum, lum FROM datos WHERE dia BETWEEN '${diaMes}' AND '${diaHoy}'`;  }
+  sql = `SELECT time, temp, hum, lum FROM datos WHERE time BETWEEN '${diaMes}' AND '${tiempoActual}'`;  }
 
   con.query(sql, (err, result) => {
     if (err) {
@@ -88,11 +88,10 @@ app.get('/graficos/:id', (req, res) =>  {
 
 
 app.post('/insert', (req, res) =>{
-  let fechaActual = obtenerFecha();
-  let diaActual = obtenerDia(0);
+  let tiempoActual = obtenerTiempo();
   const data = req.body;
-  let sql = `INSERT INTO datos (id, time, dia, serie, temp, hum, lum) `;
-  sql += `VALUES (NULL, '${fechaActual}', '${diaActual}', ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
+  let sql = `INSERT INTO datos (id, time, serie, temp, hum, lum) `;
+  sql += `VALUES (NULL, '${tiempoActual}', ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
       try {
