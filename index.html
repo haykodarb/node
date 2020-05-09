@@ -383,13 +383,13 @@ function dataGraph(periodo) {
 	})
 	.then(json => {
 		let tempData = [];
-		tempData.length = json.length;
+		tempData.length = json.tempArray.length;
 		let humData = [];
-		humData.length = json.length;
+		humData.length = json.humArray.length;
 		let lumData = [];	
-		lumData.length = json.length;
-		
-		for(let i = 0; i < json.length; i++){
+		lumData.length = json.lumArray.length;
+
+		for(let i = 0; i < json.timeArray.length; i++){
 			tempData[i] = {
 				x: json.timeArray[i],
 				y: json.tempArray[i]
