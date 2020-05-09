@@ -348,8 +348,14 @@ function dataGraph(periodo) {
 	})
 	.then(json => {
 		if(periodo === 'hoy'){
-		chart.data.labels = json.horaArray;}
-		else {chart.data.labels = json.diaArray;}
+			chart.title = 'Datos del día de hoy';
+			chart.data.labels = json.horaArray;}
+		else if(periodo === 'semana') {
+			chart.title = 'Datos de la última semana';
+			chart.data.labels = json.diaArray;}
+		else if(periodo === 'mes') {
+			chart.title = 'Datos del último mes';
+			chart.data.labels = json.diaArray;}
 		chart.data.datasets[0].data = json.tempArray;
 		chart.data.datasets[1].data = json.humArray;
 		chart.data.datasets[2].data = json.lumArray;
@@ -357,7 +363,7 @@ function dataGraph(periodo) {
 	});
 }
 
-dataGraph(periodo);
+dataGra-ph(periodo);
 fijarHora();
 fetchData();
 
