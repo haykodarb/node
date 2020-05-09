@@ -174,7 +174,7 @@
 				box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2), 0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5), -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em green;
 			}
 		}
-		button {
+		.botonApagado {
 			background-color: white;
 			color:	#43695c;
 			font-size: 18px;
@@ -186,8 +186,20 @@
 			cursor: pointer;
 			box-shadow: none;
 		}
-		button:hover{
+		.botonEncendido {
 			background-color: #43695c;
+			color:	white;
+			font-size: 18px;
+			font-weight: 500;
+			width: 20%;
+			height: 100%;
+			margin: 35px auto 0;
+			border-radius: 15px;
+			cursor: pointer;
+			box-shadow: none;
+		}
+		.botonApagado:hover{
+			background-color: #70af99;
 			color:	white;
 		}
 		button:focus {
@@ -196,6 +208,8 @@
 		button::-moz-focus-inner {
  			border: 0;
 		}
+
+
 		canvas {
 			max-width: 1000px;
 			width: 100%;
@@ -229,9 +243,9 @@
 		</form>
 	</div>
 	<div class= "botones">
-	<button id="botonHoy" onclick= "cambiarPeriodo('hoy')">Hoy</button>
-	<button id="botonSemana" onclick= "cambiarPeriodo('semana')">Últimos 7 días</button>
-	<button id="botonMes" onclick= "cambiarPeriodo('mes')">Últimos 30 días</button>
+	<button id="botonHoy" class="botonEncendido" onclick= "cambiarPeriodo('hoy')">Hoy</button>
+	<button id="botonSemana" class="botonApagado" onclick= "cambiarPeriodo('semana')">Últimos 7 días</button>
+	<button id="botonMes" class="botonApagado" onclick= "cambiarPeriodo('mes')">Últimos 30 días</button>
 	</div>
 	<canvas id="myChart"></canvas>
 </body>
@@ -241,6 +255,22 @@ let periodo = 'hoy';
 
 function cambiarPeriodo(per) {
 periodo = per;
+let botonHoy = document.getElementById("botonHoy");
+let botonSemana = document.getElementById("botonSemana");
+let botonMes = document.getElementById("botonMes");	
+if(per === 'hoy') {
+	botonHoy.setAttribute("class", 'botonEncendido');
+	botonSemana.setAttribute('class', 'botonApagado');
+	botonMes.setAttribute('class', 'botonApagado');
+} else if (per === 'semana') {
+	botonHoy.setAttribute("class", 'botonApagado');
+	botonSemana.setAttribute('class', 'botonEncendido');
+	botonMes.setAttribute('class', 'botonApagado');
+} else if (per === 'mes') {
+	botonHoy.setAttribute("class", 'botonApagado');
+	botonSemana.setAttribute('class', 'botonApagado');
+	botonMes.setAttribute('class', 'botonEncendido');
+}
 dataGraph(per);
 }
 
