@@ -238,8 +238,8 @@
 
 <script>
 
-let periodo = 'dia';
-document.getElementById('botonHoy').addEventListener("click", cambiarPeriodo('dia'));
+let periodo = 'hoy';
+document.getElementById('botonHoy').addEventListener("click", cambiarPeriodo('hoy'));
 document.getElementById('botonSemana').addEventListener("click", cambiarPeriodo('semana'));
 document.getElementById('botonMes').addEventListener("click", cambiarPeriodo('mes'));
 
@@ -348,7 +348,7 @@ function dataGraph(periodo) {
 		return res.json();	
 	})
 	.then(json => {
-		if(periodo === 'dia'){
+		if(periodo === 'hoy'){
 		chart.data.labels = json.horaArray;}
 		else {chart.data.labels = json.diaArray;}
 		chart.data.datasets[0].data = json.tempArray;
