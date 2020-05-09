@@ -14,7 +14,7 @@ http.listen(3000, () => {
 
 
 function obtenerFecha() {
-  let now = moment().tz('America/Argentina/Buenos_Aires').format();
+  let now = moment().tz('America/Argentina/Buenos_Aires').format('YYYY:MM:DD HH:mm:ss');
   return now;
 }
 
