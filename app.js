@@ -59,10 +59,19 @@ app.get('/datos', (req, res) => {
 });
 
 app.get('/graficos/:id', (req, res) =>  {
-  let hoy = obtenerDia(0); 
+  let hoy = obtenerDia(0);  //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarable
   let semana = obtenerDia(7);
   let mes = obtenerDia(30);
-  let sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia BETWEEN '${req.params.id}' AND '${hoy}'`
+  let sql = '';
+  if(req.params.id === 'hoy') {
+  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia = '${diaHoy}'`;
+  }
+  else if (req.params.id === 'semana'){
+  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia BETWEEN '${diaSemana}' AND '${diaHoy}'`
+  }
+  else if (req.params.id === 'mes') {
+  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia BETWEEN '${diaMes}' AND '${diaHoy}'`  
+  }
   con.query(sql, (err, result) => {
     if (err) {
       try {
