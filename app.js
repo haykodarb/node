@@ -26,13 +26,13 @@ function obtenerHora() {
   return horaActual;
 }
 
-function obtenerDia() {
+function obtenerDia(num) {
   let today = new Date();
   let year = today.getFullYear();
   let month = agregarCero(today.getMonth()+1);
-  let day = agregarCero(today.getUTCDate());
-  let diaActual = `${year}-${month}-${day}`;
-  return diaActual;
+  let day = agregarCero(today.getUTCDate()-num);
+  let dia = `${year}-${month}-${day}`;
+  return dia;
 }
 
 let con = mysql.createPool({
@@ -58,10 +58,20 @@ app.get('/datos', (req, res) => {
     });
 });
 
-app.get('/graficos', (req, res) =>  {
-  let diaActual = obtenerDia();
-  console.log(`diaActual`);
-  const sql = `SELECT temp, hum, lum, hora FROM datos WHERE dia = '${diaActual}'`;
+app.get('/graficos/:id', (req, res) =>  {
+  let diaHoy = obtenerDia(0);  //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarable
+  let diaSemana = obtenerDia(7);
+  let diaMes = obtenerDia(30);
+  let sql = '';
+  if(req.params.id === 'hoy') {
+  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia = '${diaHoy}'`;
+  }
+  else if (req.params.id === 'semana'){
+  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia BETWEEN '${diaSemana}' AND '${diaHoy}'`
+  }
+  else if (req.params.id === 'mes') {
+  sql = `SELECT temp, hum, lum, hora, dia FROM datos WHERE dia BETWEEN '${diaMes}' AND '${diaHoy}'`  
+  }
   con.query(sql, (err, result) => {
     if (err) {
       try {
@@ -74,13 +84,15 @@ app.get('/graficos', (req, res) =>  {
         tempArray: [],
         humArray: [],
         lumArray: [],
-        horaArray: []
+        horaArray: [],
+        diaArray: [],
       };
       for(let i = 0; i < result.length; i++){
         dataArray.tempArray[i] = result[i].temp;
         dataArray.humArray[i] = result[i].hum; 
         dataArray.lumArray[i] = result[i].lum;
         dataArray.horaArray[i] = result[i].hora;
+        dataArray.diaArray[i] = result[i].hora;
       }
       res.status(200).json(dataArray);
       }
