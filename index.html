@@ -329,7 +329,7 @@ var chart = new Chart(ctx, {
 	});
 
 function dataGraph() {
-	fetch('https://kassen.now.sh/graficos')
+	fetch('https://kassen.now.sh/graficos/hoy')
     .then(res => {
 		return res.json();	
 	})
