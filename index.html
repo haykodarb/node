@@ -353,6 +353,7 @@ var chart = new Chart(ctx, {
             },
 			scales: {
             	xAxes: [{
+					type: 'time',
 					time: {
 							displayFormats: {
 								hour: 'DD/MM HH:mm',
@@ -383,12 +384,8 @@ function dataGraph(periodo) {
 	})
 	.then(json => {
 		let tempData = [];
-		tempData.length = json.tempArray.length;
 		let humData = [];
-		humData.length = json.humArray.length;
 		let lumData = [];	
-		lumData.length = json.lumArray.length;
-
 		for(let i = 0; i < json.timeArray.length; i++){
 			tempData[i] = {
 				x: json.timeArray[i],
