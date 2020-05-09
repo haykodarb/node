@@ -354,10 +354,10 @@ var chart = new Chart(ctx, {
 			scales: {
             	xAxes: [{
                 	type: 'time',
-                	time: {
-                    		displayFormats: {
-							}},
 					distribution: 'linear',
+					time: {
+							parser: 'DD/MM HH:mm'
+						},
 					ticks: {
 						source: 'auto',
 						autoSkip: 'true',
