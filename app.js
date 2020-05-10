@@ -14,12 +14,12 @@ http.listen(3000, () => {
 
 
 function obtenerTiempo() {
-  let now = moment().tz('America/Argentina/Buenos_Aires').format('YYYY-MM-DD HH:mm:ss');
+  let now = moment().tz('America/Argentina/Buenos_Aires').format();
   return now;
 }
 
 function obtenerDia(num) {
-  let now = moment().tz('America/Argentina/Buenos_Aires').subtract(num, 'days').hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss');
+  let now = moment().tz('America/Argentina/Buenos_Aires').subtract(num, 'days').hour(0).minute(0).second(0).format();
   return now;
 }
 
