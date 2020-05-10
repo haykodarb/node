@@ -355,8 +355,16 @@ let chart = new Chart(ctx, {
 		},
 		scales: {
 			xAxes: [{
-				type: 'time'
-				}],
+				type: 'time',
+				ticks: {
+					autoSkip: true,
+					autoSkipPadding: 2,
+					maxRotation: 5
+				},
+				displayFormats: {
+                        minute: 'MM/DD HH:mm'
+				}
+			}],
 			yAxes: [{
 				ticks: {
 					min: 0,
