@@ -358,15 +358,14 @@ let chart = new Chart(ctx, {
 				type: 'time',
 				ticks: {
 					autoSkip: true,
-					maxRotation: 0
+					maxRotation: 0,
+					maxTicksLimit: 8
 				},
 				time: {
 					unit: 'minute',
 					displayFormats: {
-						minute: 'DD/MM HH:mm',
-						hour: 'DD/MM HH',
-						day: 'DD/MM',
-                        month: 'MM'
+						minute: 'HH:mm',
+						hour: 'HH',
 					}
 					
 				}
