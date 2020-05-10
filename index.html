@@ -362,8 +362,12 @@ let chart = new Chart(ctx, {
 					maxRotation: 0
 				},
 				time: {
+					unite: minute,
 					displayFormats: {
-                        minute: 'MM/DD HH:mm'
+						minute: 'DD/MM HH:mm',
+						hour: 'DD/MM HH:mm',
+						day: 'DD/MM HH:mm',
+                        month: 'DD/MM HH:mm'
 					}
 				}
 			}],
