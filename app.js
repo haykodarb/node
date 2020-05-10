@@ -77,7 +77,7 @@ app.get('/graficos/:id', (req, res) =>  {
         dataArray.tempArray[i] = result[i].temp;
         dataArray.humArray[i] = result[i].hum; 
         dataArray.lumArray[i] = result[i].lum;
-        dataArray.timeArray[i] = moment().tz(result[i].tiempo, 'America/Argentina/Buenos_Aires');
+        dataArray.timeArray[i] = moment(result[i].tiempo).utcOffset('-03:00');
       }
       res.status(200).json(dataArray);
       }
