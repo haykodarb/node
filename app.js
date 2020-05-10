@@ -77,7 +77,7 @@ app.get('/graficos/:id', (req, res) =>  {
         dataArray.tempArray[i] = result[i].temp;
         dataArray.humArray[i] = result[i].hum; 
         dataArray.lumArray[i] = result[i].lum;
-        dataArray.timeArray[i] = moment(result[i].time);
+        dataArray.timeArray[i] = moment(result[i].time).format("DD-MM-YY HH:mm:ss");
       }
       res.status(200).json(dataArray);
       }
