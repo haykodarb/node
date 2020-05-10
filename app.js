@@ -89,6 +89,7 @@ app.get('/graficos/:id', (req, res) =>  {
 
 app.post('/insert', (req, res) =>{
   let tiempoActual = obtenerTiempo();
+  res.send(tiempoActual);
   const data = req.body;
   let sql = `INSERT INTO datos (id, time, serie, temp, hum, lum) `;
   sql += `VALUES (NULL, '${tiempoActual}', ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
