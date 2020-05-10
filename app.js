@@ -53,11 +53,11 @@ app.get('/graficos/:id', (req, res) =>  {
   let tiempoActual = obtenerTiempo();
   let sql = '';
   if(req.params.id === 'hoy') {
-  sql = `SELECT time, temp, hum, lum FROM datos WHERE time BETWEEN '${diaHoy}' AND '${tiempoActual}'`;  }
+  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE tiempo BETWEEN '${diaHoy}' AND '${tiempoActual}'`;  }
   else if (req.params.id === 'semana'){
-  sql = `SELECT time, temp, hum, lum FROM datos WHERE time BETWEEN '${diaSemana}' AND '${tiempoActual}'`;  }
+  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE tiempo BETWEEN '${diaSemana}' AND '${tiempoActual}'`;  }
   else if (req.params.id === 'mes') {
-  sql = `SELECT time, temp, hum, lum FROM datos WHERE time BETWEEN '${diaMes}' AND '${tiempoActual}'`;  }
+  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE tiempo BETWEEN '${diaMes}' AND '${tiempoActual}'`;  }
 
   con.query(sql, (err, result) => {
     if (err) {
@@ -77,7 +77,7 @@ app.get('/graficos/:id', (req, res) =>  {
         dataArray.tempArray[i] = result[i].temp;
         dataArray.humArray[i] = result[i].hum; 
         dataArray.lumArray[i] = result[i].lum;
-        dataArray.timeArray[i] = result[i].time;
+        dataArray.timeArray[i] = result[i].tiempo;
       }
       res.status(200).json(dataArray);
       }
@@ -90,7 +90,7 @@ app.get('/graficos/:id', (req, res) =>  {
 app.post('/insert', (req, res) =>{
   let tiempoActual = obtenerTiempo();
   const data = req.body;
-  let sql = `INSERT INTO datos (id, time, serie, temp, hum, lum) `;
+  let sql = `INSERT INTO datos (id, tiempo, serie, temp, hum, lum) `;
   sql += `VALUES (NULL, '${tiempoActual}', ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
