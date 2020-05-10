@@ -315,13 +315,13 @@ function fetchData() {
 		});
 }
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
+let ctx = document.getElementById('myChart').getContext('2d');
+let chart = new Chart(ctx, {
 	type: 'line',
 	data: {
 		labels: [],
 		datasets: [
-		{
+			{
 			label: 'Temperatura',
 			borderColor: 'rgb(248, 51, 60)',
 			data: []
@@ -337,35 +337,31 @@ var chart = new Chart(ctx, {
 			data: []
 			}]
 		},
-		// Configuration options go here
-		options: {
-			responsive: false,
-			title: {
-            display: true,
-			text: 'Datos del día de hoy',
-			fontSize: 20 
-			},
-			layout: {
-            	padding: {
-                	left: 5,
-                	right: 5,
-                	top: 5,
-                	bottom: 5
-			},
-			},
-			scales: {
-            	xAxes: [{
-					type: 'time'
-					}],
-				yAxes: [{
-					ticks: {
-						min: 0,
-						max: 100
-					}
-				}]
-			}
+	options: {
+		responsive: false,
+		title: {
+		display: true,
+		text: 'Datos del día de hoy',
+		fontSize: 20 
+		},
+		layout: {
+			padding: {
+				left: 5,
+				right: 5,
+				top: 5,
+				bottom: 5
+		},
+		},
+		scales: {
+			yAxes: [{
+				ticks: {
+					min: 0,
+					max: 100
+				}
+			}]
 		}
-	});
+	}
+});
 
 
 
