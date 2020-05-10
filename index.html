@@ -351,7 +351,8 @@ var chart = new Chart(ctx, {
                 	right: 20,
                 	top: 20,
                 	bottom: 20
-            },
+			},
+			},
 			scales: {
             	xAxes: [{
 					type: 'time',
@@ -359,15 +360,14 @@ var chart = new Chart(ctx, {
 					scaleLabel: {
 						display: true,
 						labelString: 'Date'
-					},
+					}
+					}],
+				yAxes: [{
 					ticks: {
-						major: {
-							fontStyle: 'bold',
-							fontColor: '#FF0000'
-							}
-						}
-            		}]
-				}
+						min: 0,
+						max: 100
+					}
+				}]
 			}
 		}
 	});
