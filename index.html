@@ -385,15 +385,15 @@ function dataGraph(periodo) {
 		let lumData = [];	
 		for(let i = 0; i < json.timeArray.length; i++){
 			tempData[i] = {
-				x: json.timeArray[i],
+				x: moment(json.timeArray[i]).format("YYYY-MM-DD HH:mm:ss"),
 				y: json.tempArray[i]
 			}
 			humData[i] = {
-				x: json.timeArray[i],
+				x: moment(json.timeArray[i]).format("YYYY-MM-DD HH:mm:ss"),
 				y: json.humArray[i]
 			}
 			lumData[i] = {
-				x: json.timeArray[i],
+				x: moment(json.timeArray[i]).format("YYYY-MM-DD HH:mm:ss"),
 				y: json.lumArray[i]
 			}			
 		 }
