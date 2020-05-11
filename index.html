@@ -323,23 +323,24 @@ let chart = new Chart(ctx, {
 		labels: [],
 		datasets: [
 			{
-			label: 'Temperatura',
-			borderColor: 'rgb(248, 51, 60)',
-			data: [],
-			yAxisID: 'eje2'
-				},
-			{
-			label: 'Humedad',
+			label: 'Humedad [%]',
 			borderColor: 'rgb(43, 158, 179)',
 			data: [],
 			yAxisID: 'eje1'
 				},
 			{
-			label: 'Iluminación',
+			label: 'Iluminación [%]',
 			borderColor: 'rgb(253, 184, 32)',
 			data: [],
 			yAxisID: 'eje1'
-			}]
+			},
+			{
+			label: 'Temperatura [°C]',
+			borderColor: 'rgb(248, 51, 60)',
+			data: [],
+			yAxisID: 'eje2'
+				}
+			]
 		},
 	options: {
 		responsive: true,
@@ -418,9 +419,9 @@ function dataGraph(periodo) {
 	})
 	.then(json => {
 		chart.data.labels = json.timeArray;
-		chart.data.datasets[0].data = json.tempArray;
-		chart.data.datasets[1].data = json.humArray;
-		chart.data.datasets[2].data = json.lumArray;
+		chart.data.datasets[0].data = json.humArray;
+		chart.data.datasets[1].data = json.lumArray;
+		chart.data.datasets[2].data = json.tempArray;
 		if(periodo === 'hoy'){
 			chart.options.title.text = 'Datos del día de hoy'; }
 		else if(periodo === 'semana') {
