@@ -8,12 +8,12 @@
       { "src": "*.js", "use": "@now/node" }
     ],
     "routes": [
-      { "src": "/datos", "dest": "app.js" },
-      { "src": "/insert", "dest": "app.js" },
-      { "src": "/graficos", "dest": "app.js" },
-      { "src": "/graficos/hoy", "dest": "app.js" },
-      { "src": "/graficos/semana", "dest": "app.js" },
-      { "src": "/graficos/mes", "dest": "app.js" },
+      { "src": "/datos", "dest": "server.js" },
+      { "src": "/insert", "dest": "server.js" },
+      { "src": "/graficos", "dest": "server.js" },
+      { "src": "/graficos/hoy", "dest": "server.js" },
+      { "src": "/graficos/semana", "dest": "server.js" },
+      { "src": "/graficos/mes", "dest": "server.js" },
       { "src": "/favicon.ico", "dest": "favicon.ico"}
       ]
   }
