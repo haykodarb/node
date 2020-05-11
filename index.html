@@ -339,7 +339,10 @@ let chart = new Chart(ctx, {
 			}]
 		},
 	options: {
-		responsive: false,
+		responsive: true,
+		tooltip: {
+			enabled: false
+		},
 		title: {
 		display: true,
 		text: 'Datos del día de hoy',
@@ -362,7 +365,6 @@ let chart = new Chart(ctx, {
 					maxTicksLimit: 10
 				},
 				time: {
-					tooltipFormat:'DD/MM/YYYY HH:mm',
 					unit: 'minute',
 					displayFormats: {
 						minute: 'HH:mm',
