@@ -1,17 +1,19 @@
 const express = require('express');
 const mysql = require('mysql');
 const chalk = require('chalk');
-const app = express();
-const http = require('http').createServer(app);
+const http = require('http');
 const bodyParser = require('body-parser'); 
-let moment = require('moment-timezone');
+const moment = require('moment-timezone');
 
-app.use(express.json());
+const app = express();
+http.createServer(app);
+let port = process.env.port || 3000;
 
-http.listen(3000, () => {
-  console.log(chalk.green('Listening on port: 3000'));
+http.listen(process.env.port, () => {
+  console.log(chalk.green(`Listening on port: ${port}`));
 });
 
+app.use(express.json());
 
 function obtenerTiempo() {
   let now = moment().tz('America/Argentina/Buenos_Aires').format();
