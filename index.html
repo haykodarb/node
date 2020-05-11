@@ -340,13 +340,15 @@ let chart = new Chart(ctx, {
 		},
 	options: {
 		responsive: true,
-		tooltips: {
-			enabled: false
+		elements: {
+            point:{
+                radius: 0
+            }
 		},
 		title: {
-		display: true,
-		text: 'Datos del día de hoy',
-		fontSize: 20 
+			display: true,
+			text: 'Datos del día de hoy',
+			fontSize: 20 
 		},
 		layout: {
 			padding: {
@@ -369,8 +371,8 @@ let chart = new Chart(ctx, {
 					displayFormats: {
 						minute: 'HH:mm',
 						hour: 'HH',
-					}
-					
+					},
+					tooltipFormat: "DD/MM/YYYY HH:mm"
 				}
 			}],
 			yAxes: [{
