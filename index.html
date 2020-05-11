@@ -325,24 +325,27 @@ let chart = new Chart(ctx, {
 			{
 			label: 'Temperatura',
 			borderColor: 'rgb(248, 51, 60)',
-			data: []
+			data: [],
+			yAxisID: 'eje2'
 				},
 			{
 			label: 'Humedad',
 			borderColor: 'rgb(43, 158, 179)',
-			data: []
+			data: [],
+			yAxisID: 'eje1'
 				},
 			{
 			label: 'Iluminación',
 			borderColor: 'rgb(253, 184, 32)',
-			data: []
+			data: [],
+			yAxisID: 'eje1'
 			}]
 		},
 	options: {
 		responsive: true,
 		elements: {
             point:{
-                radius: 1,
+                radius: 2,
 				borderWidth: 0,
 				hitRadius: 2
             }
@@ -378,11 +381,29 @@ let chart = new Chart(ctx, {
 				}
 			}],
 			yAxes: [{
+                id: 'eje1',
+                type: 'linear',
+				position: 'left',
 				ticks: {
 					min: 0,
-					max: 100
+					max: 100,
+					callback: function(value, index, values) {
+                        return `${value}%`;
+                    }
 				}
-			}]
+			}, 
+			{
+                id: 'eje2',
+                type: 'linear',
+				position: 'right',
+				ticks: {
+					min: 0,
+					max: 45,
+					callback: function(value, index, values) {
+                        return `${value}°C`;
+                    }
+				}
+            }]
 		}
 	}
 });
