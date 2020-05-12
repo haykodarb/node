@@ -13,7 +13,7 @@ router.use(cookieParser());
 router.use(express.urlencoded({ extended: true}));   
 
 router.get('/', (req, res) => {
-    res.render('login');
+    res.render('login.ejs');
 });
 
 let salt = bcrypt.genSaltSync(10);
