@@ -17,6 +17,7 @@
       { "src": "/api/graficos", "dest": "app.js" },
       { "src": "/api/graficos/hoy", "dest": "app.js" },
       { "src": "/api/graficos/semana", "dest": "app.js" },
+      { "src": "/api/graficos/mes", "dest": "app.js" },
       { "src": "/login", "dest": "app.js" },
       { "src": "/dashboard", "dest": "app.js" },
       { "src": "/register", "dest": "app.js" }, 
