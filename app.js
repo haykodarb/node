@@ -15,7 +15,7 @@ const verify = require('./tools/tokenVerify');
 
 app.use(cors());
 
-app.set('views', '/views/');
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use('/api', api);
@@ -30,3 +30,17 @@ http.listen(3000, () => {
 app.get('/', verify, (req, res) => {
     res.redirect('./dashboard');
 });
+
+app.get('/views/login.ejs', (req, res) => {
+    res.sendFile(__dirname + "/views/login.ejs"); 
+}); 
+
+
+app.get('/views/register', (req, res) => {
+    res.sendFile(__dirname + "/views/register.ejs"); 
+}); 
+
+
+app.get('/views/dashboard', (req, res) => {
+    res.sendFile(__dirname + "/views/dashboard.ejs"); 
+}); 
