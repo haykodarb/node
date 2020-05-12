@@ -12,6 +12,7 @@ const dashboard = require('./routes/dashboard');
 const login = require('./routes/login');
 const register = require('./routes/register');
 const verify = require('./tools/tokenVerify');
+const fileserver = require('./fileserver');
 
 app.use(cors());
 
@@ -22,35 +23,8 @@ app.use('/api', api);
 app.use('/dashboard', dashboard);
 app.use('/login', login);
 app.use('/register', register);
+app.use('/', fileserver);
 
 http.listen(3000, () => {
     console.log(chalk.green('Listening on port: 3000'));
   });
-
-app.get('/', verify, (req, res) => {
-    res.redirect('./dashboard');
-});
-
-app.get('/views/login.ejs', (req, res) => {
-    res.sendFile(__dirname + "/views/login.ejs"); 
-}); 
-
-app.get('/views/register.ejs', (req, res) => {
-    res.sendFile(__dirname + "/views/register.ejs"); 
-}); 
-
-app.get('/views/dashboard.ejs', (req, res) => {
-    res.sendFile(__dirname + "/views/dashboard.ejs"); 
-}); 
-
-app.get('/scripts/dashboard.js', (req, res) => {
-    res.sendFile(__dirname + "/scripts/dashboard.js"); 
-}); 
-
-app.get('/scripts/graph.js', (req, res) => {
-    res.sendFile(__dirname + "/scripts/graph.js"); 
-}); 
-
-app.get('/styles/style.css', (req, res) => {
-    res.sendFile(__dirname + "/styles/style.css"); 
-}); 
