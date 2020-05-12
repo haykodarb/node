@@ -25,9 +25,9 @@ let con = mysql.createPool({
   
 
 const registerSchema = Joi.object({
-    username: Joi.string().min(6).required(),
+    username: Joi.string().min(6).alphanum().required(),
     email: Joi.string().min(10).required().email(),
-    password: Joi.string().min(6).required()
+    password: Joi.string().min(6).alphanum().required()
 });
 
 
