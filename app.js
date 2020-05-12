@@ -35,11 +35,22 @@ app.get('/views/login.ejs', (req, res) => {
     res.sendFile(__dirname + "/views/login.ejs"); 
 }); 
 
-
 app.get('/views/register.ejs', (req, res) => {
     res.sendFile(__dirname + "/views/register.ejs"); 
 }); 
 
 app.get('/views/dashboard.ejs', (req, res) => {
     res.sendFile(__dirname + "/views/dashboard.ejs"); 
+}); 
+
+app.get('/scripts/dashboard.js', (req, res) => {
+    res.sendFile(__dirname + "/scripts/dashboard.js"); 
+}); 
+
+app.get('/scripts/graph.js', (req, res) => {
+    res.sendFile(__dirname + "/scripts/graph.js"); 
+}); 
+
+app.get('/styles/style.css', (req, res) => {
+    res.sendFile(__dirname + "/styles/style.css"); 
 }); 
