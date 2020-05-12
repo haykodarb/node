@@ -24,9 +24,22 @@ function dataGraph(periodo) {
 		if(periodo === 'hoy'){
 			chart.options.title.text = 'Datos del día de hoy'; }
 		else if(periodo === 'semana') {
-			chart.options.title.text = 'Datos de la última semana'; }
+			chart.options.title.text = 'Datos de la última semana';
+			chart.options.scales.xAxes[0].time.displayFormats = {
+				hour: 'DD MMM hA',
+				day: 'DD MMM',
+				month: 'MMM',
+			};
+			chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
+		}
 		else if(periodo === 'mes') {
-			chart.options.title.text = 'Datos del último mes'; }
+			chart.options.title.text = 'Datos del último mes';
+			chart.options.scales.xAxes[0].time.displayFormats = {
+				day: 'DD MMM',
+				month: 'MMM',
+			};
+			chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
+		}
 		chart.update();
 	});
 }

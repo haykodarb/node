@@ -53,7 +53,7 @@ let chart = new Chart(ctx, {
 				ticks: {
 					autoSkip: true,
 					maxRotation: 0,
-					maxTicksLimit: 10
+					maxTicksLimit: 12
 				},
 				time: {
 					unit: 'minute',
