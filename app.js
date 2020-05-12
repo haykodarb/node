@@ -15,7 +15,7 @@ const verify = require('./tools/tokenVerify');
 
 app.use(cors());
 
-app.set('views', './public/views');
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.use('/api', api);
