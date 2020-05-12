@@ -1,5 +1,10 @@
 {
     "version": 2,
+    "functions": {
+        "api/test.js": {
+          "includeFiles": "views/**"
+        }
+      },
     "builds": [
       { "src": "*.html", "use": "@now/static" },
       { "src": "*.png", "use": "@now/static" },
@@ -17,7 +22,8 @@
       { "src": "/login", "dest": "app.js" },
       { "src": "/dashboard", "dest": "app.js" },
       { "src": "/register", "dest": "app.js" }, 
-      { "src": "./views", "dest": "./views" }, 
+      { "src": "/views", "dest": "./views" }, 
+      { "src": "/views/login.ejs", "dest": "/views/login.ejs" }, 
       { "src": "/favicon.ico", "dest": "favicon.ico"}
       ]
   }
