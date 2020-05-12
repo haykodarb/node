@@ -18,10 +18,10 @@ function obtenerDia(num) {
 
 let con = mysql.createPool({
   connectionLimit: 4,
-  host: 'us-cdbr-gcp-east-01.cleardb.net',
-  user: 'bd70014928536a',
-  password: `a867a9ff`,
-  database: `gcp_3a44f6029eefbaf3050d`
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database
 });
 
 router.post('/datos', (req, res) => {

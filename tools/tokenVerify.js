@@ -13,7 +13,7 @@ module.exports = function verify(req, res, next) {
     else {
     try {
         const token = req.cookies.token;
-        let data = jwt.verify(token, "tokensecret");
+        let data = jwt.verify(token, process.env.token_secret);
         next();
     }
     catch {

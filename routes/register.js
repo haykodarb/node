@@ -17,10 +17,10 @@ let salt = bcrypt.genSaltSync(10);
 
 let con = mysql.createPool({
     connectionLimit: 4,
-    host: 'us-cdbr-gcp-east-01.cleardb.net',
-    user: 'bd70014928536a',
-    password: `a867a9ff`,
-    database: `gcp_3a44f6029eefbaf3050d`
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database: process.env.database
   });
   
 
@@ -42,7 +42,7 @@ router.get('/', (req, res) => {
         return res.render('register');
     } 
     try {
-        let data = jwt.verify(token, "tokensecret");
+        let data = jwt.verify(token, process.env.token_secret);
         return res.redirect('./dashboard');
     }
     catch {
