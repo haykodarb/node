@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
     } 
     let sqlVerify = `SELECT serie, password FROM users WHERE username = '${user.username}'`;
     con.query(sqlVerify, (err, result) => {
-        if (typeof result != 'undefined') {
+        if (result[0]) {
             let validPass = bcrypt.compareSync(user.password, result[0].password); 
             if(!validPass) {
                 let err = 'La contraseña ingresada es incorrecta';
