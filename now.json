@@ -19,7 +19,7 @@
       { "src": "/dashboard", "dest": "app.js" },
       { "src": "/register", "dest": "app.js" }, 
       { "src": "/views", "dest": "./views" }, 
-      { "src": "/views/login.ejs", "dest": "/views/login.ejs" }, 
+      { "src": "/views/login.ejs", "dest": "./views/login.ejs" },
       { "src": "/favicon.ico", "dest": "favicon.ico"}
       ]
   }
