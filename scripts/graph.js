@@ -85,7 +85,7 @@ let chart = new Chart(ctx, {
 				  },
 				ticks: {
 					min: 0,
-					suggestedMax: 30,
+					suggestedMax: 45,
 					callback: function(value, index, values) {
                         return `${value}°C`;
                     }
