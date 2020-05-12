@@ -5,8 +5,7 @@
       { "src": "*.png", "use": "@now/static" },
       { "src": "*.jpg", "use": "@now/static" },
       { "src": "*.ico", "use": "@now/static" },
-      { "src": "*.js", "use": "@now/node" },
-      { "src": "/views/*.ejs", "use": "@now/node" }
+      { "src": "*.js", "use": "@now/node" }
     ],
     "routes": [
       { "src": "/", "dest": "app.js" },
@@ -18,7 +17,7 @@
       { "src": "/login", "dest": "app.js" },
       { "src": "/dashboard", "dest": "app.js" },
       { "src": "/register", "dest": "app.js" }, 
-      { "src": "/favicon.ico", "dest": "favicon.ico"},
-      { "src": "/views/login.ejs", "dest": "/views/login.ejs"}
+      { "src": "./views", "dest": "./views" }, 
+      { "src": "/favicon.ico", "dest": "favicon.ico"}
       ]
   }
