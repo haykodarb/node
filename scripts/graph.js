@@ -80,6 +80,9 @@ let chart = new Chart(ctx, {
                 id: 'eje2',
                 type: 'linear',
 				position: 'right',
+				gridLines: {
+					display: false,
+				  },
 				ticks: {
 					min: 0,
 					max: 45,
