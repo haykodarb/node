@@ -7,9 +7,11 @@ const router = express.Router();
 router.use(cookieParser());
 
 module.exports = function verify(req, res, next) {
+
     if(!req.cookies) {
         return res.redirect('./login');
     }
+    else{
     try {
         const token = req.cookies.token;
         let data = jwt.verify(token, "tokensecret");
@@ -17,6 +19,6 @@ module.exports = function verify(req, res, next) {
     }
     catch {
         return res.redirect('./login');
-    }
+    }}
 }
 
