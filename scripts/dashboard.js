@@ -22,21 +22,30 @@ function dataGraph(periodo) {
 		chart.data.datasets[1].data = json.lumArray;
 		chart.data.datasets[2].data = json.tempArray;
 		if(periodo === 'hoy'){
-			chart.options.title.text = 'Datos del día de hoy'; }
+			chart.options.title.text = 'Datos del día de hoy';
+			chart.options.scales.xAxes[0].time.unit = 'minute';
+			chart.options.scales.xAxes[0].time.displayFormats = {
+				minute: 'HH:mm',
+				hour: 'HH',
+			};
+		}
 		else if(periodo === 'semana') {
 			chart.options.title.text = 'Datos de la última semana';
+			chart.options.scales.xAxes[0].time.unit = 'hour';
 			chart.options.scales.xAxes[0].time.displayFormats = {
-				hour: 'DD MMM hA',
-				day: 'DD MMM',
-				month: 'MMM',
+				hour: 'D MMM ha',
+				day: 'D MMM',
+				month: 'MMM'
 			};
 			chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
 		}
 		else if(periodo === 'mes') {
 			chart.options.title.text = 'Datos del último mes';
+			chart.options.scales.xAxes[0].time.unit = 'hour';
 			chart.options.scales.xAxes[0].time.displayFormats = {
-				day: 'DD MMM',
-				month: 'MMM',
+				hour: 'D MMM ha',
+				day: 'D MMM ha',
+				month: 'MMM'
 			};
 			chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
 		}
