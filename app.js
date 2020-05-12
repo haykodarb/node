@@ -28,3 +28,7 @@ app.use('/', fileserver);
 http.listen(3000, () => {
     console.log(chalk.green('Listening on port: 3000'));
   });
+
+app.get('/', verify, (req, res) => {
+    res.redirect('./dashboard');
+});
