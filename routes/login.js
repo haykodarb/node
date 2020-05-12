@@ -12,9 +12,6 @@ const router = express.Router();
 router.use(cookieParser());
 router.use(express.urlencoded({ extended: true}));   
 
-router.get('/', (req, res) => {
-    res.render('login');
-});
 
 let salt = bcrypt.genSaltSync(10);
 
@@ -29,6 +26,25 @@ let con = mysql.createPool({
 const userSchema = Joi.object({
     username: Joi.string().min(6).required(),
     password: Joi.string().min(6).required()
+});
+
+
+router.get('/', (req, res) => {
+    if(!req.cookies) {
+        return res.render('login');
+    }
+    else if(!req.cookies.token) {
+        return res.render('login');
+    } 
+    else {
+    try {
+        const token = req.cookies.token;
+        let data = jwt.verify(token, "tokensecret");
+        res.redirect('./dashboard');
+    }
+    catch {
+        return res.render('login');
+    }}
 });
 
 
