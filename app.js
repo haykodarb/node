@@ -34,13 +34,9 @@ app.get('/', verify, (req, res) => {
 app.get('/views/login.ejs', (req, res) => {
     res.sendFile(__dirname + "/views/login.ejs"); 
 }); 
-
-
-app.get('/views/register', (req, res) => {
+app.get('/views/register.ejs', (req, res) => {
     res.sendFile(__dirname + "/views/register.ejs"); 
 }); 
-
-
-app.get('/views/dashboard', (req, res) => {
+app.get('/views/dashboard.ejs', (req, res) => {
     res.sendFile(__dirname + "/views/dashboard.ejs"); 
 }); 
