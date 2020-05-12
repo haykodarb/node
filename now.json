@@ -19,8 +19,5 @@
       { "src": "/dashboard", "dest": "app.js" },
       { "src": "/register", "dest": "app.js" }, 
       { "src": "/favicon.ico", "dest": "favicon.ico"}
-      ],
-      "includeFiles": [
-        {}
       ]
   }
