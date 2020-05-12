@@ -8,12 +8,14 @@
       { "src": "*.js", "use": "@now/node" }
     ],
     "routes": [
-      { "src": "/datos", "dest": "server.js" },
-      { "src": "/insert", "dest": "server.js" },
-      { "src": "/graficos", "dest": "server.js" },
-      { "src": "/graficos/hoy", "dest": "server.js" },
-      { "src": "/graficos/semana", "dest": "server.js" },
-      { "src": "/graficos/mes", "dest": "server.js" },
+      { "src": "/api/datos", "dest": "app.js" },
+      { "src": "/api/insert", "dest": "app.js" },
+      { "src": "/api/graficos", "dest": "app.js" },
+      { "src": "/api/graficos/hoy", "dest": "app.js" },
+      { "src": "/api/graficos/semana", "dest": "app.js" },
+      { "src": "/login", "dest": "app.js" },
+      { "src": "/dashboard", "dest": "app.js" },
+      { "src": "/register", "dest": "app.js" }, 
       { "src": "/favicon.ico", "dest": "favicon.ico"}
       ]
   }
