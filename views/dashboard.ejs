@@ -37,9 +37,11 @@
 	<button id="botonSemana" class="botonApagado" onclick= "cambiarPeriodo('semana')">Últimos 7 días</button>
 	<button id="botonMes" class="botonApagado" onclick= "cambiarPeriodo('mes')">Últimos 30 días</button>
 	</div>
+</div>
+<div class = 'graphCont'>
 	<canvas id="myChart"></canvas>
-	<div id='serie' data-serie="<%= serie %>"</div>>
 </div>	
+<div id='serie' data-serie="<%= serie %>"</div>>	
 </body>
 
 <script src="../scripts/graph.js"></script>

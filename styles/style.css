@@ -124,7 +124,9 @@ button::-moz-focus-inner {
      border: 0;
 }
 canvas {
-    max-width: 1000px;
+    max-width: 1100px;
+    max-height: 550px;
+    height: 100%;
     width: 100%;
     display: block;
     margin: 45px auto 0;
