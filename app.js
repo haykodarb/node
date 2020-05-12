@@ -13,7 +13,6 @@ const login = require('./routes/login');
 const register = require('./routes/register');
 const verify = require('./tools/tokenVerify');
 
-
 app.use(cors());
 
 app.set('views', './views');

@@ -8,6 +8,7 @@
       { "src": "*.js", "use": "@now/node" }
     ],
     "routes": [
+      { "src": "/", "dest": "app.js" },
       { "src": "/api/datos", "dest": "app.js" },
       { "src": "/api/insert", "dest": "app.js" },
       { "src": "/api/graficos", "dest": "app.js" },
