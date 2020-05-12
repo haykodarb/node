@@ -50,7 +50,6 @@ router.get('/', (req, res) => {
     }
 });
 
-
 router.post('/', (req, res) => {
     let hassedPass = bcrypt.hashSync(req.body.password, salt);
     let user = {
