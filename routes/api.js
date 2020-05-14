@@ -54,7 +54,7 @@ router.post('/graficos/:id', (req, res) => {
     let mes = obtenerDia(30);
     let tiempoActual = obtenerAhora();
     let sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}'`;
-    sql += `AND tiempo BETWEEN '${'${req.params.id}'}' AND '${tiempoActual}'`;
+    sql += `AND tiempo BETWEEN '${`${req.params.id}`}' AND '${tiempoActual}'`;
     con.query(sql, (err, result) => {
         if (err) {
             try {
