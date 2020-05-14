@@ -12,6 +12,7 @@
     ],
     "routes": [
       { "src": "/", "dest": "app.js" },
+      { "src": "/public", "dest": "app.js" },
       { "src": "/api/datos", "dest": "app.js" },
       { "src": "/api/insert", "dest": "app.js" },
       { "src": "/api/graficos", "dest": "app.js" },

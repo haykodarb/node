@@ -11,6 +11,7 @@ http.listen(3000, () => {
   console.log(chalk.green('Listening on port: 3000'));
 });
 
+app.use(express.static('public'));
 
 //Routes
 const api = require('./routes/api');
@@ -21,7 +22,6 @@ const verify = require('./tools/tokenVerify');
 
 //Middleware
 app.use(cors());
-app.use(express.static('public'));
 app.use('/api', api);
 app.use('/dashboard', dashboard);
 app.use('/login', login);
