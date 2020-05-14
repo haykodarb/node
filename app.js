@@ -17,7 +17,7 @@ const fileserver = require('./fileserver');
 app.use(cors());
 app.use('/public', express.static('public'));
 
-app.set('views', './views');
+app.set('views', './public/views');
 app.set('view engine', 'ejs');
 
 app.use('/api', api);
