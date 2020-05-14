@@ -5,7 +5,7 @@ const moment = require('moment-timezone');
 const router = express.Router();
 router.use(express.json());
 
-function obtenerTiempo() {
+function obtenerAhora() {
     let now = moment().tz('America/Argentina/Buenos_Aires').format();
     return now;
 }
@@ -49,10 +49,10 @@ router.post('/datos', (req, res) => {
 
 router.post('/graficos/:id', (req, res) => {
     const serie = req.body.serie;
-    let diaHoy = obtenerDia(0); //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarabltime let instanteActual = obtenerTiempo();
+    let diaHoy = obtenerDia(0); //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarabltime let instanteActual = obtenerAhora();
     let diaSemana = obtenerDia(7);
     let diaMes = obtenerDia(30);
-    let tiempoActual = obtenerTiempo();
+    let tiempoActual = obtenerAhora();
     let sql = '';
     if (req.params.id === 'hoy') {
         sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}' AND tiempo BETWEEN '${diaHoy}' AND '${tiempoActual}'`;
@@ -93,7 +93,7 @@ router.post('/graficos/:id', (req, res) => {
 });
 
 router.post('/insert', (req, res) => {
-    let tiempoActual = obtenerTiempo();
+    let tiempoActual = obtenerAhora();
     const data = req.body;
     let sql = `INSERT INTO datos (id, tiempo, serie, temp, hum, lum) `;
     sql += `VALUES (NULL, '${tiempoActual}', '${data.serie}', ${data.temp}, ${data.hum}, ${data.lum})`;
