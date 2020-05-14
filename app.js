@@ -12,7 +12,6 @@ const dashboard = require('./routes/dashboard');
 const login = require('./routes/login');
 const register = require('./routes/register');
 const verify = require('./tools/tokenVerify');
-const fileserver = require('./fileserver');
 
 //Middleware
 app.use(cors());
