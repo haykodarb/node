@@ -20,6 +20,7 @@
       { "src": "/api/graficos/mes", "dest": "app.js" },
       { "src": "/login", "dest": "app.js" },
       { "src": "/dashboard", "dest": "app.js" },
-      { "src": "/register", "dest": "app.js" }
-    ]
+      { "src": "/register", "dest": "app.js" }, 
+      { "src": "/favicon.ico", "dest": "favicon.ico"}
+      ]
   }
