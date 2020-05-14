@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment-timezone');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-const randomize = require('../tools/randomize');
+const randomize = require('../public/tools/randomize');
 
 const router = express.Router();
 

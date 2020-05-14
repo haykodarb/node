@@ -5,10 +5,7 @@
       { "src": "*.png", "use": "@now/static" },
       { "src": "*.jpg", "use": "@now/static" },
       { "src": "*.ico", "use": "@now/static" },
-      { "src": "*.js", "use": "@now/node" },
-      { "src": "/views/*.ejs", "use": "@now/static"},
-      { "src": "/scripts/*.js", "use": "@now/static"},
-      { "src": "/styles/*.css", "use": "@now/static"}
+      { "src": "*.js", "use": "@now/node" }
     ],
     "routes": [
       { "src": "/", "dest": "app.js" },
@@ -20,7 +17,6 @@
       { "src": "/api/graficos/mes", "dest": "app.js" },
       { "src": "/login", "dest": "app.js" },
       { "src": "/dashboard", "dest": "app.js" },
-      { "src": "/register", "dest": "app.js" }, 
-      { "src": "/favicon.ico", "dest": "favicon.ico"}
+      { "src": "/register", "dest": "app.js" }
       ]
   }

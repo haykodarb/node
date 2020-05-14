@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const verify = require('../tools/tokenVerify');
+const verify = require('../public/tools/tokenVerify');
 const cookieParser = require('cookie-parser');
 
 const router = express.Router();
