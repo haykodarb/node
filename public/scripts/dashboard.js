@@ -4,6 +4,28 @@ let data = {
 	serie: serie
 }
 
+function fetchData() { 
+    fetch('./api/datos', {
+		mode: 'cors',
+		method: 'POST',
+		body: JSON.stringify(data),
+		headers: { 
+			'Content-Type': 'application/json'
+		}
+	})
+        .then(res => {
+			return res.json();	
+        })
+        .then(json => {
+			let temp = `${json.temp}°C`;
+            let hum = `${json.hum}%`;
+            let lum = `${json.lum}%`;
+            document.getElementById('temp').setAttribute('value', `${temp}`);
+            document.getElementById('hum').setAttribute('value', `${hum}`);
+            document.getElementById('lum').setAttribute('value', `${lum}`);
+		});
+}
+
 function dataGraph(periodo) {
 	let url =`./api/graficos/${periodo}`; 
 	fetch(url, {
@@ -92,40 +114,16 @@ function fijarHora() {
     document.getElementById('hora').setAttribute('value', `${hora}:${min}`);
 }
 
-function fetchData() { 
-    fetch('./api/datos', {
-		mode: 'cors',
-		method: 'POST',
-		body: JSON.stringify(data),
-		headers: { 
-			'Content-Type': 'application/json'
-		}
-	})
-        .then(res => {
-			return res.json();	
-        })
-        .then(json => {
-			let temp = `${json.temp}°C`;
-            let hum = `${json.hum}%`;
-            let lum = `${json.lum}%`;
-            document.getElementById('temp').setAttribute('value', `${temp}`);
-            document.getElementById('hum').setAttribute('value', `${hum}`);
-            document.getElementById('lum').setAttribute('value', `${lum}`);
-		});
-}
-
-
 dataGraph(periodo);
 fijarHora();
 fetchData();
-
 
 function liveUpdate() { 
     setInterval( () => {
         fetchData();
         fijarHora();
 		dataGraph(periodo);
-	}, 60000)
+	}, 150000)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
