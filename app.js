@@ -15,10 +15,10 @@ const verify = require('./tools/tokenVerify');
 
 //Middleware
 app.use(cors());
-app.use('/', express.static(__dirname + '/public'));
+app.use('/', express.static('/public'));
 app.use('/views', express.static(__dirname + '/public'));
-app.use('/scripts', express.static(__dirname + '/public/scripts'));
-app.use('/styles', express.static(__dirname + '/public/styles'));
+app.use('/scripts', express.static('/public/scripts'));
+app.use('/styles', express.static('/public/styles'));
 app.use('/api', api);
 app.use('/dashboard', dashboard);
 app.use('/login', login);
