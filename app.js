@@ -15,7 +15,7 @@ const verify = require('./tools/tokenVerify');
 const fileserver = require('./fileserver');
 
 app.use(cors());
-//app.use(express.static('public'));
+app.use(express.static('public'));
 
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -24,7 +24,7 @@ app.use('/api', api);
 app.use('/dashboard', dashboard);
 app.use('/login', login);
 app.use('/register', register);
-app.use('/', fileserver);
+//app.use('/', fileserver);
 
 http.listen(3000, () => {
     console.log(chalk.green('Listening on port: 3000'));
