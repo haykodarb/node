@@ -1,4 +1,4 @@
-const verify = require('../public/tools/tokenVerify');
+const verify = require('../tools/tokenVerify');
 const express = require('express');
 const Joi = require('@hapi/joi');
 const mysql = require('mysql');
@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment-timezone');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
-const randomize = require('../public/tools/randomize');
+const randomize = require('../tools/randomize');
 
 const router = express.Router();
 router.use(cookieParser());
