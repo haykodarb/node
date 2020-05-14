@@ -1,4 +1,4 @@
-let periodo = 'hoy';
+let periodo = 0;
 let serie = document.getElementById('serie').dataset.serie;
 let data = {
     serie: serie,
@@ -27,7 +27,8 @@ function fetchData() {
 }
 
 function dataGraph(periodo) {
-    let url = `./api/graficos/${periodo}`;
+    let url = `./api/graficos`;
+    data.periodo = periodo;
     fetch(url, {
         mode: 'cors',
         method: 'POST',
@@ -37,21 +38,21 @@ function dataGraph(periodo) {
         },
     })
         .then((res) => {
-            return res.json();
+            return res.json(); //Creo que es completamente innecesario esto, la respuesta ya esta en JSON
         })
         .then((json) => {
             chart.data.labels = json.timeArray;
             chart.data.datasets[0].data = json.humArray;
             chart.data.datasets[1].data = json.lumArray;
             chart.data.datasets[2].data = json.tempArray;
-            if (periodo === 'hoy') {
+            if (periodo === 0) {
                 chart.options.title.text = 'Datos del día de hoy';
                 chart.options.scales.xAxes[0].time.unit = 'minute';
                 chart.options.scales.xAxes[0].time.displayFormats = {
                     minute: 'HH:mm',
                     hour: 'HH',
                 };
-            } else if (periodo === 'semana') {
+            } else if (periodo === 7) {
                 chart.options.title.text = 'Datos de la última semana';
                 chart.options.scales.xAxes[0].time.unit = 'hour';
                 chart.options.scales.xAxes[0].time.displayFormats = {
@@ -60,7 +61,7 @@ function dataGraph(periodo) {
                     month: 'MMM',
                 };
                 chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
-            } else if (periodo === 'mes') {
+            } else if (periodo === 30) {
                 chart.options.title.text = 'Datos del último mes';
                 chart.options.scales.xAxes[0].time.unit = 'hour';
                 chart.options.scales.xAxes[0].time.displayFormats = {
@@ -79,21 +80,21 @@ function cambiarPeriodo(per) {
     let botonHoy = document.getElementById('botonHoy');
     let botonSemana = document.getElementById('botonSemana');
     let botonMes = document.getElementById('botonMes');
-    if (per === 'hoy') {
+    if (per === 0) {
         botonHoy.setAttribute('class', 'botonEncendido');
         botonHoy.disabled = true;
         botonSemana.setAttribute('class', 'botonApagado');
         botonSemana.disabled = false;
         botonMes.setAttribute('class', 'botonApagado');
         botonMes.disabled = false;
-    } else if (per === 'semana') {
+    } else if (per === 7) {
         botonHoy.setAttribute('class', 'botonApagado');
         botonHoy.disabled = false;
         botonSemana.setAttribute('class', 'botonEncendido');
         botonSemana.disabled = true;
         botonMes.setAttribute('class', 'botonApagado');
         botonMes.disabled = false;
-    } else if (per === 'mes') {
+    } else if (per === 30) {
         botonHoy.setAttribute('class', 'botonApagado');
         botonHoy.disabled = false;
         botonSemana.setAttribute('class', 'botonApagado');
@@ -105,13 +106,8 @@ function cambiarPeriodo(per) {
 }
 
 function fijarHora() {
-    let today = new Date();
-    let min = today.getMinutes();
-    let hora = today.getHours();
-    if (min < 10) {
-        min = `0${min}`;
-    }
-    document.getElementById('hora').setAttribute('value', `${hora}:${min}`);
+    let hora = moment().format('HH:mm');
+    document.getElementById('hora').setAttribute('value', `${hora}`);
 }
 
 fijarHora();

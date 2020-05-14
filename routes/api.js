@@ -49,12 +49,10 @@ router.post('/datos', (req, res) => {
 
 router.post('/graficos/:id', (req, res) => {
     const serie = req.body.serie;
-    let hoy = obtenerDia(0); //despues intentar sacando los if y poniendo solo una linea de SQL donde el ID sea la viarabltime let instanteActual = obtenerAhora();
-    let semana = obtenerDia(7);
-    let mes = obtenerDia(30);
+    let periodo = obtenerDia(req.params.id);
     let tiempoActual = obtenerAhora();
     let sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}'`;
-    sql += `AND tiempo BETWEEN '${`${req.params.id}`}' AND '${tiempoActual}'`;
+    sql += `AND tiempo BETWEEN '${periodo}' AND '${tiempoActual}'`;
     con.query(sql, (err, result) => {
         if (err) {
             try {
