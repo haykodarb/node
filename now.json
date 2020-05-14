@@ -8,7 +8,7 @@
       { "src": "*.js", "use": "@now/node" },
       { "src": "/public/views/*.ejs", "use": "@now/static"},
       { "src": "/public/scripts/*.js", "use": "@now/static"},
-      { "src": "/public/styles/*.css", "use": "@now/static"}
+      { "src": "/public/styles/*.css", "use": "@now/static"},
       { "src": "/views/*.ejs", "use": "@now/static"},
       { "src": "/scripts/*.js", "use": "@now/static"},
       { "src": "/styles/*.css", "use": "@now/static"}
