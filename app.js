@@ -15,7 +15,7 @@ const verify = require('./tools/tokenVerify');
 
 //Middleware
 app.use(cors());
-app.use(express.static(__dirname + '/public'));
+app.use('/', express.static(__dirname + '/public'));
 app.use('/views', express.static(__dirname + '/public'));
 app.use('/scripts', express.static(__dirname + '/public/scripts'));
 app.use('/styles', express.static(__dirname + '/public/styles'));
