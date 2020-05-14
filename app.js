@@ -24,7 +24,7 @@ app.use('/api', api);
 app.use('/dashboard', dashboard);
 app.use('/login', login);
 app.use('/register', register);
-app.use('/public', fileserver);
+app.use('/', fileserver);
 
 http.listen(3000, () => {
     console.log(chalk.green('Listening on port: 3000'));
