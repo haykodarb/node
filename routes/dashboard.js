@@ -10,7 +10,7 @@ router.use(cookieParser());
 router.get('/', verify, (req, res) => {
     let data = jwt.verify(req.cookies.token, process.env.token_secret);
     res.render('dashboard', {
-        serie: data.serie
+        serie: data.serie,
     });
 });
 

@@ -8,9 +8,8 @@ const http = require('http').createServer(app);
 
 //Server config
 http.listen(3000, () => {
-  console.log(chalk.green('Listening on port: 3000'));
+    console.log(chalk.green('Listening on port: 3000'));
 });
-
 
 //Routes
 const api = require('./routes/api');
@@ -30,7 +29,6 @@ app.use('/register', register);
 //Views config
 app.set('views', './public/views');
 app.set('view engine', 'ejs');
-
 
 app.get('/', verify, (req, res) => {
     res.redirect('./dashboard');

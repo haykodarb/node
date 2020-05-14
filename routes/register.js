@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.use(express.json());
 router.use(cookieParser());
-router.use(express.urlencoded( { extended: true}));
+router.use(express.urlencoded({ extended: true }));
 
 let salt = bcrypt.genSaltSync(10);
 
@@ -20,33 +20,30 @@ let con = mysql.createPool({
     host: process.env.host,
     user: process.env.user,
     password: process.env.password,
-    database: process.env.database
-  });
-  
+    database: process.env.database,
+});
 
 const registerSchema = Joi.object({
     username: Joi.string().min(6).alphanum().required(),
     email: Joi.string().min(10).required().email(),
-    password: Joi.string().min(6).alphanum().required()
+    password: Joi.string().min(6).alphanum().required(),
 });
-
 
 function obtenerTiempo() {
     let now = moment().tz('America/Argentina/Buenos_Aires').format();
     return now;
-  }
+}
 
 router.get('/', (req, res) => {
     let token = req.cookies.token;
-    if(!token){
+    if (!token) {
         return res.render('register');
-    } 
+    }
     try {
         let data = jwt.verify(token, process.env.token_secret);
         return res.redirect('./dashboard');
-    }
-    catch {
-        return res.render('register');;
+    } catch {
+        return res.render('register');
     }
 });
 
@@ -56,7 +53,7 @@ router.post('/', (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: hassedPass,
-        date: obtenerTiempo()
+        date: obtenerTiempo(),
     };
     const { error } = registerSchema.validate(req.body);
     if (error) {
@@ -64,16 +61,15 @@ router.post('/', (req, res) => {
         res.render('register', {
             err: err,
         });
-    } 
-    else {
-        let sqlVerify = `SELECT username, email FROM users WHERE email = '${user.email}' OR username = '${user.username}'`
+    } else {
+        let sqlVerify = `SELECT username, email FROM users WHERE email = '${user.email}' OR username = '${user.username}'`;
         con.query(sqlVerify, (error, result) => {
             if (result[0]) {
-                let err =   'Este usuario o email ya está siendo utilizado'; 
+                let err = 'Este usuario o email ya está siendo utilizado';
                 res.render('register', {
-                    err: err
-                }); } 
-            else {
+                    err: err,
+                });
+            } else {
                 let serie = randomize(8);
                 let sqlCreate = `INSERT INTO users (id, date, serie, username, email, password) `;
                 sqlCreate += `VALUES (NULL, '${user.date}', '${serie}', '${user.username}', '${user.email}', '${user.password}')`;
@@ -81,21 +77,20 @@ router.post('/', (req, res) => {
                     if (err) {
                         try {
                             throw err;
-                        } 
-                        catch (e) {
-                            res.status(400).json({ errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`});
+                        } catch (e) {
+                            res.status(400).json({
+                                errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`,
+                            });
                         }
-                    } 
-                    else {    
+                    } else {
                         res.render('register', {
-                            err: `Su usuario fue creado correctamente. Su código individual es "${serie}", por favor ingreselo junto con sus credenciales de WiFi en su dispositivo.`
+                            err: `Su usuario fue creado correctamente. Su código individual es "${serie}", por favor ingreselo junto con sus credenciales de WiFi en su dispositivo.`,
                         });
                     }
                 });
             }
         });
-    } 
+    }
 });
-
 
 module.exports = router;

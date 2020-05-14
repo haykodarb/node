@@ -7,18 +7,15 @@ const router = express.Router();
 router.use(cookieParser());
 
 module.exports = function verify(req, res, next) {
-    if(!req.cookies) {
+    if (!req.cookies) {
         return res.redirect('./login');
+    } else {
+        try {
+            const token = req.cookies.token;
+            let data = jwt.verify(token, process.env.token_secret);
+            next();
+        } catch {
+            return res.redirect('./login');
+        }
     }
-    else {
-    try {
-        const token = req.cookies.token;
-        let data = jwt.verify(token, process.env.token_secret);
-        next();
-    }
-    catch {
-        return res.redirect('./login');
-    }
-}
-}
-
+};

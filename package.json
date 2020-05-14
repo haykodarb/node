@@ -1,34 +1,34 @@
 {
-  "name": "nodesql",
-  "version": "1.0.0",
-  "description": "aprendiendo a usar node.js con sql",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@hapi/joi": "^17.1.1",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
-    "chalk": "^4.0.0",
-    "chart.js": "^2.9.3",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "ejs": "^3.1.2",
-    "express": "^4.17.1",
-    "fs": "0.0.1-security",
-    "jsonwebtoken": "^8.5.1",
-    "moment": "^2.25.3",
-    "moment-timezone": "^0.5.28",
-    "mysql": "^2.18.1",
-    "nodemon": "^2.0.3",
-    "socket.io": "^2.3.0"
-  },
-  "engines": {
-    "node": "12.16.2"
-  },
-  "devDependencies": {}
+    "name": "nodesql",
+    "version": "1.0.0",
+    "description": "aprendiendo a usar node.js con sql",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@hapi/joi": "^17.1.1",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "chalk": "^4.0.0",
+        "chart.js": "^2.9.3",
+        "cookie-parser": "^1.4.5",
+        "cors": "^2.8.5",
+        "ejs": "^3.1.2",
+        "express": "^4.17.1",
+        "fs": "0.0.1-security",
+        "jsonwebtoken": "^8.5.1",
+        "moment": "^2.25.3",
+        "moment-timezone": "^0.5.28",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.3",
+        "socket.io": "^2.3.0"
+    },
+    "engines": {
+        "node": "12.16.2"
+    },
+    "devDependencies": {}
 }

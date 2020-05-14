@@ -12,7 +12,7 @@ body {
 }
 
 h1 {
-    background-color: #466d60;	
+    background-color: #466d60;
     padding: 8px 0;
     text-align: center;
     font-size: 40px;
@@ -80,7 +80,7 @@ form > div > input {
     width: 100%;
 }
 
-form input[type="submit"] {
+form input[type='submit'] {
     margin-top: 20px;
     padding: 10px;
 }
@@ -91,7 +91,7 @@ form input[disabled] {
 }
 .botonApagado {
     background-color: white;
-    color:	#43695c;
+    color: #43695c;
     font-size: 18px;
     font-weight: 500;
     width: 20%;
@@ -103,7 +103,7 @@ form input[disabled] {
 }
 .botonEncendido {
     background-color: #43695c;
-    color:	white;
+    color: white;
     font-size: 18px;
     font-weight: 500;
     width: 20%;
@@ -113,15 +113,15 @@ form input[disabled] {
     cursor: pointer;
     box-shadow: none;
 }
-.botonApagado:hover{
+.botonApagado:hover {
     background-color: #70af99;
-    color:	white;
+    color: white;
 }
 button:focus {
-      outline: none;
+    outline: none;
 }
 button::-moz-focus-inner {
-     border: 0;
+    border: 0;
 }
 canvas {
     max-width: 1100px;

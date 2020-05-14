@@ -10,8 +10,7 @@ const randomize = require('../tools/randomize');
 
 const router = express.Router();
 router.use(cookieParser());
-router.use(express.urlencoded({ extended: true}));   
-
+router.use(express.urlencoded({ extended: true }));
 
 let salt = bcrypt.genSaltSync(10);
 
@@ -20,67 +19,67 @@ let con = mysql.createPool({
     host: process.env.host,
     user: process.env.user,
     password: process.env.password,
-    database: process.env.database
-  });
-  
+    database: process.env.database,
+});
+
 const userSchema = Joi.object({
     username: Joi.string().min(6).required(),
-    password: Joi.string().min(6).required()
+    password: Joi.string().min(6).required(),
 });
-
 
 router.get('/', (req, res) => {
-    if(!req.cookies) {
+    if (!req.cookies) {
         return res.render('login');
+    } else if (!req.cookies.token) {
+        return res.render('login');
+    } else {
+        try {
+            const token = req.cookies.token;
+            let data = jwt.verify(token, process.env.token_secret);
+            res.redirect('./dashboard');
+        } catch {
+            return res.render('login');
+        }
     }
-    else if(!req.cookies.token) {
-        return res.render('login');
-    } 
-    else {
-    try {
-        const token = req.cookies.token;
-        let data = jwt.verify(token, process.env.token_secret);
-        res.redirect('./dashboard');
-    }
-    catch {
-        return res.render('login');
-    }}
 });
-
 
 router.post('/', (req, res) => {
     let user = {
         username: req.body.username,
-        password: req.body.password
-    }
+        password: req.body.password,
+    };
     const { error } = userSchema.validate(req.body);
     if (error) {
         let err = error.details[0].message;
         return res.render('login', {
-            err: err
+            err: err,
         });
-    } 
-    let sqlVerify = `SELECT serie, password FROM users WHERE username = '${user.username}'`;
-    con.query(sqlVerify, (err, result) => {
-        if (result.length > 0) {
-            let validPass = bcrypt.compareSync(user.password, result[0].password); 
-            if(!validPass) {
-                let err = 'La contraseña ingresada es incorrecta';
-                return res.render('login', {
-                    err: err
-                });
+    } else {
+        let sqlVerify = `SELECT serie, password FROM users WHERE username = '${user.username}'`;
+        con.query(sqlVerify, (err, result) => {
+            if (result.length > 0) {
+                let validPass = bcrypt.compareSync(user.password, result[0].password);
+                if (!validPass) {
+                    let err = 'La contraseña ingresada es incorrecta';
+                    return res.render('login', {
+                        err: err,
+                    });
+                } else {
+                    const token = jwt.sign(
+                        { username: user.username, serie: result[0].serie },
+                        process.env.token_secret
+                    );
+                    res.cookie('token', token);
+                    res.redirect('../dashboard');
+                }
             } else {
-                const token = jwt.sign( {username: user.username, serie: result[0].serie }, process.env.token_secret);
-                res.cookie('token', token);
-                res.redirect('../dashboard');
+                let err = 'El usuario ingresado no existe';
+                return res.render('login', {
+                    err: err,
+                });
             }
-        } else {
-            let err = 'El usuario ingresado no existe';
-            return res.render('login', {
-                err: err
-            });
-        }   
-    });       
+        });
+    }
 });
 
 module.exports = router;

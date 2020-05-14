@@ -1,26 +1,26 @@
 {
     "version": 2,
     "builds": [
-      { "src": "*.html", "use": "@now/static" },
-      { "src": "*.png", "use": "@now/static" },
-      { "src": "*.jpg", "use": "@now/static" },
-      { "src": "*.ico", "use": "@now/static" },
-      { "src": "*.js", "use": "@now/node" },
-      { "src": "/public/views/*.ejs", "use": "@now/static"},
-      { "src": "/public/scripts/*.js", "use": "@now/static"},
-      { "src": "/public/styles/*.css", "use": "@now/static"}
+        { "src": "*.html", "use": "@now/static" },
+        { "src": "*.png", "use": "@now/static" },
+        { "src": "*.jpg", "use": "@now/static" },
+        { "src": "*.ico", "use": "@now/static" },
+        { "src": "*.js", "use": "@now/node" },
+        { "src": "/public/views/*.ejs", "use": "@now/static" },
+        { "src": "/public/scripts/*.js", "use": "@now/static" },
+        { "src": "/public/styles/*.css", "use": "@now/static" }
     ],
     "routes": [
-      { "src": "/", "dest": "app.js" },
-      { "src": "/api/datos", "dest": "app.js" },
-      { "src": "/api/insert", "dest": "app.js" },
-      { "src": "/api/graficos", "dest": "app.js" },
-      { "src": "/api/graficos/hoy", "dest": "app.js" },
-      { "src": "/api/graficos/semana", "dest": "app.js" },
-      { "src": "/api/graficos/mes", "dest": "app.js" },
-      { "src": "/login", "dest": "app.js" },
-      { "src": "/dashboard", "dest": "app.js" },
-      { "src": "/register", "dest": "app.js" }, 
-      { "src": "/favicon.ico", "dest": "favicon.ico"}
-      ]
-  }
+        { "src": "/", "dest": "app.js" },
+        { "src": "/api/datos", "dest": "app.js" },
+        { "src": "/api/insert", "dest": "app.js" },
+        { "src": "/api/graficos", "dest": "app.js" },
+        { "src": "/api/graficos/hoy", "dest": "app.js" },
+        { "src": "/api/graficos/semana", "dest": "app.js" },
+        { "src": "/api/graficos/mes", "dest": "app.js" },
+        { "src": "/login", "dest": "app.js" },
+        { "src": "/dashboard", "dest": "app.js" },
+        { "src": "/register", "dest": "app.js" },
+        { "src": "/favicon.ico", "dest": "favicon.ico" }
+    ]
+}
