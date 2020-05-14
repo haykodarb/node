@@ -47,10 +47,10 @@ router.post('/datos', (req, res) => {
     });
 });
 
-router.post('/graficos/:id', (req, res) => {
+router.post('/graficos', (req, res) => {
     const serie = req.body.serie;
-    let periodo = obtenerDia(req.params.id);
-    let tiempoActual = obtenerAhora();
+    const periodo = obtenerDia(req.body.periodo);
+    const tiempoActual = obtenerAhora();
     let sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}'`;
     sql += `AND tiempo BETWEEN '${periodo}' AND '${tiempoActual}'`;
     con.query(sql, (err, result) => {
