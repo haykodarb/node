@@ -66,8 +66,6 @@ router.post('/graficos', (req, res) => {
             let dataArray = {
                 tempArray: [],
                 humArray: [],
-                lumArray: [],
-                timeArray: [],
             };
             for (let i = 0; i < result.length; i++) {
                 dataArray.tempArray[i] = result[i].temp;
