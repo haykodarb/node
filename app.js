@@ -6,6 +6,12 @@ const cors = require('cors');
 const chalk = require('chalk');
 const http = require('http').createServer(app);
 
+//Server config
+http.listen(3000, () => {
+  console.log(chalk.green('Listening on port: 3000'));
+});
+
+
 //Routes
 const api = require('./routes/api');
 const dashboard = require('./routes/dashboard');
@@ -25,9 +31,6 @@ app.use('/register', register);
 app.set('views', './public/views');
 app.set('view engine', 'ejs');
 
-http.listen(3000, () => {
-    console.log(chalk.green('Listening on port: 3000'));
-  });
 
 app.get('/', verify, (req, res) => {
     res.redirect('./dashboard');
