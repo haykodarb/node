@@ -14,16 +14,17 @@ const register = require('./routes/register');
 const verify = require('./tools/tokenVerify');
 const fileserver = require('./fileserver');
 
+//Middleware
 app.use(cors());
-app.use(express.static(__dirname + '/public'));
-
-app.set('views', './public/views');
-app.set('view engine', 'ejs');
-
+app.use('/' , express.static(__dirname + '/public'));
 app.use('/api', api);
 app.use('/dashboard', dashboard);
 app.use('/login', login);
 app.use('/register', register);
+
+//Views config
+app.set('views', './public/views');
+app.set('view engine', 'ejs');
 
 http.listen(3000, () => {
     console.log(chalk.green('Listening on port: 3000'));
