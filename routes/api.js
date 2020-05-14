@@ -26,7 +26,7 @@ let con = mysql.createPool({
 
 router.post('/datos', (req, res) => {
   const serie = req.body.serie;
-  const sql = `SELECT temp, hum, lum FROM datos WHERE serie = ${serie} ORDER BY ID DESC LIMIT 1`; 
+  const sql = `SELECT temp, hum, lum FROM datos WHERE serie = '${serie}' ORDER BY ID DESC LIMIT 1`; 
   con.query(sql, (err, result) => {
     if (err) {
       try {
@@ -48,11 +48,11 @@ router.post('/graficos/:id', (req, res) =>  {
   let tiempoActual = obtenerTiempo();
   let sql = '';
   if(req.params.id === 'hoy') {
-  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = ${serie} AND tiempo BETWEEN '${diaHoy}' AND '${tiempoActual}'`;  }
+  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}' AND tiempo BETWEEN '${diaHoy}' AND '${tiempoActual}'`;  }
   else if (req.params.id === 'semana'){
-  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = ${serie} AND tiempo BETWEEN '${diaSemana}' AND '${tiempoActual}'`;  }
+  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}' AND tiempo BETWEEN '${diaSemana}' AND '${tiempoActual}'`;  }
   else if (req.params.id === 'mes') {
-  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = ${serie} AND tiempo BETWEEN '${diaMes}' AND '${tiempoActual}'`;  }
+  sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}' AND tiempo BETWEEN '${diaMes}' AND '${tiempoActual}'`;  }
 
   con.query(sql, (err, result) => {
     if (err) {
