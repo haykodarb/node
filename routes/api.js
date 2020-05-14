@@ -87,7 +87,7 @@ router.post('/insert', (req, res) =>{
   let tiempoActual = obtenerTiempo();
   const data = req.body;
   let sql = `INSERT INTO datos (id, tiempo, serie, temp, hum, lum) `;
-  sql += `VALUES (NULL, '${tiempoActual}', ${data.serie}, ${data.temp}, ${data.hum}, ${data.lum})`;
+  sql += `VALUES (NULL, '${tiempoActual}', '${data.serie}', ${data.temp}, ${data.hum}, ${data.lum})`;
   con.query(sql, (err) => {
     if (err) {
       try {
