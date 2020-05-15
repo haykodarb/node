@@ -12,8 +12,7 @@ function fetchData() {
         headers: {
             'Content-Type': 'application/json',
         },
-    }).then((res) => {
-        let json = res.json();
+    }).then((json) => {
         let temp = `${json.temp}°C`;
         let hum = `${json.hum}%`;
         let lum = `${json.lum}%`;
@@ -33,40 +32,43 @@ function dataGraph(periodo) {
         headers: {
             'Content-Type': 'application/json',
         },
-    }).then((res) => {
-        let json = res.json();
-        chart.data.labels = json.timeArray;
-        chart.data.datasets[0].data = json.humArray;
-        chart.data.datasets[1].data = json.lumArray;
-        chart.data.datasets[2].data = json.tempArray;
-        if (periodo === 0) {
-            chart.options.title.text = 'Datos del día de hoy';
-            chart.options.scales.xAxes[0].time.unit = 'minute';
-            chart.options.scales.xAxes[0].time.displayFormats = {
-                minute: 'HH:mm',
-                hour: 'HH',
-            };
-        } else if (periodo === 7) {
-            chart.options.title.text = 'Datos de la última semana';
-            chart.options.scales.xAxes[0].time.unit = 'hour';
-            chart.options.scales.xAxes[0].time.displayFormats = {
-                hour: 'D MMM ha',
-                day: 'D MMM',
-                month: 'MMM',
-            };
-            chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
-        } else if (periodo === 30) {
-            chart.options.title.text = 'Datos del último mes';
-            chart.options.scales.xAxes[0].time.unit = 'hour';
-            chart.options.scales.xAxes[0].time.displayFormats = {
-                hour: 'D MMM ha',
-                day: 'D MMM ha',
-                month: 'MMM',
-            };
-            chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
-        }
-        chart.update();
-    });
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .then((json) => {
+            chart.data.labels = json.timeArray;
+            chart.data.datasets[0].data = json.humArray;
+            chart.data.datasets[1].data = json.lumArray;
+            chart.data.datasets[2].data = json.tempArray;
+            if (periodo === 0) {
+                chart.options.title.text = 'Datos del día de hoy';
+                chart.options.scales.xAxes[0].time.unit = 'minute';
+                chart.options.scales.xAxes[0].time.displayFormats = {
+                    minute: 'HH:mm',
+                    hour: 'HH',
+                };
+            } else if (periodo === 7) {
+                chart.options.title.text = 'Datos de la última semana';
+                chart.options.scales.xAxes[0].time.unit = 'hour';
+                chart.options.scales.xAxes[0].time.displayFormats = {
+                    hour: 'D MMM ha',
+                    day: 'D MMM',
+                    month: 'MMM',
+                };
+                chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
+            } else if (periodo === 30) {
+                chart.options.title.text = 'Datos del último mes';
+                chart.options.scales.xAxes[0].time.unit = 'hour';
+                chart.options.scales.xAxes[0].time.displayFormats = {
+                    hour: 'D MMM ha',
+                    day: 'D MMM ha',
+                    month: 'MMM',
+                };
+                chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
+            }
+            chart.update();
+        });
 }
 
 function cambiarPeriodo(per) {
