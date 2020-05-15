@@ -13,9 +13,10 @@ function fetchData() {
             'Content-Type': 'application/json',
         },
     }).then((res) => {
-        let temp = `${res.temp}°C`;
-        let hum = `${res.hum}%`;
-        let lum = `${res.lum}%`;
+        let json = res.json();
+        let temp = `${json.temp}°C`;
+        let hum = `${json.hum}%`;
+        let lum = `${json.lum}%`;
         document.getElementById('temp').setAttribute('value', `${temp}`);
         document.getElementById('hum').setAttribute('value', `${hum}`);
         document.getElementById('lum').setAttribute('value', `${lum}`);
@@ -33,10 +34,11 @@ function dataGraph(periodo) {
             'Content-Type': 'application/json',
         },
     }).then((res) => {
-        chart.data.labels = res.timeArray;
-        chart.data.datasets[0].data = res.humArray;
-        chart.data.datasets[1].data = res.lumArray;
-        chart.data.datasets[2].data = res.tempArray;
+        let json = res.json();
+        chart.data.labels = json.timeArray;
+        chart.data.datasets[0].data = json.humArray;
+        chart.data.datasets[1].data = json.lumArray;
+        chart.data.datasets[2].data = json.tempArray;
         if (periodo === 0) {
             chart.options.title.text = 'Datos del día de hoy';
             chart.options.scales.xAxes[0].time.unit = 'minute';
