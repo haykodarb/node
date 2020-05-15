@@ -22,7 +22,6 @@
         { "src": "/dashboard", "dest": "app.js" },
         { "src": "/register", "dest": "app.js" },
         { "src": "/scripts", "dest": "app.js" },
-        { "src": "/views", "dest": "app.js" },
         { "src": "/styles/style.css", "dest": "app.js" },
         { "src": "/favicon.ico", "dest": "favicon.ico" }
     ]
