@@ -123,7 +123,12 @@
       text-align: right;
       align-items: right;
 		}
-		
+	.alertas{
+		background-color: #FFF9A5;
+		font-size: 30;
+		padding-left: 15%;
+		border-radius: 10px;
+	}
     .botonApagado:hover{
 			background-color: #70af99;
 			color:	white;
@@ -138,12 +143,7 @@
 </head>
 <body>      <div class="container">
 		<h1>Iniciar Sesión</h1>
-		<% if(typeof err != 'undefined'){ %> 
-			<div class="alertas" role="alert">
-			  <%= err %>
-			</div>
-			<% } %> 
-        <form action="/login" method="POST">
+		<form action="/login" method="POST">
           <div>
             <label for="username">Nombre de usuario</label>
             <input
@@ -164,7 +164,14 @@
               placeholder="Ingrese su contraseña"
             />
           </div>
-          <div class = "botones">
+		  <% if(typeof err != 'undefined'){ %> 
+			<div class="alertas" role="alert">
+			<p> 
+			      Error = <%= err %>
+			</p>
+			</div>
+			<% } %>  
+		  <div class = "botones">
           <button type="submit" class="botonEncendido">Enviar</button>
           </div>
         </form>

@@ -12,14 +12,18 @@ function fetchData() {
         headers: {
             'Content-Type': 'application/json',
         },
-    }).then((json) => {
-        let temp = `${json.temp}°C`;
-        let hum = `${json.hum}%`;
-        let lum = `${json.lum}%`;
-        document.getElementById('temp').setAttribute('value', `${temp}`);
-        document.getElementById('hum').setAttribute('value', `${hum}`);
-        document.getElementById('lum').setAttribute('value', `${lum}`);
-    });
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .then((json) => {
+            let temp = `${json.temp}°C`;
+            let hum = `${json.hum}%`;
+            let lum = `${json.lum}%`;
+            document.getElementById('temp').setAttribute('value', `${temp}`);
+            document.getElementById('hum').setAttribute('value', `${hum}`);
+            document.getElementById('lum').setAttribute('value', `${lum}`);
+        });
 }
 
 function dataGraph(periodo) {
