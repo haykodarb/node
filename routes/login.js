@@ -57,26 +57,32 @@ router.post('/', (req, res) => {
     } else {
         let sqlVerify = `SELECT serie, password FROM users WHERE username = '${user.username}'`;
         con.query(sqlVerify, (err, result) => {
-            if (result.length > 0) {
-                let validPass = bcrypt.compareSync(user.password, result[0].password);
-                if (!validPass) {
-                    let err = 'La contraseña ingresada es incorrecta';
+            if (err) {
+                return res.render('login', {
+                    err: `Error con la conexión a la base de datos: ${e}`,
+                });
+            } else {
+                if (result[0]) {
+                    let validPass = bcrypt.compareSync(user.password, result[0].password);
+                    if (!validPass) {
+                        let err = 'La contraseña ingresada es incorrecta';
+                        return res.render('login', {
+                            err: err,
+                        });
+                    } else {
+                        const token = jwt.sign(
+                            { username: user.username, serie: result[0].serie },
+                            process.env.token_secret
+                        );
+                        res.cookie('token', token);
+                        res.redirect('../dashboard');
+                    }
+                } else {
+                    let err = 'El usuario ingresado no existe';
                     return res.render('login', {
                         err: err,
                     });
-                } else {
-                    const token = jwt.sign(
-                        { username: user.username, serie: result[0].serie },
-                        process.env.token_secret
-                    );
-                    res.cookie('token', token);
-                    res.redirect('../dashboard');
                 }
-            } else {
-                let err = 'El usuario ingresado no existe';
-                return res.render('login', {
-                    err: err,
-                });
             }
         });
     }

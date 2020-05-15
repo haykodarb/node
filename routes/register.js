@@ -64,30 +64,36 @@ router.post('/', (req, res) => {
     } else {
         let sqlVerify = `SELECT username, email FROM users WHERE email = '${user.email}' OR username = '${user.username}'`;
         con.query(sqlVerify, (error, result) => {
-            if (result[0]) {
-                let err = 'Este usuario o email ya está siendo utilizado';
-                res.render('register', {
-                    err: err,
+            if (err) {
+                return res.render('login', {
+                    err: `Error con la conexión a la base de datos: ${e}`,
                 });
             } else {
-                let serie = randomize(8);
-                let sqlCreate = `INSERT INTO users (id, date, serie, username, email, password) `;
-                sqlCreate += `VALUES (NULL, '${user.date}', '${serie}', '${user.username}', '${user.email}', '${user.password}')`;
-                con.query(sqlCreate, (err) => {
-                    if (err) {
-                        try {
-                            throw err;
-                        } catch (e) {
-                            res.status(400).json({
-                                errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`,
+                if (result[0]) {
+                    let err = 'Este usuario o email ya está siendo utilizado';
+                    res.render('register', {
+                        err: err,
+                    });
+                } else {
+                    let serie = randomize(8);
+                    let sqlCreate = `INSERT INTO users (id, date, serie, username, email, password) `;
+                    sqlCreate += `VALUES (NULL, '${user.date}', '${serie}', '${user.username}', '${user.email}', '${user.password}')`;
+                    con.query(sqlCreate, (err) => {
+                        if (err) {
+                            try {
+                                throw err;
+                            } catch (e) {
+                                res.status(400).json({
+                                    errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`,
+                                });
+                            }
+                        } else {
+                            res.render('register', {
+                                err: `Su usuario fue creado correctamente. Su código individual es "${serie}", por favor ingreselo junto con sus credenciales de WiFi en su dispositivo.`,
                             });
                         }
-                    } else {
-                        res.render('register', {
-                            err: `Su usuario fue creado correctamente. Su código individual es "${serie}", por favor ingreselo junto con sus credenciales de WiFi en su dispositivo.`,
-                        });
-                    }
-                });
+                    });
+                }
             }
         });
     }
