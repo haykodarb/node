@@ -3,8 +3,8 @@ html {
 }
 
 body {
-    background-color: #d7fff1;
-    font-family: Arial, Helvetica, serif;
+    background-color: #e2eeef;
+    font-family: 'Roboto Slab', serif;
     min-height: 100vh;
     /* mobile viewport bug fix */
     min-height: -webkit-fill-available;
@@ -12,11 +12,11 @@ body {
 }
 
 h1 {
-    background-color: #466d60;
+    background-color: #114b5f;
     padding: 8px 0;
     text-align: center;
     font-size: 40px;
-    font-weight: 500;
+    font-weight: 700;
     color: white;
     border-radius: 10px;
 }
@@ -53,9 +53,8 @@ form > div {
 
 form > div > label {
     font-size: 20px;
-    font-family: Arial, Helvetica, serif;
-    background: #8cd790;
-    color: black;
+    background: #178764;
+    color: white;
     font-weight: 500;
     width: 100%;
     height: 100%;
@@ -67,13 +66,13 @@ form > div > label {
 }
 
 form > div > input {
-    font-size: 16px;
-    background: #aafcb8;
+    font-size: 18px;
+    background: #45b394;
     color: black;
     height: 100%;
     padding: 0;
     text-align: center;
-    font-weight: 600;
+    font-weight: 300;
     border: none;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
@@ -91,7 +90,7 @@ form input[disabled] {
 }
 .botonApagado {
     background-color: white;
-    color: #43695c;
+    color: #396f7f;
     font-size: 18px;
     font-weight: 500;
     width: 20%;
@@ -102,7 +101,7 @@ form input[disabled] {
     box-shadow: none;
 }
 .botonEncendido {
-    background-color: #43695c;
+    background-color: #396f7f;
     color: white;
     font-size: 18px;
     font-weight: 500;
@@ -114,7 +113,7 @@ form input[disabled] {
     box-shadow: none;
 }
 .botonApagado:hover {
-    background-color: #70af99;
+    background-color: #74a5af;
     color: white;
 }
 button:focus {

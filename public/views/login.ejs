@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 	<link rel="shortcut icon" href="/favicon.ico" />
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;500;700&display=swap" rel="stylesheet"> 
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Kassen</title>
@@ -11,8 +12,8 @@
 		}
 
 		body {
-			background-color: #d7fff1;
-			font-family: Arial, Helvetica, serif;
+			background-color: #e2eeef;
+			font-family: 'Roboto Slab', serif;
 			min-height: 100vh;
 			/* mobile viewport bug fix */
 			min-height: -webkit-fill-available;
@@ -20,17 +21,25 @@
 		}
 
 		h1 {
-			background-color: #466d60;	
+			margin-top: 70px;
+			background-color: #114b5f;	
 			padding: 8px 0;
 			text-align: center;
-			font-size: 40px;
+			font-size: 35px;
 			font-weight: 500;
 			color: white;
 			border-radius: 10px;
 		}
 
-		.container {
-			display: flex;
+		.alertas{
+		background-color: #FFF9A5;
+		font-size: 17px;
+		padding-left: 5%;
+		border-radius: 10px;
+		margin-top: 5px;
+		}
+		
+		.container {	display: flex;
 			flex-direction: column;
 			max-width: 600px;
 			width: 100%;
@@ -52,9 +61,9 @@
 
 		form > div > label {
 			font-size: 20px;
-			font-family: Arial, Helvetica, serif;
-			background: #8cd790;
-			color: black;
+			font-family: 'Roboto Slab', serif;
+			background: #178764;
+			color: white;
 			font-weight: 500;
 			width: 100%;
 			height: 100%;
@@ -66,8 +75,8 @@
 		}
 
 		form > div > input {
-			font-size: 16px;
-			background: #aafcb8;
+			font-size: 18px;
+			background: #45b394;
 			color: black;
 			height: 100%;
 			padding: 0;
@@ -88,50 +97,31 @@
 			background: #afafaf;
 			cursor: not-allowed;
 		}
-
-    .botonApagado {
-			background-color: white;
-			color:	#43695c;
-			font-size: 18px;
-			font-weight: 500;
-			width: 20%;
-			height: 100%;
-			margin: 35px auto 0;
-			border-radius: 15px;
-			cursor: pointer;
-			box-shadow: none;
-		}
+		
 		.botonEncendido {
-			background-color: #43695c;
+			background-color: #396f7f;
 			color:	white;
-			font-size: 18px;
+			font-size: 22px;
 			font-weight: 500;
-			width: 40%;
+			width: 47%;
 			height: 100%;
-			margin: 35px auto 0;
+			margin: 0px ;
 			border-radius: 15px;
 			cursor: pointer;
 			box-shadow: none;
 		}
 		.botones {
-			display: block;
+			display:flex;
 			flex-direction: row;
 			max-width: 1200px;
 			height: 65px;
 			width: 100%;
-			margin: 0 auto;
-      text-align: right;
-      align-items: right;
+			text-align: right;
 		}
-	.alertas{
-		background-color: #FFF9A5;
-		font-size: 30;
-		padding-left: 15%;
-		border-radius: 10px;
-	}
-    .botonApagado:hover{
-			background-color: #70af99;
-			color:	white;
+		.login {
+			text-align: left;
+			width: 50%;
+			font-size: 17px;
 		}
 		button:focus {
   			outline: none;
@@ -151,7 +141,6 @@
               id="username"
               name="username"
               class="form-control"
-              placeholder="Ingrese su nombre de usuario"
             />
           </div>
           <div>
@@ -161,7 +150,6 @@
               id="password"
               name="password"
               class="form-control"
-              placeholder="Ingrese su contraseña"
             />
           </div>
 		  <% if(typeof err != 'undefined'){ %> 
@@ -172,12 +160,13 @@
 			</div>
 			<% } %>  
 		  <div class = "botones">
-          <button type="submit" class="botonEncendido">Enviar</button>
+			<p>
+				¿No tiene una cuenta? <a href="/register">Registro</a>
+			  </p>
+			<button type="submit" class="botonEncendido">Enviar</button>
           </div>
         </form>
-        <p>
-          ¿No tiene una cuenta? <a href="/register">Registro</a>
-        </p>
+        
       </div>
     </div>
   </div>
