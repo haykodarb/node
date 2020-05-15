@@ -65,9 +65,9 @@ router.post('/', (req, res) => {
                 if (result[0]) {
                     let validPass = bcrypt.compareSync(user.password, result[0].password);
                     if (!validPass) {
-                        let err = 'La contraseña ingresada es incorrecta';
+                        let error = 'La contraseña ingresada es incorrecta';
                         return res.render('login', {
-                            err: err,
+                            err: error,
                         });
                     } else {
                         const token = jwt.sign(
@@ -78,9 +78,9 @@ router.post('/', (req, res) => {
                         res.redirect('../dashboard');
                     }
                 } else {
-                    let err = 'El usuario ingresado no existe';
+                    let error = 'El usuario ingresado no existe';
                     return res.render('login', {
-                        err: err,
+                        err: error,
                     });
                 }
             }

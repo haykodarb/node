@@ -65,14 +65,14 @@ router.post('/', (req, res) => {
         let sqlVerify = `SELECT username, email FROM users WHERE email = '${user.email}' OR username = '${user.username}'`;
         con.query(sqlVerify, (error, result) => {
             if (err) {
-                return res.render('login', {
+                return res.render('register', {
                     err: `Error con la conexión a la base de datos: ${e}`,
                 });
             } else {
                 if (result[0]) {
-                    let err = 'Este usuario o email ya está siendo utilizado';
+                    let error = 'Este usuario o email ya está siendo utilizado';
                     res.render('register', {
-                        err: err,
+                        err: error,
                     });
                 } else {
                     let serie = randomize(8);
@@ -80,13 +80,9 @@ router.post('/', (req, res) => {
                     sqlCreate += `VALUES (NULL, '${user.date}', '${serie}', '${user.username}', '${user.email}', '${user.password}')`;
                     con.query(sqlCreate, (err) => {
                         if (err) {
-                            try {
-                                throw err;
-                            } catch (e) {
-                                res.status(400).json({
-                                    errorMessage: `Endpoint: ${req.path}. Sucedio un error al recibir: ${e}`,
-                                });
-                            }
+                            res.render('register', {
+                                err: `Error con la conexión a la base de datos: ${e}`,
+                            });
                         } else {
                             res.render('register', {
                                 err: `Su usuario fue creado correctamente. Su código individual es "${serie}", por favor ingreselo junto con sus credenciales de WiFi en su dispositivo.`,
