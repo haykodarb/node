@@ -64,13 +64,15 @@ router.post('/graficos', (req, res) => {
                 lumArray: [],
                 timeArray: [],
             };
-            for (let i = 0; i < result.length; i++) {
+            const forLength = result.length / num;
+            let temporalArray = [];
+            for (let i = 0; i < forLength; i++) {
                 dataArray.tempArray[i] = result[num * i].temp;
                 dataArray.humArray[i] = result[num * i].hum;
                 dataArray.lumArray[i] = result[num * i].lum;
-                result[i].tiempo = moment(result[i].tiempo).format('YYYY-MM-DD HH:mm:ss');
+                temporalArray[i] = moment(result[num * i].tiempo).format('YYYY-MM-DD HH:mm:ss');
                 dataArray.timeArray[i] = moment
-                    .tz(result[num * i].tiempo, 'America/Argentina/Buenos_Aires')
+                    .tz(temporalArray[i], 'America/Argentina/Buenos_Aires')
                     .format();
             }
             res.status(200).json(dataArray);
