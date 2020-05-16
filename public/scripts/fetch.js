@@ -113,7 +113,3 @@ function fijarHora() {
 fijarHora();
 fetchData();
 dataGraph(periodo);
-
-document.addEventListener('DOMContentLoaded', () => {
-    liveUpdate();
-});
