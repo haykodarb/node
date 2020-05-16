@@ -42,8 +42,9 @@ router.post('/datos', (req, res) => {
 });
 
 router.post('/graficos', (req, res) => {
+    const num = req.body.periodo;
     const serie = req.body.serie;
-    const periodo = obtenerDia(req.body.periodo);
+    const periodo = obtenerDia(num);
     const tiempoActual = obtenerAhora();
     let sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}'`;
     sql += `AND tiempo BETWEEN '${periodo}' AND '${tiempoActual}'`;
@@ -64,12 +65,12 @@ router.post('/graficos', (req, res) => {
                 timeArray: [],
             };
             for (let i = 0; i < result.length; i++) {
-                dataArray.tempArray[i] = result[i].temp;
-                dataArray.humArray[i] = result[i].hum;
-                dataArray.lumArray[i] = result[i].lum;
+                dataArray.tempArray[i] = result[num * i].temp;
+                dataArray.humArray[i] = result[num * i].hum;
+                dataArray.lumArray[i] = result[num * i].lum;
                 result[i].tiempo = moment(result[i].tiempo).format('YYYY-MM-DD HH:mm:ss');
                 dataArray.timeArray[i] = moment
-                    .tz(result[i].tiempo, 'America/Argentina/Buenos_Aires')
+                    .tz(result[num * i].tiempo, 'America/Argentina/Buenos_Aires')
                     .format();
             }
             res.status(200).json(dataArray);
