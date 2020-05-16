@@ -71,21 +71,16 @@ function cambiarPeriodo(per) {
     periodo = per;
     let botonHoy = document.getElementById('botonHoy');
     let botonSemana = document.getElementById('botonSemana');
-    let botonMes = document.getElementById('botonMes');
     if (per === 1) {
         botonHoy.setAttribute('class', 'botonEncendido');
         botonHoy.disabled = true;
         botonSemana.setAttribute('class', 'botonApagado');
         botonSemana.disabled = false;
-        botonMes.setAttribute('class', 'botonApagado');
-        botonMes.disabled = false;
     } else if (per === 7) {
         botonHoy.setAttribute('class', 'botonApagado');
         botonHoy.disabled = false;
         botonSemana.setAttribute('class', 'botonEncendido');
         botonSemana.disabled = true;
-        botonMes.setAttribute('class', 'botonApagado');
-        botonMes.disabled = false;
     }
     dataGraph(per);
 }
