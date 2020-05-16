@@ -52,24 +52,16 @@ function dataGraph(periodo) {
                     minute: 'HH:mm',
                     hour: 'HH',
                 };
+                chart.options.scales.xAxes[0].ticks.maxTicksLimit = 12;
             } else if (periodo === 7) {
                 chart.options.title.text = 'Datos de la última semana';
                 chart.options.scales.xAxes[0].time.unit = 'hour';
                 chart.options.scales.xAxes[0].time.displayFormats = {
-                    hour: 'D MMM ha',
-                    day: 'D MMM',
+                    hour: 'DMMM ha',
+                    day: 'DMMM',
                     month: 'MMM',
                 };
-                chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
-            } else if (periodo === 30) {
-                chart.options.title.text = 'Datos del último mes';
-                chart.options.scales.xAxes[0].time.unit = 'hour';
-                chart.options.scales.xAxes[0].time.displayFormats = {
-                    hour: 'D MMM ha',
-                    day: 'D MMM ha',
-                    month: 'MMM',
-                };
-                chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
+                chart.options.scales.xAxes[0].ticks.maxTicksLimit = 9;
             }
             chart.update();
         });
@@ -94,13 +86,6 @@ function cambiarPeriodo(per) {
         botonSemana.disabled = true;
         botonMes.setAttribute('class', 'botonApagado');
         botonMes.disabled = false;
-    } else if (per === 30) {
-        botonHoy.setAttribute('class', 'botonApagado');
-        botonHoy.disabled = false;
-        botonSemana.setAttribute('class', 'botonApagado');
-        botonSemana.disabled = false;
-        botonMes.setAttribute('class', 'botonEncendido');
-        botonMes.disabled = true;
     }
     dataGraph(per);
 }
