@@ -38,6 +38,7 @@ h1 {
     width: 100%;
     margin: 0 auto;
     text-align: center;
+    transition: 0.3s all linear;
 }
 .addOpacity {
     opacity: 0.5;
