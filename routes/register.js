@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
         });
     } else {
         let sqlVerify = `SELECT username, email FROM users WHERE email = '${user.email}' OR username = '${user.username}'`;
-        con.query(sqlVerify, (error, result) => {
+        con.query(sqlVerify, (err, result) => {
             if (err) {
                 return res.render('register', {
                     err: `Error con la conexión a la base de datos: ${e}`,
