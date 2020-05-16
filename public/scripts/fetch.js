@@ -1,4 +1,4 @@
-let periodo = 0;
+let periodo = 1;
 let serie = document.getElementById('serie').dataset.serie;
 let data = {
     serie: serie,
@@ -45,7 +45,7 @@ function dataGraph(periodo) {
             chart.data.datasets[0].data = json.humArray;
             chart.data.datasets[1].data = json.lumArray;
             chart.data.datasets[2].data = json.tempArray;
-            if (periodo === 0) {
+            if (periodo === 1) {
                 chart.options.title.text = 'Datos del día de hoy';
                 chart.options.scales.xAxes[0].time.unit = 'minute';
                 chart.options.scales.xAxes[0].time.displayFormats = {
@@ -80,7 +80,7 @@ function cambiarPeriodo(per) {
     let botonHoy = document.getElementById('botonHoy');
     let botonSemana = document.getElementById('botonSemana');
     let botonMes = document.getElementById('botonMes');
-    if (per === 0) {
+    if (per === 1) {
         botonHoy.setAttribute('class', 'botonEncendido');
         botonHoy.disabled = true;
         botonSemana.setAttribute('class', 'botonApagado');
@@ -113,14 +113,6 @@ function fijarHora() {
 fijarHora();
 fetchData();
 dataGraph(periodo);
-
-function liveUpdate() {
-    setInterval(() => {
-        fijarHora();
-        fetchData();
-        dataGraph(periodo);
-    }, 150000);
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     liveUpdate();

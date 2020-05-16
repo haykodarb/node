@@ -11,13 +11,7 @@ function obtenerAhora() {
 }
 
 function obtenerDia(num) {
-    let now = moment()
-        .tz('America/Argentina/Buenos_Aires')
-        .subtract(num, 'days')
-        .hour(0)
-        .minute(0)
-        .second(0)
-        .format();
+    let now = moment().tz('America/Argentina/Buenos_Aires').subtract(num, 'days').format();
     return now;
 }
 
