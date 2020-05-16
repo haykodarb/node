@@ -23,9 +23,9 @@ let con = mysql.createPool({
     database: process.env.database,
 });
 
-router.post('/datos', (req, res) => {
+router.post('/fechaMin', (req, res) => {
     const serie = req.body.serie;
-    const sql = `SELECT temp, hum, lum FROM datos WHERE serie = '${serie}' ORDER BY ID DESC LIMIT 1`;
+    const sql = `SELECT tiempo FROM datos WHERE serie = '${serie}' LIMIT 1`;
     con.query(sql, (err, result) => {
         if (err) {
             try {
@@ -41,7 +41,7 @@ router.post('/datos', (req, res) => {
     });
 });
 
-router.post('/graficos', (req, res) => {
+router.post('/graph_btn', (req, res) => {
     const num = req.body.periodo;
     const serie = req.body.serie;
     const periodo = obtenerDia(num);
@@ -73,6 +73,43 @@ router.post('/graficos', (req, res) => {
                 temporalArray[i] = moment(result[num * i].tiempo).format('YYYY-MM-DD HH:mm:ss');
                 dataArray.timeArray[i] = moment
                     .tz(temporalArray[i], 'America/Argentina/Buenos_Aires')
+                    .format();
+            }
+            res.status(200).json(dataArray);
+        }
+    });
+});
+
+router.post('/graph_picker', (req, res) => {
+    const selectedDate = req.body.date;
+    const serie = req.body.serie;
+    const diaInic = moment(selectedDate).startOf().format();
+    const diaFin = moment(selectedDate).add(1, 'days').startOf().format();
+    let sql = `SELECT tiempo, temp, hum, lum FROM datos WHERE serie = '${serie}'`;
+    sql += `AND tiempo BETWEEN '${diaInic}' AND '${diaFin}'`;
+    con.query(sql, (err, result) => {
+        if (err) {
+            try {
+                throw err;
+            } catch (e) {
+                res.status(400).json({
+                    errorMessage: `Endpoint: ${req.path}. Sucedio un error: ${e}`,
+                });
+            }
+        } else {
+            let dataArray = {
+                tempArray: [],
+                humArray: [],
+                lumArray: [],
+                timeArray: [],
+            };
+            for (let i = 0; i < result.length; i++) {
+                dataArray.tempArray[i] = result[i].temp;
+                dataArray.humArray[i] = result[i].hum;
+                dataArray.lumArray[i] = result[i].lum;
+                result[i].tiempo = moment(result[i].tiempo).format('YYYY-MM-DD HH:mm:ss');
+                dataArray.timeArray[i] = moment
+                    .tz(result[i].tiempo, 'America/Argentina/Buenos_Aires')
                     .format();
             }
             res.status(200).json(dataArray);

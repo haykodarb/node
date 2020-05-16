@@ -27,7 +27,7 @@
 				<input type="text" id="lum" name="lum" value="" readonly>
 			</div>
 			<div>
-				<label for="hora">Hora</label>
+				<label for="hora">Última actualización</label>
 				<input type="text" id="hora" name="hora" value="" readonly>
 			
 			</div>	
@@ -36,12 +36,13 @@
 	<div class= "botones">
 	<button id="botonHoy" class="botonEncendido" onclick= "cambiarPeriodo(1)" disabled>Hoy</button>
 	<button id="botonSemana" class="botonApagado" onclick= "cambiarPeriodo(7)">Últimos 7 días</button>
+	<input type="date" class="dateSelectApagado" id="date-select" required>
 	</div>
 </div>
 <div class = 'graphCont'>
 	<canvas id="myChart"></canvas>
 </div>	
-<div id='serie' data-serie="<%= serie %>"</div>>	
+<div id='serie' data-serie="<%= serie %>" </div>>	
 </body>
 
 <script src="../public/scripts/graph.js"></script>

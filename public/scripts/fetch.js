@@ -1,11 +1,16 @@
 let periodo = 1;
 let serie = document.getElementById('serie').dataset.serie;
-let data = {
-    serie: serie,
-};
+let datepicker = document.getElementById('date-select');
+datepicker.addEventListener('change', graphOnDatePick);
 
-function fetchData() {
-    fetch('./api/datos', {
+datepicker.setAttribute('value', moment().subtract(1, 'days').format('YYYY-MM-DD'));
+datepicker.setAttribute('max', moment().subtract(1, 'days').format('YYYY-MM-DD'));
+
+function fetchFirst() {
+    let data = {
+        serie: serie,
+    };
+    fetch('./api/fechaMin', {
         mode: 'cors',
         method: 'POST',
         body: JSON.stringify(data),
@@ -17,22 +22,20 @@ function fetchData() {
             return res.json();
         })
         .then((json) => {
-            let temp = `${json.temp}°C`;
-            let hum = `${json.hum}%`;
-            let lum = `${json.lum}%`;
-            document.getElementById('temp').setAttribute('value', `${temp}`);
-            document.getElementById('hum').setAttribute('value', `${hum}`);
-            document.getElementById('lum').setAttribute('value', `${lum}`);
+            datepicker.setAttribute('min', moment(json.tiempo).format('YYYY-MM-DD'));
         });
 }
 
-function dataGraph(periodo) {
-    let url = `./api/graficos`;
-    data.periodo = periodo;
+function graphOnClick(periodo) {
+    let url = `./api/graph_btn`;
+    let input = {
+        serie: serie,
+        periodo: periodo,
+    };
     fetch(url, {
         mode: 'cors',
         method: 'POST',
-        body: JSON.stringify(data),
+        body: JSON.stringify(input),
         headers: {
             'Content-Type': 'application/json',
         },
@@ -46,6 +49,12 @@ function dataGraph(periodo) {
             chart.data.datasets[1].data = json.lumArray;
             chart.data.datasets[2].data = json.tempArray;
             if (periodo === 1) {
+                let i = json.timeArray.length - 1;
+                document.getElementById('temp').setAttribute('value', `${json.tempArray[i]}°C`);
+                document.getElementById('hum').setAttribute('value', `${json.humArray[i]}%`);
+                document.getElementById('lum').setAttribute('value', `${json.lumArray[i]}%`);
+                let hora = moment(json.timeArray[i]).format('HH:mm');
+                document.getElementById('hora').setAttribute('value', `${hora}`);
                 chart.options.title.text = 'Datos del día de hoy';
                 chart.options.scales.xAxes[0].time.unit = 'minute';
                 chart.options.scales.xAxes[0].time.displayFormats = {
@@ -67,6 +76,42 @@ function dataGraph(periodo) {
         });
 }
 
+function graphOnDatePick() {
+    dateClicked();
+    const selectedDate = datepicker.value;
+    const dateOnGraph = moment(selectedDate).format('DD/MM/YYYY');
+    let url = './api/graph_picker';
+    let input = {
+        date: selectedDate,
+        serie: serie,
+    };
+    fetch(url, {
+        mode: 'cors',
+        method: 'POST',
+        body: JSON.stringify(input),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then((res) => {
+            return res.json();
+        })
+        .then((json) => {
+            chart.data.labels = json.timeArray;
+            chart.data.datasets[0].data = json.humArray;
+            chart.data.datasets[1].data = json.lumArray;
+            chart.data.datasets[2].data = json.tempArray;
+            chart.options.title.text = `Datos del día ${dateOnGraph}`;
+            chart.options.scales.xAxes[0].time.unit = 'minute';
+            chart.options.scales.xAxes[0].time.displayFormats = {
+                minute: 'HH:mm',
+                hour: 'HH',
+            };
+            chart.options.scales.xAxes[0].ticks.maxTicksLimit = 12;
+            chart.update();
+        });
+}
+
 function cambiarPeriodo(per) {
     periodo = per;
     let botonHoy = document.getElementById('botonHoy');
@@ -76,20 +121,26 @@ function cambiarPeriodo(per) {
         botonHoy.disabled = true;
         botonSemana.setAttribute('class', 'botonApagado');
         botonSemana.disabled = false;
+        datepicker.setAttribute('class', 'dateSelectApagado');
     } else if (per === 7) {
         botonHoy.setAttribute('class', 'botonApagado');
         botonHoy.disabled = false;
         botonSemana.setAttribute('class', 'botonEncendido');
         botonSemana.disabled = true;
+        datepicker.setAttribute('class', 'dateSelectApagado');
     }
-    dataGraph(per);
+    graphOnClick(per);
 }
 
-function fijarHora() {
-    let hora = moment().format('HH:mm');
-    document.getElementById('hora').setAttribute('value', `${hora}`);
+function dateClicked() {
+    let botonHoy = document.getElementById('botonHoy');
+    let botonSemana = document.getElementById('botonSemana');
+    botonHoy.setAttribute('class', 'botonApagado');
+    botonHoy.disabled = false;
+    botonSemana.setAttribute('class', 'botonApagado');
+    botonSemana.disabled = false;
+    datepicker.setAttribute('class', 'dateSelectEncendido');
 }
 
-fijarHora();
-fetchData();
-dataGraph(periodo);
+fetchFirst();
+graphOnClick(periodo);
