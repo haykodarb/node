@@ -65,7 +65,7 @@ router.post('/', (req, res) => {
                 if (result[0]) {
                     let validPass = bcrypt.compareSync(user.password, result[0].password);
                     if (!validPass) {
-                        let error = 'La contraseña ingresada es incorrecta';
+                        let error = 'La contraseña ingresada es incorrecta.';
                         return res.render('login', {
                             err: error,
                         });
