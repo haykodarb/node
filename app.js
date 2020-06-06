@@ -7,9 +7,11 @@ const cors = require('cors');
 const chalk = require('chalk');
 const http = require('http').createServer(app);
 
+let port = process.env.port || 3000;
+
 //Server config
-http.listen(3000, () => {
-    console.log(chalk.green('Listening on port: 3000'));
+http.listen(port, () => {
+    console.log(chalk.green(`Listening on port: ${port}`));
 });
 
 //Routes
