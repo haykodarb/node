@@ -30,7 +30,7 @@ app.use('/login', login);
 app.use('/register', register);
 
 //Views config
-app.set('views', './views');
+app.set('views', './public/views');
 app.set('view engine', 'ejs');
 
 app.get('/', verify, (req, res) => {
