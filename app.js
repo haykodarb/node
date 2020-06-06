@@ -34,5 +34,5 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.get('/', verify, (req, res) => {
-    res.render('login');
+    res.send('Hasta aca bien');
 });
