@@ -34,5 +34,5 @@ app.set('views', './public/views');
 app.set('view engine', 'ejs');
 
 app.get('/', verify, (req, res) => {
-    res.send('Hasta aca bien');
+    res.redirect('./dashboard');
 });
