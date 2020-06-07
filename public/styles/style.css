@@ -15,6 +15,7 @@ h1 {
     background-color: #114b5f;
     padding: 8px 0;
     text-align: center;
+    cursor: default;
     font-size: 40px;
     font-weight: 700;
     color: white;

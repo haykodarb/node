@@ -55,7 +55,7 @@ function graphOnClick(periodo) {
                 document.getElementById('lum').setAttribute('value', `${json.lumArray[i]}%`);
                 let hora = moment(json.timeArray[i]).format('HH:mm');
                 document.getElementById('hora').setAttribute('value', `${hora}`);
-                chart.options.title.text = 'Datos del día de hoy';
+                chart.options.title.text = 'Datos de las últimas 24hs';
                 chart.options.scales.xAxes[0].time.unit = 'minute';
                 chart.options.scales.xAxes[0].time.displayFormats = {
                     minute: 'HH:mm',
