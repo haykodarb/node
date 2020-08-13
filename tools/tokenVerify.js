@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(cookieParser());
 
 module.exports = function verify(req, res, next) {
-    if (!req.cookies) {
+    if (typeof req.cookies === 'undefined') {
         return res.redirect('./login');
     } else {
         try {

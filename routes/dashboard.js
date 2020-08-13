@@ -8,6 +8,7 @@ const router = express.Router();
 router.use(cookieParser());
 
 router.get('/', verify, (req, res) => {
+    console.log(`User has token ${token}`);
     let data = jwt.verify(req.cookies.token, process.env.token_secret);
     res.render('dashboard', {
         serie: data.serie,
