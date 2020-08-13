@@ -13,6 +13,7 @@ router.use(cookieParser());
 router.use(express.urlencoded({ extended: true }));
 
 let salt = bcrypt.genSaltSync(10);
+var farFuture = new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 365 * 10);
 
 let con = mysql.createPool({
     connectionLimit: 4,
@@ -75,7 +76,7 @@ router.post('/', (req, res) => {
                             process.env.token_secret
                         );
                         res.cookie('token', token, {
-                            maxAge: 100000000,
+                            expires: farFuture,
                             secure: true,
                         });
                         console.log(`User has token ${token}`);
