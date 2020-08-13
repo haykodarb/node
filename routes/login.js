@@ -79,6 +79,7 @@ router.post('/', (req, res) => {
                             expires: farFuture,
                             secure: true,
                         });
+                        console.log("User has token", token);
                         res.redirect('../dashboard');
                     }
                 } else {
